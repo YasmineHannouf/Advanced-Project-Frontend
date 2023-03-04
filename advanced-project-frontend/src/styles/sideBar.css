@@ -1,0 +1,7 @@
+.sideBar > div {
+	margin-top: 1rem;
+}
+.sideBar > div a:nth-child(1) {
+	padding: 10px;
+	
+}

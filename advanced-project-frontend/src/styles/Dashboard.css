@@ -1,0 +1,17 @@
+.DashboardContainer {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+}
+.searchBar {
+	grid-column: 1/-1;
+}
+.dashHeader {
+	grid-column: 1/-1;
+}
+.sideBar {
+	grid-column: 1/3;
+}
+.dashHome {
+	grid-column: 3/-1;
+	grid-row: 3/4;
+}
