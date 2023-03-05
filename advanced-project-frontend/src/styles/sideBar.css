@@ -1,7 +1,55 @@
-.sideBar > div {
-	margin-top: 1rem;
+.sideBar {
+	min-width: 200px;
+	padding: 0 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
-.sideBar > div a:nth-child(1) {
-	padding: 10px;
-	
+.sideBar_collapsed {
+	padding: 0 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.sideBar > div,
+.sideBar_collapsed > div {
+	margin-top: 5rem;
+}
+.sideBar > a,
+.sideBar_collapsed > a {
+	margin-top: 1rem;
+	display: block;
+	width: 100%;
+}
+
+.sideBar_collapsed > a svg {
+	display: block;
+	margin: 0 auto;
+}
+
+.sideBar a svg {
+	display: block;
+	margin-left: auto;
+}
+.none {
+	display: none;
+}
+.sideBarLinkContainer > a {
+	text-decoration: none;
+}
+.sideBarLinkContainer > a svg {
+	display: block;
+	margin: 0 auto;
+}
+.sideBarLinkContainer > a:nth-child(1) {
+	color: rgba(0, 0, 0, 0.797);
+	margin-top: 1.5rem;
+
+	display: inline-block;
+	min-width: 30px;
+	padding: 0 10px;
+}
+
+.sideBarLinkContainer > a:nth-child(2) {
+	color: gray;
 }

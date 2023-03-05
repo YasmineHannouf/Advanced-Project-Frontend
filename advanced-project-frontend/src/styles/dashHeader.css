@@ -1,12 +1,45 @@
 /* header */
 .dashHeader {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
+
+	padding: 0.6rem 1.2rem;
+
+	background-color: lightgray;
 }
 
+.dashHeader h1 {
+	font-weight: 100;
+}
 .dashHeader .greetings {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+.admin-img-container {
+	height: 70px;
+	width: 70px;
+}
+.admin-img-container img {
+	object-fit: contain;
+	max-width: 100%;
+	height: 100%;
+
+	margin-left: 10px;
+}
+.header-btn-container button:nth-child(1) {
+	background: transparent;
+	border: 0;
+}
+
+.header-btn-container button:nth-child(2) {
+	padding: 0.6rem 1rem;
+	margin: 0 0.5rem;
+	border-radius: 10px;
+	border: 0;
+}
+.header-btn-container .fa-arrow-right-from-bracket,
+.header-btn-container .fa-bell {
+	margin-right: 8px;
 }

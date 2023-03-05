@@ -12,10 +12,12 @@ const Dashboard = () => {
 
 	return (
 		<div className="DashboardContainer">
-			<Search />
+			<Search placeholder={'search'} />
 			<DashHeader />
-			<SideBar setHomeExpanded={setHomeExpanded} />
-			<DashHome homeExpanded={homeExpanded} />
+			<div style={{ display: 'flex'  , gridColumn : '1/-1'}}>
+				<SideBar setHomeExpanded={setHomeExpanded} />
+				<DashHome homeExpanded={homeExpanded} />
+			</div>
 		</div>
 	);
 };

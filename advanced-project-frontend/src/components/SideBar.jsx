@@ -5,6 +5,7 @@ import '../styles/sideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import SideLink from './SideLink';
 library.add(fas);
 
 const sideBarLinks = [
@@ -21,17 +22,17 @@ const sideBarLinks = [
 	{
 		name: 'Receive',
 		path: '/receive',
-		icon: <FontAwesomeIcon className="icon" icon="fa-solid fa-house" />,
+		icon: <FontAwesomeIcon icon="fa-solid fa-download" />,
 	},
 	{
 		name: 'Report',
 		path: '/report',
-		icon: <FontAwesomeIcon icon="fa-solid fa-money-bill-transfer" />,
+		icon: <FontAwesomeIcon icon="fa-solid fa-clipboard" />,
 	},
 	{
 		name: 'Categories',
 		path: '/categories',
-		icon: <FontAwesomeIcon icon="fa-solid fa-money-bill-transfer" />,
+		icon: <FontAwesomeIcon icon="fa-solid fa-grip" />,
 	},
 ];
 const collapseState = [
@@ -42,66 +43,37 @@ const collapseState = [
 ];
 
 const SideBar = ({ setHomeExpanded }) => {
-	const [collapsed, setCollapsed] = useState({});
-	const [status, setStatus] = useState(false);
-	const [gridExpanded, setGridExpanded] = useState({
-		gridColumnStart: '1',
-		gridColumnEnd: '3',
-	});
-
-	const collapseStatus = [
-		{
-			display: 'inline',
-		},
-		{
-			display: 'none',
-		},
-	];
+	const [sideBarExpanded, setsideBarExpanded] = useState(false);
 
 	return (
-		<div className="sideBar" style={gridExpanded}>
+		<div className={sideBarExpanded ? 'sideBar' : ' sideBar_collapsed'}>
 			<a
 				href="#"
 				onClick={() => {
-					if (status) {
-						setStatus(!status);
-						setCollapsed(collapseStatus[0]);
-						setGridExpanded({
-							gridColumnStart: '1',
-							gridColumnEnd: '3',
-						});
-						setHomeExpanded(false);
-					} else {
-						setStatus(!status);
-						setCollapsed(collapseStatus[1]);
-						setHomeExpanded(false);
-						setGridExpanded({
-							gridColumnStart: '1',
-							gridColumnEnd: '2',
-						});
-					}
+					console.log(sideBarExpanded);
+					setsideBarExpanded(!sideBarExpanded);
 				}}
 			>
-				<FontAwesomeIcon icon="fa-solid fa-arrow-left" />
+				{sideBarExpanded ? (
+					<FontAwesomeIcon icon="fa-solid fa-x" />
+				) : (
+					<FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+				)}
 			</a>
-
-			{sideBarLinks.map((link) => {
-				return (
-					<div
-						key={sideBarLinks.indexOf(link)}
-						className="sideBarLinkContainer"
-					>
-						<a href="#">{link.icon} </a>
-						<a
-							href={link.path}
-							className="linkNaming"
-							style={collapsed}
-						>
-							{link.name}
-						</a>
-					</div>
-				);
-			})}
+			<div>
+				{sideBarLinks.map((link) => {
+					return (
+						<SideLink
+							display={sideBarExpanded ? 'inline-block' : 'none'}
+							key={sideBarLinks.indexOf(link)}
+							name={link.name}
+							icon={link.icon}
+							path={link.path}
+							// collapsed={collapsed}
+						/>
+					);
+				})}
+			</div>
 		</div>
 	);
 };

@@ -1,10 +1,15 @@
 import React from 'react';
-import '../styles/search.css'
+import '../styles/search.css';
 
-const Search = () => {
+const Search = ({ placeholder }) => {
 	return (
 		<form className="searchBar">
-			<input type="search" name="search" id="search" />
+			<input
+				type="search"
+				name="search"
+				id="search"
+				placeholder={placeholder}
+			/>
 		</form>
 	);
 };
