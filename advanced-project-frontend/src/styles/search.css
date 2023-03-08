@@ -6,7 +6,7 @@
 	margin: 0 auto;
 	border: 2px solid lightgray;
 	line-height: 2;
-	width: 35%;
+	/* width: 35% */
 	border-radius: 10px;
 	padding-left: 0.5rem;
 }

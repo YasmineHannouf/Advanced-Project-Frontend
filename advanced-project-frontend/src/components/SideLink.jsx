@@ -1,12 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const SideLink = ({ key, icon, path, name, display }) => {
 	return (
 		<div key={key} className="sideBarLinkContainer">
-			<a href="#">{icon} </a>
-			<a href={path} style={{ display: display }}>
+			<NavLink href={path}>{icon} </NavLink>
+			<NavLink to={path} style={{ display: display }}>
 				{name}
-			</a>
+			</NavLink>
 		</div>
 	);
 };

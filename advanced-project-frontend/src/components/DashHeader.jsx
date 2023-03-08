@@ -7,14 +7,8 @@ const DashHeader = () => {
 	return (
 		<header className="dashHeader">
 			<h2>Dashboard</h2>
-			<div className="greetings">
-				<h4>
-					hello <span>Admin</span>
-				</h4>
-				<div className="admin-img-container">
-					<img src={adminImage} alt="userImage" />
-				</div>
-			</div>
+			
+			<Search placeholder={'Search'} />
 			<div className="header-btn-container">
 				<button>
 					<FontAwesomeIcon icon="fa-solid fa-bell" />
