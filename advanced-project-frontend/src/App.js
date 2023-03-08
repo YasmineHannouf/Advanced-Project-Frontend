@@ -6,26 +6,31 @@ import FixedIncomes from "./components/FixedIncomes";
 import SignIn from "./pages/SignIn";
 import Expenses from "./components/Expenses";
 import SideBar from "./components/SideBar";
-import DashHeader from './components/DashHeader';
+import DashHeader from "./components/DashHeader";
+import Categories from "./components/Categories";
+import Additionals from "./components/Additionals";
 
 const App = () => {
   return (
     <BrowserRouter>
-	<DashHeader />
+      <DashHeader />
 
       <SideBar />
-	  
-      <Routes>
-	  <Route path="/login" element={<SignIn />} />
-        <Route path="/" element={<Dashboard />}/>
-          <Route path="/incomes" element={<Incomes />}/>
-            <Route path="/recurring" element={<RecurringIncome />} />
-            <Route path="/fixing" element={<FixedIncomes />} />
 
-          <Route path="/expenses" element={<Expenses />}/>
-            <Route path="/recurring" element={<RecurringIncome />} />
-            <Route path="/fixing" element={<FixedIncomes />} />
-          
+      <Routes>
+        <Route path="/login" element={<SignIn />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/incomes" element={<Incomes />} />
+        <Route path="/incomes/recurring" element={<RecurringIncome />} />
+        <Route path="/incomes/fixing" element={<FixedIncomes />} />
+
+        <Route path="/expenses" element={<Expenses />} />
+        <Route path="/expenses/recurring" element={<RecurringIncome />} />
+        <Route path="/expenses/fixing" element={<FixedIncomes />} />
+
+        <Route path="/add" element={<Additionals />} />
+        <Route path="/add/categories" element={<Categories />} />
+        <Route path="/add/fixing" element={<FixedIncomes />} />
       </Routes>
     </BrowserRouter>
   );
