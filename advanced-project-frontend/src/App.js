@@ -9,14 +9,13 @@ import SideBar from "./components/SideBar";
 import DashHeader from "./components/DashHeader";
 import Categories from "./components/Categories";
 import Additionals from "./components/Additionals";
+import FixedKey from "./components/Fixed_Key";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <DashHeader />
-
+    <div style={{ display: 'flex', gridColumn: '1/-1' }}>
       <SideBar />
-
       <Routes>
         <Route path="/login" element={<SignIn />} />
         <Route path="/" element={<Dashboard />} />
@@ -30,9 +29,10 @@ const App = () => {
 
         <Route path="/add" element={<Additionals />} />
         <Route path="/add/categories" element={<Categories />} />
-        <Route path="/add/fixing" element={<FixedIncomes />} />
+        <Route path="/add/fixedkey" element={<FixedKey />} />
       </Routes>
-    </BrowserRouter>
+    </div>
+  </BrowserRouter>
   );
 };
 
