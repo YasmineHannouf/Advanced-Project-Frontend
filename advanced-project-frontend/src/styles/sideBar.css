@@ -1,89 +1,171 @@
-:root {
-	--green-color: #48bf91;
-	--dark-blue: #0076be;
-	--lighter-blue: #4db4d7;
-	--sky-blue: #95d8eb;
-}
+.sideBar {
+	position: fixed;
+	left: 1rem;
+	top: 2.5%;
+	height: calc(85% - 2rem);
 
-.sideBar,
-.sideBar_collapsed {
-	background-color: #0076be;
-	padding: 0.5rem 0;
-}
+	background-color: brown;
+	max-width: 250px;
+	padding: 1.5rem ;
+	border-radius: 1.5rem;
+	color: #eee;
+	box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
+	-webkit-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
+	-moz-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
+	transition: 0.5s;
 
-.greetings {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+}
+.sideBar_expanded {
+	position: fixed;
+	left: 1rem;
+	top: 2.5%;
+	height: calc(95% - 2rem);
+
+	background-color: brown;
+	min-width: 70px;
+	padding: 0.5rem;
+	border-radius: 1.5rem;
+	color: #eee;
+	box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
+	-webkit-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
+	-moz-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
+	transition: 0.5s;
+
+	display: flex;
+	flex-direction: column;
 	align-items: center;
-	font-size: 0.7rem;
-	margin: 0 auto 0 0;
-	color: #eee;
-}
-.sideBar > a,
-.sideBar_collapsed > a {
-	color: #eee;
-	display: block;
-	width: 100%;
 }
 
-.sideBar_collapsed > a svg {
-	display: block;
+/* toggle */
+.sideBar .fa-arrow-left {
+	cursor: pointer;
+	position: absolute;
+	top: 5%;
+	right: -5%;
+	border: 2px solid gray;
+	background-color: #eee;
+	color: gray;
+	padding: 0.5rem;
+	border-radius: 50%;
+}
+.sideBar_expanded .fa-arrow-right {
+	cursor: pointer;
+	position: absolute;
+	top: 5%;
+	right: -25%;
+	border: 2px solid gray;
+	background-color: #eee;
+	color: gray;
+	padding: 0.5rem;
+	border-radius: 50%;
 }
 
-.sideBar a svg {
-	display: block;
-	margin: auto;
+/* brand */
+.sideBar .brandContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
-.none {
+
+/* search  Bar */
+.sideBar .searchBar,
+.sideBar_expanded .searchBar {
+	margin-top: 1rem;
+}
+.sideBar_expanded .searchBar input {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+/* links  */
+.sideLinksContainer {
+	margin-top: 2rem;
+}
+
+.sideBarLinkContainer {
+	margin: 1rem 0;
+}
+
+.sideLinksContainer a {
+	text-decoration: none;
+	color: #eee;
+}
+
+/* image css */
+.profileContainer {
+	width: 50px;
+	height: 50px;
+	position: relative;
+	margin-right: 5px;
+}
+.profileContainer img {
+	height: 100%;
+	max-width: 100%;
+	object-fit: contain;
+}
+.sideBar > div:last-child {
+	margin-top: auto;
+	display: flex;
+	align-items: center;
+	background-color: rgb(57, 57, 57);
+	padding: 0.5rem;
+	border-radius: 10px;
+}
+
+.sideBar_expanded > div:last-child {
+	display: flex;
+	margin-top: auto;
+	justify-content: center;
+}
+.sideBar div:last-child h4 {
+	font-size: 20px;
+}
+.sideBar div:last-child p {
+	font-size: 16px;
+}
+
+.sideBar .fa-arrow-right-from-bracket {
+	margin-left: auto;
+}
+
+/* toggle */
+.sideBar_expanded .fa-arrow-right-from-bracket {
 	display: none;
 }
 
-.sideBarLinkContainer > a {
-	text-decoration: none;
+.sideBar_expanded div:last-child h4,
+.sideBar_expanded div:last-child p {
+	display: none;
 }
 
-.sideBarLinkContainer > a svg {
-	display: block;
-	margin: 0 auto;
+.sideBar_expanded .sideLinksContainer a span {
+	display: none;
 }
-.sideBarLinkContainer > a:nth-child(1) {
-	color: #eee;
-	margin-top: 1.5rem;
 
+.sideBar_expanded .brandContainer span {
+	display: none;
+}
+.sideBar .sideLinksContainer a,
+.sideBar_expanded .sideLinksContainer a {
 	display: inline-block;
-	min-width: 30px;
-	padding: 0 10px;
+	font-size: 1.5em;
 }
-
-.sideBarLinkContainer > a:nth-child(2) {
-	transition: 0.2s;
-	color: #eee;
+.sideBar .sideLinksContainer span,
+.sideBar_expanded .sideLinksContainer span {
+	font-size: 1rem;
+	letter-spacing: 1px;
 }
-
-.sideBar {
-	padding: 0 1rem;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: space-between;
-	width: 220px;
-	transition: all 0.3s ease-out;
+.sideBar_expanded .sideBarLinkContainer a svg {
+	display: inline-block;
+	min-width: 60px;
+	display: block;
 }
-
-.sideBar-collapsed {
-	width: 50px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+.sideBar .sideBarLinkContainer a {
+	display: block;
 }
-
-.admin-img-container {
-	height: 40px;
-	width: 40px;
-	margin: 0 7px;
-}
-.admin-img-container img {
-	object-fit: contain;
-	max-width: 100%;
-	height: 100%;
+.sideBar .sideBarLinkContainer a svg {
+	display: inline-block;
+	min-width: 20%;
 }

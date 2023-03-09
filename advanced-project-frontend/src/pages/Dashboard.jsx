@@ -7,10 +7,7 @@ import '../styles/dashHeader.css';
 const Dashboard = () => {
 	return (
 		<div className="DashboardContainer">
-			
-			<div style={{ display: 'flex', gridColumn: '1/-1' }}>
 			<Outlet />
-			</div>
 		</div>
 	);
 };

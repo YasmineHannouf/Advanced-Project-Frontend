@@ -6,17 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const DashHeader = () => {
 	return (
 		<header className="dashHeader">
-			<h2>Dashboard</h2>
-			
-			<Search placeholder={'Search'} />
 			<div className="header-btn-container">
 				<button>
 					<FontAwesomeIcon icon="fa-solid fa-bell" />
 					Get help
-				</button>
-				<button>
-					<FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
-					Logout{' '}
 				</button>
 			</div>
 		</header>
