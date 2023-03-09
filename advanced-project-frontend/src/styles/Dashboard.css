@@ -1,10 +1,8 @@
 .DashboardContainer {
-	grid-template-columns: repeat(12, 1fr);
-	height: calc(100vh);
+	height: 100vh ;
 }
-.sideBar {
-	height: calc(100vh - 10vh);
-}
+
+
 .dashHome {
 	flex-basis: 100%;
 }

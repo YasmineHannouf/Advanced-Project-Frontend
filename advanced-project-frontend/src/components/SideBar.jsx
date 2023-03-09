@@ -1,4 +1,4 @@
-import adminImage  from "../assets/default_61f3429ad1ced-removebg-preview.png"
+import adminImage from '../assets/default_61f3429ad1ced-removebg-preview.png';
 import { useState } from 'react';
 import React from 'react';
 import '../styles/sideBar.css';
@@ -6,11 +6,9 @@ import '../styles/sideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import Search from './Search';
 import SideLink from './SideLink';
 library.add(fas);
-
-// images 
-
 
 const sideBarLinks = [
 	{
@@ -38,52 +36,75 @@ const sideBarLinks = [
 		path: '/add',
 		icon: <FontAwesomeIcon icon="fa-solid fa-plus" />,
 	},
+	{
+		name: 'Settings',
+		path: '/settings',
+		icon: <FontAwesomeIcon icon="fa-solid fa-gear" />,
+	},
 ];
 
-const SideBar = ({ setHomeExpanded }) => {
-	const [sideBarExpanded, setsideBarExpanded] = useState(true);
+const displayToggle = (bool) => {
+	if (bool) {
+		return 'none';
+	} else {
+		return 'block';
+	}
+};
+const SideBar = () => {
+	const [sideBarExpanded, setsideBarExpanded] = useState(false);
 
 	const handleToggleSideBar = () => {
 		setsideBarExpanded(!sideBarExpanded);
 	};
 
 	return (
-		<div
-			className={`sideBar ${
-				sideBarExpanded ? 'sideBar-expanded' : 'sideBar-collapsed'
-			}`}
-		>
-			<a href="#" onClick={handleToggleSideBar}>
+		<aside className={sideBarExpanded ? 'sideBar' : 'sideBar_expanded'}>
+			<div className="brandContainer">
+				<h1>
+					<FontAwesomeIcon icon="fa-solid fa-bars-staggered" />
+					<span>Brand</span>
+				</h1>
+
 				{sideBarExpanded ? (
-					<FontAwesomeIcon icon="fa-solid fa-arrow-left" />
+					<FontAwesomeIcon
+						onClick={() => {
+							setsideBarExpanded(!sideBarExpanded);
+						}}
+						icon="fa-solid fa-arrow-left"
+					/>
 				) : (
-					<FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+					<FontAwesomeIcon
+						onClick={() => {
+							setsideBarExpanded(!sideBarExpanded);
+						}}
+						icon="fa-solid fa-arrow-right"
+					/>
 				)}
-			</a>
-			<div>
-				{sideBarLinks.map((item) => {
+			</div>
+			<Search />
+			<div className="sideLinksContainer">
+				{sideBarLinks.map((eachLink) => {
 					return (
 						<SideLink
-							display={sideBarExpanded ? 'inline-block' : 'none'}
-							key={sideBarLinks.indexOf(item)}
-							name={item.name}
-							icon={item.icon}
-							path={item.path}
+							key={sideBarLinks.indexOf(eachLink)}
+							name={eachLink.name}
+							path={eachLink.path}
+							icon={eachLink.icon}
 						/>
 					);
 				})}
 			</div>
-			<div className="greetings">
-			<FontAwesomeIcon icon="fa-solid fa-caret-up" />
-			<div className="admin-img-container">
-					<img src={adminImage} alt="userImage" />
+			<div>
+				<div className="profileContainer">
+					<img src={adminImage} alt="admin" />
 				</div>
-				<h4>
-					hello <span>Admin</span>
-				</h4>
-				
+				<div>
+					<h4>dev name </h4>
+					<p>Administrator</p>
+				</div>
+				<FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
 			</div>
-		</div>
+		</aside>
 	);
 };
 
