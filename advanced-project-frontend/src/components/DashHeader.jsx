@@ -1,6 +1,4 @@
 import React from 'react';
-import Search from './Search';
-import adminImage from '../assets/default_61f3429ad1ced-removebg-preview.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DashHeader = () => {
