@@ -6,7 +6,6 @@ import FixedIncomes from "./components/FixedIncomes";
 import SignIn from "./pages/SignIn";
 import Expenses from "./components/Expenses";
 import SideBar from "./components/SideBar";
-import DashHeader from "./components/DashHeader";
 import Categories from "./components/Categories";
 import Additionals from "./components/Additionals";
 import FixedKey from "./components/Fixed_Key";

@@ -8,7 +8,7 @@ const SideLink = ({ key, icon, path, name, display, align_items }) => {
 			className="sideBarLinkContainer"
 			style={{ alignItems: align_items }}
 		>
-			<NavLink href={path}>
+			<NavLink to={path}>
 				{icon} <span style={{ display: display }}>{name}</span>
 			</NavLink>
 			<NavLink to={path}></NavLink>

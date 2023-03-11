@@ -38,24 +38,13 @@ const sideBarLinks = [
 	},
 	{
 		name: 'Settings',
-		path: '/settings',
+		path: 'settings',
 		icon: <FontAwesomeIcon icon="fa-solid fa-gear" />,
 	},
 ];
 
-const displayToggle = (bool) => {
-	if (bool) {
-		return 'none';
-	} else {
-		return 'block';
-	}
-};
 const SideBar = () => {
 	const [sideBarExpanded, setsideBarExpanded] = useState(false);
-
-	const handleToggleSideBar = () => {
-		setsideBarExpanded(!sideBarExpanded);
-	};
 
 	return (
 		<aside className={sideBarExpanded ? 'sideBar' : 'sideBar_expanded'}>
