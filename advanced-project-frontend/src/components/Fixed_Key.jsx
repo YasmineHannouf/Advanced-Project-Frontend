@@ -45,7 +45,6 @@ export default function BasicTable() {
   }, 500);
 
   const handleDelete = (rowsDeleted) => {
-    console.log(rowsDeleted);
     axios
       .delete(`http://127.0.0.1:8000/api/Fixedkeys/delete/${rowsDeleted}`)
       .then((response) => {
@@ -58,18 +57,18 @@ export default function BasicTable() {
       });
   };
 
-  const getData = () =>
-    axios
-      .get("http://127.0.0.1:8000/api/Fixedkeys/show")
-      .then((response) => {
-        setFixedKey(response.data.Fixed_keysByDesc);
-        setIsLoading(false);
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
+  const getData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/Fixedkeys/show");
+      setFixedKey(response.data.Fixed_keysByDesc);
+      setIsLoading(false);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+  
 
   const handleUpdate = (rowData) => {
     setEditingRow(true);
