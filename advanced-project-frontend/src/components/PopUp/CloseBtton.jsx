@@ -31,7 +31,7 @@ const CloseButton = ({ onClick }) => {
       };
       
       const handleOnClick = () => {
-        if (onClick) onClick();
+        if (onClick) {onClick();}
       };
       
   return (
