@@ -15,7 +15,7 @@ const App = () => {
     <BrowserRouter>
     <div style={{ display: 'flex', gridColumn: '1/-1' }}>
       <SideBar />
-      <Routes>
+      {/* <Routes>
         <Route path="/login" element={<SignIn />} />
         <Route path="/" element={<Dashboard />} />
         <Route path="/incomes" element={<Incomes />} />
@@ -29,7 +29,9 @@ const App = () => {
         <Route path="/add" element={<Additionals />} />
         <Route path="/add/categories" element={<Categories />} />
         <Route path="/add/fixedkey" element={<FixedKey />} />
-      </Routes>
+      </Routes> */}
+      <SignIn></SignIn>
+
     </div>
   </BrowserRouter>
   );
