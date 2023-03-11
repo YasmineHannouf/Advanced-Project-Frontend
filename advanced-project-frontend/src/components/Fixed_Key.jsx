@@ -6,17 +6,16 @@ import debounce from "lodash/debounce";
 import "../styles/Fixed_Key.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/system";
-import Add from "./PopUp/FixedKeyPop";//CloseButton
-import ButtonClose from './PopUp/CloseBtton';
-import zIndex from "@mui/material/styles/zIndex";
+import Add from "./PopUp/FixedKeyPop"; //CloseButton
+import ButtonClose from "./PopUp/CloseBtton";
 
-function createData(id, userId, title, body) {
-  return { id, userId, title, body };
+function createData(id, name, is_active, created_at, updated_at) {
+  return { id, name, is_active, created_at, updated_at };
 }
 
 export default function BasicTable() {
   const [isLoading, setIsLoading] = useState(true);
-  const [posts, setPosts] = useState([]);
+  const [FixedKey, setFixedKey] = useState([]);
   const [editingRow, setEditingRow] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const togglePopup = () => {
@@ -27,20 +26,17 @@ export default function BasicTable() {
     setShowPopup(false);
   };
   useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => {
-        setPosts(response.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
+    getData();
   }, []);
 
-  const rows = posts.map((post) =>
-    createData(post.id, post.userId, post.title, post.body)
+  const rows = FixedKey.map((item) =>
+    createData(
+      item.id,
+      item.name,
+      item.is_active,
+      item.created_at,
+      item.updated_at
+    )
   );
 
   const handleSearch = debounce((searchValue) => {
@@ -48,13 +44,42 @@ export default function BasicTable() {
   }, 500);
 
   const handleDelete = (rowsDeleted) => {
-    const idsToDelete = rowsDeleted.data.map((d) => d.dataIndex);
-    console.log(idsToDelete);
+    console.log(rowsDeleted);
+    axios.delete(`http://127.0.0.1:8000/api/Fixedkeys/delete/${rowsDeleted}`)
+    .then((response) => {
+      console.log(response);
+      getData();
+    })
+    .catch((error) => {
+      console.log(error);
+      // setIsLoading(false);
+    });
   };
+  
+  const getData = () => axios
+  .get("http://127.0.0.1:8000/api/Fixedkeys/show")
+  .then((response) => {
+    setFixedKey(response.data.Fixed_keysByDesc);
+    setIsLoading(false);
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error);
+    setIsLoading(false);
+  });
 
-  const handleUpdate = (rowIndex) => {
+  const handleUpdate = (rowData) => {
     setEditingRow(true);
-    alert(`Updating row at index ${rowIndex}`);
+    console.log(rowData[2]);
+   axios.patch(`http://127.0.0.1:8000/api/Fixedkeys/update/${rowData[0]}`, {name:rowData[1],is_active:rowData[2]})
+    .then((response) => {
+      getData();
+      console.log(rowData);
+    })
+    .catch((error) => {
+      console.log(error);
+      // setIsLoading(false);
+    });
   };
 
   const columns = [
@@ -66,15 +91,15 @@ export default function BasicTable() {
       },
     },
     {
-      name: "userId",
-      label: "User ID",
+      name: "name",
+      label: "Name",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const rowIndex = tableMeta.rowIndex;
           const isEditing = rowIndex === editingRow;
 
           return (
-            <div onClick={() => setEditingRow(rowIndex)}>
+            <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
               {isEditing ? (
                 <input
                   className="EditInput"
@@ -91,23 +116,34 @@ export default function BasicTable() {
       },
     },
     {
-      name: "title",
-      label: "Title",
+      name: "is_active",
+      label: "Status",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const rowIndex = tableMeta.rowIndex;
           const isEditing = rowIndex === editingRow;
 
           return (
-            <div onClick={() => setEditingRow(rowIndex)}>
+            <div style={{  }} onClick={() => setEditingRow(rowIndex)}>
               {isEditing ? (
                 <input
+                  type="checkbox"
                   className="EditInput"
-                  value={value}
-                  onChange={(e) => updateValue(e.target.value)}
-                />
+                  onChange={(e) => updateValue(Number(e.target.checked ? 1 : 0))}                />
               ) : (
-                value
+                <span >
+                  {value === 1 ? (
+                    // <input
+                    //   type="checkbox"
+                    //   className="EditInput"
+                    //   checked={value === 1}
+                    //   onChange={(e) => updateValue(Number(e.target.checked))}
+                    // />
+                    <strong className="ActiveLabel"><>Active</></strong>
+                  ) : (
+                    <strong className="DisActiveLabel"><>Disabel</></strong>
+                  )}
+                </span>
               )}
             </div>
           );
@@ -116,42 +152,23 @@ export default function BasicTable() {
       },
     },
     {
-      name: "body",
-      label: "Body",
-      options: {
-        customBodyRender: (value, tableMeta, updateValue) => {
-          const rowIndex = tableMeta.rowIndex;
-          const isEditing = rowIndex === editingRow;
-
-          return (
-            <div onClick={() => setEditingRow(rowIndex)}>
-              {isEditing ? (
-                <input
-                  className="EditInput"
-                  value={value}
-                  onChange={(e) => updateValue(e.target.value)}
-                />
-              ) : (
-                value
-              )}
-            </div>
-          );
-        },
-        editable: true,
-      },
+      name: "created_at",
+      label: "Created At",
+    },
+    {
+      name: "updated_at",
+      label: "Updatedd At",
     },
     {
       name: "actions",
       label: "Actions",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
-          const rowIndex = tableMeta.rowIndex;
+          const rowData = tableMeta.rowData;
+          const id = rowData[0]; 
           return (
             <>
-              <button
-                className="Editbtn"
-                onClick={() => handleUpdate(rowIndex)}
-              >
+              <button className="Editbtn" onClick={() => handleUpdate(rowData)}>
                 <FontAwesomeIcon
                   icon="fas fa-edit"
                   className="Editbtn"
@@ -159,7 +176,7 @@ export default function BasicTable() {
                 />
               </button>
               &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-              <button className="Deletebtn">
+              <button className="Deletebtn" onClick={() => handleDelete(rowData[0])}>
                 <svg
                   viewBox="0 0 15 17.5"
                   height="15"
@@ -218,17 +235,20 @@ export default function BasicTable() {
   };
   return (
     <Box sx={{ width: "70%", marginLeft: "350px", marginY: "150px" }}>
-     
-      {showPopup ?<> <Add sx={{ zIndex: 0 }} className="popUpAdd" />
-       <ButtonClose onClick={handlePopupClose}/></>
-       : null}
+      {showPopup ? (
+        <>
+          {" "}
+          <Add sx={{ zIndex: 0 }} className="popUpAdd" />
+          <ButtonClose onClick={handlePopupClose} />
+        </>
+      ) : null}
       <MUIDataTable
         title={"Fixed Keys"}
         data={rows}
         columns={columns}
         options={options}
         className={showPopup ? "blur" : ""}
-        sx={{ width: "70%", marginLeft: "350px", marginY: "150px", zIndex: 1 }}
+        sx={{ width: "70%", marginLeft: "350px", marginY: "150px", zIndex: 1 ,textAlign: "center" }}
       />
     </Box>
   );
