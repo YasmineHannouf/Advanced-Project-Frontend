@@ -234,7 +234,7 @@ export default function BasicTable() {
     },
   };
   return (
-    <Box sx={{ width: "70%", marginLeft: "350px", marginY: "150px" }}>
+    <Box sx={{ width: "70%", marginLeft: "300px", marginY: "150px" }}>
       {showPopup ? (
         <>
           {" "}

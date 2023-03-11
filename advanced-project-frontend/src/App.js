@@ -31,7 +31,7 @@ const App = () => {
         <Route path="/add/categories" element={<Categories />} />
         <Route path="/add/fixedkey" element={<FixedKey />} />
       </Routes> */}
-      <Categories></Categories>
+      <SignIn></SignIn>
 
     </div>
   </BrowserRouter>
