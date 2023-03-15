@@ -29,8 +29,18 @@ const sideBarLinks = [
 	},
 	{
 		name: 'Additionals',
-		path: '/categories',
+		path: '/additionals',
 		icon: <FontAwesomeIcon icon="fa-solid fa-grip" />,
+		subLinks: [
+			{
+			  name: 'Categories',
+			  path: '/add/categories',
+			},
+			{
+			  name: 'Fixed Key',
+			  path: '/add/fixedkey',
+			},
+		  ],
 	},
 	{
 		name: 'Quick Add',

@@ -34,13 +34,15 @@ const App = () => {
 					/>
 					<Route path="/expenses/fixing" element={<FixedIncomes />} />
 
-					<Route path="/add" element={<Additionals />} />
-					{/* <Route path="/add/categories" element={<Categories />} /> */}
-					<Route path="/add/fixedkey" element={<FixedKey />} />
-				</Routes>
-			</div>
-		</BrowserRouter>
-	);
+        <Route path="/add" element={<Additionals />} />
+        <Route path="/add/categories" element={<Categories />} />
+        <Route path="/add/fixedkey" element={<FixedKey />} />
+      </Routes>
+      {/* <SignIn></SignIn> */}
+
+    </div>
+  </BrowserRouter>
+  );
 };
 
 export default App;
