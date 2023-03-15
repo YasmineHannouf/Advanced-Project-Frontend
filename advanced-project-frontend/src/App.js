@@ -9,13 +9,15 @@ import SideBar from "./components/SideBar";
 import Categories from "./components/Categories";
 import Additionals from "./components/Additionals";
 import FixedKey from "./components/Fixed_Key";
+import './styles/container.css';
 
 const App = () => {
   return (
     <BrowserRouter>
-    <div style={{ display: 'flex', gridColumn: '1/-1' }}>
+    <div className="container">
       <SideBar />
-      {/* <Routes>
+      <div className="pageWrapper">
+      <Routes>
         <Route path="/login" element={<SignIn />} />
         <Route path="/" element={<Dashboard />} />
         <Route path="/incomes" element={<Incomes />} />
@@ -29,9 +31,9 @@ const App = () => {
         <Route path="/add" element={<Additionals />} />
         <Route path="/add/categories" element={<Categories />} />
         <Route path="/add/fixedkey" element={<FixedKey />} />
-      </Routes> */}
-      <SignIn></SignIn>
-
+      </Routes>
+      {/* <SignIn></SignIn> */}
+      </div>
     </div>
   </BrowserRouter>
   );
