@@ -7,7 +7,6 @@ import "../styles/Fixed_Key.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/system";
 import Add from "./PopUp/FixedKeyPop"; //CloseButton
-import ButtonClose from "./PopUp/CloseBtton";
 
 function createData(id, name, is_active, created_at, updated_at) {
   return { id, name, is_active, created_at, updated_at };
@@ -238,7 +237,6 @@ export default function BasicTable() {
       }
     },
     onRowsDelete: handleDelete,
-    fullScreen: true,
     customToolbar: () => {
       return (
         <button className="cta" onClick={togglePopup}>
@@ -252,7 +250,7 @@ export default function BasicTable() {
     },
   };
   return (
-    <Box sx={{ width: "70%", marginLeft: "300px", marginY: "150px" }}>
+    <Box sx={{ width: "80%", marginLeft: "330px", marginY: "10%" }}>
       {showPopup ? (
         <>
           {" "}
@@ -261,12 +259,7 @@ export default function BasicTable() {
             className="popUpAdd"
             onClick={handlePopupClose}
           />
-          <ButtonClose
-            onClick={() => {
-              handlePopupClose();
-              getData();
-            }}
-          />
+      
         </>
       ) : null}
       <MUIDataTable

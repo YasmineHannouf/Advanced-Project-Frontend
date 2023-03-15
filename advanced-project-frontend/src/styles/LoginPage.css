@@ -1,124 +1,172 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Poppins', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
-body{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-	background: #eff0f4;
+
+section {
+  position: relative;
+  min-height: 100vh;
+  background-color: #f8dd30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
-.containerLogin{
-	position: relative;
-	left: -80px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+
+section .container {
+  position: relative;
+  width: 800px;
+  height: 500px;
+  background: #fff;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
-.containerLogin .drop{
-	position: relative;
-	width: 350px;
-	height: 350px;
-	box-shadow: inset 20px 20px 20px rgba(0,0,0,0.05),25px 35px 20px rgba(0,0,0,0.05),25px 30px 30px rgba(0,0,0,0.05),
-		inset -20px -20px 25px rgba(255,255,255,0.9);
-	transition: 0.5s;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 62% 38% 24% 76% / 59% 60% 40% 41%  ;
+
+section .container .user {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
-.containerLogin .drop:hover{
-	border-radius: 50%;
+
+section .container .user .imgBx {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background: #ff0;
+  transition: 0.5s;
 }
-.containerLogin .drop::before{
-	content:'';
-	position: absolute;
-	top: 50px;
-	left: 85px;
-	width: 35px;
-	height: 35px;
-	border-radius: 50%;
-	background: #fff;
-	opacity: 0.9;
+
+section .container .user .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.containerLogin .drop::after{
-	content: '';
-	position: absolute;
-	top: 85px;
-	left: 110px;
-	width: 15px;
-	height: 15px;
-	border-radius: 50%;
-	background: #fff;
-	opacity: 0.9;
+
+section .container .user .formBx {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  transition: 0.5s;
 }
-.containerLogin .drop .content{
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	text-align: center;
-	padding: 40px;
-	gap: 15px;
+
+section .container .user .formBx form h2 {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+  color: #555;
 }
-.containerLogin .drop .content h2{
-	position: relative;
-	color: #333;
-	font-size: 1.5em;
+
+section .container .user .formBx form input {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  background: #f5f5f5;
+  color: #333;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  margin: 8px 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 300;
 }
-.containerLogin .drop .content form{
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	justify-content: center;
-	align-items: center;
+
+section .container .user .formBx form input[type='submit'] {
+  max-width: 100px;
+  background: #677eff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: 0.5s;
 }
-.containerLogin .drop .content form .input-box{
-	position: relative;
-	width: 225px;
-	box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
-		inset -2px -5px 10px rgba(255,255,255,1),15px 15px 10px rgba(0,0,0,0.05),15px 10px 15px rgba(0,0,0,0.025);
-	border-radius: 25px;
+
+section .container .user .formBx form .signup {
+  position: relative;
+  margin-top: 20px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #555;
+  text-transform: uppercase;
+  font-weight: 300;
 }
-.containerLogin .drop .content form .input-box::before{
-	content: '';
-	position: absolute;
-	top: 8px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 65%;
-	height: 5px;
-	background: rgba(255,255,255,0.5);
-	border-radius: 5px;
+
+section .container .user .formBx form .signup a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #677eff;
 }
-.containerLogin .drop .content form .input-box input{
-	border: none;
-	outline: none;
-	background: transparent;
-	width: 100%;
-	font-size: 1em;
-	padding: 10px 15px;
+
+section .container .signupBx {
+  pointer-events: none;
 }
-.containerLogin .drop .content form .input-box input[type='submit']{
-	color: #fff;
-	text-transform: uppercase;
-	font-size: 1em;
-	cursor: pointer;
-	letter-spacing: 0.1em;
-	font-weight: 500;
+
+section .container.active .signupBx {
+  pointer-events: initial;
 }
-.containerLogin .drop .content form .input-box:last-child{
-	width: 120px;
-	background: #3a86ff;
-	box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
-15px 15px 10px rgba(0,0,0,0.05),15px 10px 15px rgba(0,0,0,0.025);
-	transition: 0.5s;
+
+section .container .signupBx .formBx {
+  left: 100%;
 }
-.containerLogin .drop .content form .input-box:last-child:hover{
-	width: 150px;
+
+section .container.active .signupBx .formBx {
+  left: 0;
+}
+
+section .container .signupBx .imgBx {
+  left: -100%;
+}
+
+section .container.active .signupBx .imgBx {
+  left: 0%;
+}
+
+section .container .signinBx .formBx {
+  left: 0%;
+}
+
+section .container.active .signinBx .formBx {
+  left: 100%;
+}
+
+section .container .signinBx .imgBx {
+  left: 0%;
+}
+
+section .container.active .signinBx .imgBx {
+  left: -100%;
+}
+
+@media (max-width: 991px) {
+  section .container {
+    max-width: 400px;
+  }
+
+  section .container .imgBx {
+    display: none;
+  }
+
+  section .container .user .formBx {
+    width: 100%;
+  }
 }

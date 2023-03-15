@@ -1,0 +1,22 @@
+.AdminContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 10%;
+
+}
+
+.CardAdmin {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.AdminParent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 36px;
+}
+.card-div{
+}
