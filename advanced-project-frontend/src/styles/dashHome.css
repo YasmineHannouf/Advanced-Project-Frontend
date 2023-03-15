@@ -4,18 +4,85 @@
 	--lighter-blue: #4db4d7;
 	--sky-blue: #95d8eb;
 }
-
+.section-height {
+	height: 100vh;
+}
 .dashHome {
-	padding: 1rem;
+	padding: 1rem 1rem 1rem 1rem;
+}
+.MuiButtonGroup-root {
+	display: block;
+	width: 100%;
+	margin: 1rem auto;
 }
 .dashHome > div {
+	gap: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.dashHome > div button {
+	border-radius: 10px !important;
+	flex-basis: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+	font-size: 0.9rem;
+}
+
+/* barChartContainer */
+.barChartContainer {
+	padding:  5rem 0;
+}
+/* pie chart section  */
+.pieChartContainer {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	justify-content: space-around;
-	margin: 1rem 0;
+	padding: 2rem 0;
 }
+
+.recharts-surface {
+	margin-right: auto;
+}
+.pieChart {
+	margin: 0 !important;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center;
+	align-items: center;
+}
+
+.colorNameContainer {
+	display: flex;
+	align-items: center;
+	margin-top: 0.5rem;
+}
+.colorNameContainer p {
+	margin-left: 5px;
+}
+.colorCode {
+	width: 25px;
+	height: 25px;
+	box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
+	-webkit-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
+	-moz-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
+	margin-left: 2rem;
+	margin-top: 1rem;
+	display: flex;
+}
+
+.incomes {
+	background-color: #e38627;
+}
+.expenses {
+	background-color: brown;
+}
+
 .dashHome > div > div {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	font-weight: 900;
@@ -26,9 +93,24 @@
 	border-radius: 10px;
 	border: 2px solid var(--dark-blue);
 }
-.typeContainer {
-	width: 20%;
-	height: 100px;
-	background-color: var(--dark-blue);
-    color: #eee;
+.colorCode {
+	margin-top: 0;
+}
+
+.goal-progress {
+	position: relative;
+	background-color: #cfcfcf;
+	height: 40px;
+	/* width: 50%; */
+	margin: 0 auto 2rem auto;
+}
+
+.goal-progress > div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	/* width: 70%; */
+	background-color: var(--green-color);
+	/* width: 30%; */
 }
