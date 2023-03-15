@@ -27,7 +27,7 @@ const App = () => {
 					/>
 					<Route path="/incomes/fixing" element={<FixedIncomes />} />
 
-					<Route path="/" element={<DashHome />} />
+					{/* <Route path="/" element={<DashHome />} /> */}
 					<Route path="/expenses" element={<Expenses />} />
 					<Route
 						path="/expenses/recurring"
