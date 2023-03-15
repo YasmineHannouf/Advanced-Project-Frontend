@@ -14,7 +14,7 @@ library.add(fas);
 const sideBarLinks = [
 	{
 		name: 'home',
-		path: '/',
+		path: '/home',
 		icon: <FontAwesomeIcon icon="fa-solid fa-house" />,
 	},
 	{

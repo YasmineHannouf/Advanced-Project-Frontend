@@ -6,7 +6,7 @@ import FixedIncomes from './components/FixedIncomes';
 import SignIn from './pages/SignIn';
 import Expenses from './components/Expenses';
 import SideBar from './components/SideBar';
-
+import Categories from './components/Categories'
 import Additionals from './components/Additionals';
 import FixedKey from './components/Fixed_Key';
 import DashHome from './components/DashHome';
@@ -18,7 +18,8 @@ const App = () => {
 				<SideBar />
 				<Routes>
 					<Route path="/login" element={<SignIn />} />
-					<Route path="/" element={<DashHome />} />
+					<Route path="/" element={<Dashboard />} />
+					<Route path="/home" element={<DashHome />} />
 					<Route path="/incomes" element={<Incomes />} />
 					<Route
 						path="/incomes/recurring"
