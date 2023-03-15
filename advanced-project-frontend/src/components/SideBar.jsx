@@ -8,6 +8,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import Search from './Search';
 import SideLink from './SideLink';
+
 library.add(fas);
 
 const sideBarLinks = [
@@ -41,6 +42,11 @@ const sideBarLinks = [
 		path: 'settings',
 		icon: <FontAwesomeIcon icon="fa-solid fa-gear" />,
 	},
+	{
+		name: 'Goals Tracker',
+		path: 'goals',
+		icon: <FontAwesomeIcon icon="fa-solid fa-bullseye" />,
+	},
 ];
 
 const SideBar = () => {
@@ -49,13 +55,14 @@ const SideBar = () => {
 	return (
 		<aside className={sideBarExpanded ? 'sideBar' : 'sideBar_expanded'}>
 			<div className="brandContainer">
-				<h1>
+				<h1 className="z-index">
 					<FontAwesomeIcon icon="fa-solid fa-bars-staggered" />
 					<span>Brand</span>
 				</h1>
 
 				{sideBarExpanded ? (
 					<FontAwesomeIcon
+						className="z-index"
 						onClick={() => {
 							setsideBarExpanded(!sideBarExpanded);
 						}}
@@ -63,6 +70,7 @@ const SideBar = () => {
 					/>
 				) : (
 					<FontAwesomeIcon
+						className="z-index"
 						onClick={() => {
 							setsideBarExpanded(!sideBarExpanded);
 						}}
@@ -70,8 +78,7 @@ const SideBar = () => {
 					/>
 				)}
 			</div>
-			<Search />
-			<div className="sideLinksContainer">
+			<div className="sideLinksContainer z-index">
 				{sideBarLinks.map((eachLink) => {
 					return (
 						<SideLink
@@ -83,7 +90,7 @@ const SideBar = () => {
 					);
 				})}
 			</div>
-			<div>
+			<div className="userCredentials z-index">
 				<div className="profileContainer">
 					<img src={adminImage} alt="admin" />
 				</div>
