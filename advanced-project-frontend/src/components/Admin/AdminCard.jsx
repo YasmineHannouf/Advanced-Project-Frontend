@@ -16,7 +16,6 @@ function AdminCard(props) {
   });
   const [isSuperAdmin, setIsSuperAdmin] = useState(props.is_super);
   const [showSuccess, setShowSuccess] = useState(false);
-  const notify = () => toast("Wow so easy!");
 
   const toggleAdmin = () => {
     setIsSuperAdmin(!isSuperAdmin);
