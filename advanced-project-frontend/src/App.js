@@ -1,16 +1,19 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import Incomes from './components/Incomes';
-import RecurringIncome from './components/RecurringIncome';
-import FixedIncomes from './components/FixedIncomes';
-import SignIn from './pages/SignIn';
+
 import Expenses from './components/Expenses';
-import SideBar from './components/SideBar';
-import Categories from './components/Categories'
-import Additionals from './components/Additionals';
 import FixedKey from './components/Fixed_Key';
 import DashHome from './components/DashHome';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Incomes from "./components/Incomes";
+import RecurringIncome from "./components/RecurringIncome";
+import FixedIncomes from "./components/FixedIncomes";
+import SignIn from "./pages/SignIn";
+import Expenses from "./components/Expenses";
+import SideBar from "./components/SideBar";
+import Admin from './components/Admin/ManageAdmin'
+import Categories from "./components/Categories";
+import Additionals from "./components/Additionals";
+import Setting from '../src/components/Admin/Setting'
 const App = () => {
 	return (
 		<BrowserRouter>
@@ -38,9 +41,10 @@ const App = () => {
         <Route path="/add" element={<Additionals />} />
         <Route path="/add/categories" element={<Categories />} />
         <Route path="/add/fixedkey" element={<FixedKey />} />
-      </Routes>
-      {/* <SignIn></SignIn> */}
+        <Route path="/setting" element={<Admin />} />
 
+      </Routes>
+      {/* <Admin></Admin> */}
     </div>
   </BrowserRouter>
   );

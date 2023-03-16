@@ -48,8 +48,8 @@ const sideBarLinks = [
 		icon: <FontAwesomeIcon icon="fa-solid fa-plus" />,
 	},
 	{
-		name: 'Settings',
-		path: 'settings',
+		name: 'Setting',
+		path: '/setting',
 		icon: <FontAwesomeIcon icon="fa-solid fa-gear" />,
 	},
 	{
