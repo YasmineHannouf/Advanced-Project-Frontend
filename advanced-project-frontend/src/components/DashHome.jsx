@@ -12,6 +12,7 @@ import { Bar } from 'react-chartjs-2';
 import ProfitGoal from './ProfitGoal';
 import targetImage from '../assets/pngegg.png';
 import TargetGoal from './TargetGoal';
+import Loader from './Loader';
 
 const userdata = [
 	{
@@ -104,7 +105,7 @@ const DashHome = () => {
 
 	{
 		if (!data || !profitGoal) {
-			return <h2>No Data</h2>;
+			return <Loader />;
 		}
 		return (
 			<div className="dashHome">

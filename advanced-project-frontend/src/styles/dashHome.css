@@ -2,7 +2,9 @@
 	--green-color: #48bf91;
 	--dark-blue: #0076be;
 	--lighter-blue: #4db4d7;
+	--pouder-blue :#5e77a8;
 	--sky-blue: #95d8eb;
+	--light-pink: #f5c7a2;
 }
 .mb_5 {
 	margin-bottom: 5px;
@@ -113,7 +115,11 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-	/* width: 70%; */
-	background-color: var(--green-color);
-	/* width: 30%; */
+	/* background: linear-gradient(
+		90deg,
+		var(--light-pink) 35%,
+		var(--green-color),
+		var(--dark-blue)
+	); */
+	background-color: var(--pouder-blue);
 }
