@@ -1,8 +1,11 @@
 .AdminContainer {
   display: flex;
   flex-direction: column;
-  margin: 10%;
-
+  border-radius: 8%;
+  max-width: 100%;
+  left: 25%;
+  position: relative;
+  top: 120px;
 }
 
 .CardAdmin {
@@ -16,7 +19,22 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 36px;
+  gap: 1rem;
 }
-.card-div{
+.AdminContainer > .headerContenet>h1 {
+  color: var(--green-color);
+  border-bottom: 2px dashed;
+}
+.AdminContainer > .headerContenet {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.AdminContainer > .headerContenet>a {
+  color: var(--green-color);
+  border-bottom: 2px dashed;
+  align-self: flex-end
+
 }

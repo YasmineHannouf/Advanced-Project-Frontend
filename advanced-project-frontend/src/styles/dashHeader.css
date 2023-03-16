@@ -4,7 +4,12 @@
 	--lighter-blue: #4db4d7;
 	--sky-blue: #95d8eb;
 }
-
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+  }
 /* header */
 .dashHeader {
 	display: none !important;
@@ -12,9 +17,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
 	padding: 0 1.2rem;
-
 	/* background-color: var(--dark-blue); */
 	color: #eee;
 }

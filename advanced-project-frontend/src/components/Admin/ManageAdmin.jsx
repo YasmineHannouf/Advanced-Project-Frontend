@@ -1,11 +1,13 @@
 import axios from "axios";
-import AdminCard from './AdminCard'
+import AdminCard from "./AdminCard";
 import React, { useEffect, useState } from "react";
-import '../../styles/Admin.css';
+import "../../styles/Admin.css";
+import Add from "../../assets/add.svg";
+import AddAdmin from '../Admin/AddAdmin';
 
-import { ClassNames } from "@emotion/react";
 function Admin() {
   const [Admin, setAdmin] = useState([]);
+  const [adminForm, setAdminForm] = useState(false);
   useEffect(() => {
     getData();
   }, []);
@@ -18,16 +20,31 @@ function Admin() {
       console.error(error);
     }
   };
-  console.log('hhhh'+Admin)
-  return <div className="AdminContainer">
-  <h1>Admin</h1>
-<div   className="AdminParent">
-
-{Admin.map((items) =><div className="card-div"> <AdminCard Admin={items} className="CardAdmin"/> </div>)}
-
-</div>
-</div>;
-
+  return (
+    <div className="AdminContainer">
+      <div className="headerContenet">
+        <h1>Manage Admins</h1>
+    
+      <button className="cta"  onClick={() => {
+            setAdminForm(!adminForm);
+          }}>
+          <span>Add New</span>
+          <img src={Add} alt="" />
+        </button>
+      </div>
+      <div className="AdminParent">
+        {Admin.map((items) => (
+          <div className="card-div">
+            {" "}
+            <AdminCard Admin={items} className="CardAdmin" />{" "}
+          </div>
+        ))}
+       <AddAdmin open={adminForm} onClose={() => {
+            setAdminForm(!adminForm);
+          }}></AddAdmin>
+      </div>
+    </div>
+  );
 }
 
 export default Admin;

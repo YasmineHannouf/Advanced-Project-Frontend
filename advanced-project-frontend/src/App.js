@@ -10,6 +10,7 @@ import Admin from './components/Admin/ManageAdmin'
 import Categories from "./components/Categories";
 import Additionals from "./components/Additionals";
 import FixedKey from "./components/Fixed_Key";
+import Setting from '../src/components/Admin/Setting'
 const App = () => {
   return (
     <BrowserRouter>
@@ -29,9 +30,10 @@ const App = () => {
         <Route path="/add" element={<Additionals />} />
         <Route path="/add/categories" element={<Categories />} />
         <Route path="/add/fixedkey" element={<FixedKey />} />
-      </Routes>
-      <Admin></Admin>
+        <Route path="/setting" element={<Admin />} />
 
+      </Routes>
+      {/* <Admin></Admin> */}
     </div>
   </BrowserRouter>
   );
