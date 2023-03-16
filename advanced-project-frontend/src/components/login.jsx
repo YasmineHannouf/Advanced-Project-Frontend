@@ -1,9 +1,8 @@
-
+import React from "react";
 import "../styles/LoginPage.css";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import axios from 'axios';
-
 
 
 export default function Login({ setToken }) {
@@ -12,17 +11,9 @@ export default function Login({ setToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8000/api/login', { email, password });
-      alert('Login successful');
-      console.log(response);
-      // do something with the response, such as storing the token
-    } catch (error) {
-      console.error(error);
-      // handle error, such as displaying an error message to the user
-    }
+   
+    axios.post('http://localhost:8000/api/login',{email,password}).then(resp=>{alert('bravo')}).then(err=>{console.log(err)})
   };
-  
 
   return (
     <div className="login-wrapper">
