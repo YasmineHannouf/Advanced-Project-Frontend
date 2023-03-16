@@ -1,5 +1,4 @@
 
-import Expenses from './components/Expenses';
 import FixedKey from './components/Fixed_Key';
 import DashHome from './components/DashHome';
 import { BrowserRouter, Routes, Route } from "react-router-dom";

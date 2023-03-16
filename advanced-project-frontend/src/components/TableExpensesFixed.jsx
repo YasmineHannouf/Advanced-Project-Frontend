@@ -7,7 +7,6 @@ import "../styles/Fixed_Key.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/system";
 // import Add from "./PopUp/ReccuringPop"; //CloseButton
-import ButtonClose from "./PopUp/CloseBtton";
 import Add from '../components/PopUp/FixedPop';
 
 function createData(id, title, description, amount, date_time, category_id, key_id, is_paid, type = 'exp', scheduled_date, start_date, end_date) {
