@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../styles/FixedKeyADD.css";
 import axios from "axios";
 
-function Add() {
+const Add = (onClick) => {
   const [data, setData] = useState({
     name: "",
     is_active: 0,
@@ -14,19 +14,21 @@ function Add() {
   };
 
   console.log(data);
-  const addFixedKey =
-    () => {
-      axios
-        .post("http://127.0.0.1:8000/api/Fixedkeys/store", data)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-          // setIsLoading(false);
-        });
-    };
+  const addFixedKey = () => {
+    axios
+      .post("http://127.0.0.1:8000/api/Fixedkeys/store", data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        // setIsLoading(false);
+      });
+  };
 
+  const HandleOnClick = () => {
+    if (onClick) onClick();
+  };
   return (
     <div className="AddForm">
       <p>Add New </p>
@@ -50,13 +52,19 @@ function Add() {
           />
           <span class="slider"></span>
         </label>
-        <div className="submit-btn" onClick={addFixedKey}>Add</div>
+        <div
+          className="submit-btn"
+          onClick={() => {
+            addFixedKey();
+            HandleOnClick();
+          }}
+        >
+          Add
+        </div>
       </form>
     </div>
   );
-}
+};
 
 export default Add;
-{
-  /* */
-}
+

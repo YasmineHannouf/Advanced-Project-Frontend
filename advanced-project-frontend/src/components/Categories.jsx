@@ -24,6 +24,7 @@ export default function BasicTable() {
   };
   const handlePopupClose = () => {
     setShowPopup(false);
+    getData();
   };
   useEffect(() => {
     getData();
@@ -44,7 +45,7 @@ export default function BasicTable() {
 
   const handleDelete = (rowsDeleted) => {
     console.log(rowsDeleted);
-    axios.delete(`http://127.0.0.1:8000/api/Fixedkeys/delete/${rowsDeleted}`)
+    axios.delete(`http://127.0.0.1:8000/api/categories/${rowsDeleted}`)
     .then((response) => {
       console.log(response);
       getData();
@@ -70,7 +71,7 @@ export default function BasicTable() {
   const handleUpdate = (rowData) => {
     setEditingRow(true);
     console.log(rowData[2]);
-   axios.patch(`http://127.0.0.1:8000/api/Fixedkeys/update/${rowData[0]}`, {name:rowData[1],is_active:rowData[2]})
+   axios.patch(`http://127.0.0.1:8000/api/categories/${rowData[0]}`, {name:rowData[1],is_active:rowData[2]})
     .then((response) => {
       getData();
       console.log(rowData);
@@ -165,7 +166,7 @@ export default function BasicTable() {
 
   const options = {
     filterType: "checkbox",
-    responsive: "standard",
+    responsive: "vertical",
     rowsPerPageOptions: [5, 10, 20],
     selectableRows: "none",
     search: true,
@@ -203,7 +204,7 @@ export default function BasicTable() {
       {showPopup ? (
         <>
           {" "}
-          <Add sx={{ zIndex: 0 }} className="popUpAdd" onClick={  handlePopupClose} />
+          <Add sx={{ zIndex: 0 }} className="popUpAdd" onClick={ handlePopupClose} />
           <ButtonClose onClick={() => {
   handlePopupClose();
   getData();

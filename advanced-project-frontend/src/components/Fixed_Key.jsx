@@ -24,6 +24,7 @@ export default function BasicTable() {
   };
   const handlePopupClose = () => {
     setShowPopup(false);
+    getData();
   };
   useEffect(() => {
     getData();
@@ -44,42 +45,47 @@ export default function BasicTable() {
   }, 500);
 
   const handleDelete = (rowsDeleted) => {
-    console.log(rowsDeleted);
-    axios.delete(`http://127.0.0.1:8000/api/Fixedkeys/delete/${rowsDeleted}`)
-    .then((response) => {
+    axios
+      .delete(`http://127.0.0.1:8000/api/Fixedkeys/delete/${rowsDeleted}`)
+      .then((response) => {
+        console.log(response);
+        getData();
+      })
+      .catch((error) => {
+        console.log(error);
+        // setIsLoading(false);
+      });
+  };
+
+  const getData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/Fixedkeys/show");
+      setFixedKey(response.data.Fixed_keysByDesc);
+      setIsLoading(false);
       console.log(response);
-      getData();
-    })
-    .catch((error) => {
+    } catch (error) {
       console.log(error);
-      // setIsLoading(false);
-    });
+      setIsLoading(false);
+    }
   };
   
-  const getData = () => axios
-  .get("http://127.0.0.1:8000/api/Fixedkeys/show")
-  .then((response) => {
-    setFixedKey(response.data.Fixed_keysByDesc);
-    setIsLoading(false);
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-    setIsLoading(false);
-  });
 
   const handleUpdate = (rowData) => {
     setEditingRow(true);
     console.log(rowData[2]);
-   axios.patch(`http://127.0.0.1:8000/api/Fixedkeys/update/${rowData[0]}`, {name:rowData[1],is_active:rowData[2]})
-    .then((response) => {
-      getData();
-      console.log(rowData);
-    })
-    .catch((error) => {
-      console.log(error);
-      // setIsLoading(false);
-    });
+    axios
+      .patch(`http://127.0.0.1:8000/api/Fixedkeys/update/${rowData[0]}`, {
+        name: rowData[1],
+        is_active: rowData[2],
+      })
+      .then((response) => {
+        getData();
+        console.log(rowData);
+      })
+      .catch((error) => {
+        console.log(error);
+        // setIsLoading(false);
+      });
   };
 
   const columns = [
@@ -99,7 +105,10 @@ export default function BasicTable() {
           const isEditing = rowIndex === editingRow;
 
           return (
-            <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+            <div
+              style={{ textAlign: "center" }}
+              onClick={() => setEditingRow(rowIndex)}
+            >
               {isEditing ? (
                 <input
                   className="EditInput"
@@ -124,14 +133,17 @@ export default function BasicTable() {
           const isEditing = rowIndex === editingRow;
 
           return (
-            <div style={{  }} onClick={() => setEditingRow(rowIndex)}>
+            <div style={{}} onClick={() => setEditingRow(rowIndex)}>
               {isEditing ? (
                 <input
                   type="checkbox"
                   className="EditInput"
-                  onChange={(e) => updateValue(Number(e.target.checked ? 1 : 0))}                />
+                  onChange={(e) =>
+                    updateValue(Number(e.target.checked ? 1 : 0))
+                  }
+                />
               ) : (
-                <span >
+                <span>
                   {value === 1 ? (
                     // <input
                     //   type="checkbox"
@@ -139,9 +151,13 @@ export default function BasicTable() {
                     //   checked={value === 1}
                     //   onChange={(e) => updateValue(Number(e.target.checked))}
                     // />
-                    <strong className="ActiveLabel"><>Active</></strong>
+                    <strong className="ActiveLabel">
+                      <>Active</>
+                    </strong>
                   ) : (
-                    <strong className="DisActiveLabel"><>Disabel</></strong>
+                    <strong className="DisActiveLabel">
+                      <>Disabel</>
+                    </strong>
                   )}
                 </span>
               )}
@@ -165,7 +181,7 @@ export default function BasicTable() {
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const rowData = tableMeta.rowData;
-          const id = rowData[0]; 
+          const id = rowData[0];
           return (
             <>
               <button className="Editbtn" onClick={() => handleUpdate(rowData)}>
@@ -176,7 +192,10 @@ export default function BasicTable() {
                 />
               </button>
               &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-              <button className="Deletebtn" onClick={() => handleDelete(rowData[0])}>
+              <button
+                className="Deletebtn"
+                onClick={() => handleDelete(rowData[0])}
+              >
                 <svg
                   viewBox="0 0 15 17.5"
                   height="15"
@@ -218,7 +237,6 @@ export default function BasicTable() {
         setEditingRow(rowIndex);
       }
     },
-    // onCellEditCommit: handleCellEditCommit,
     onRowsDelete: handleDelete,
     fullScreen: true,
     customToolbar: () => {
@@ -238,8 +256,17 @@ export default function BasicTable() {
       {showPopup ? (
         <>
           {" "}
-          <Add sx={{ zIndex: 0 }} className="popUpAdd" />
-          <ButtonClose onClick={handlePopupClose} />
+          <Add
+            sx={{ zIndex: 0 }}
+            className="popUpAdd"
+            onClick={handlePopupClose}
+          />
+          <ButtonClose
+            onClick={() => {
+              handlePopupClose();
+              getData();
+            }}
+          />
         </>
       ) : null}
       <MUIDataTable
@@ -248,7 +275,13 @@ export default function BasicTable() {
         columns={columns}
         options={options}
         className={showPopup ? "blur" : ""}
-        sx={{ width: "70%", marginLeft: "350px", marginY: "150px", zIndex: 1 ,textAlign: "center" }}
+        sx={{
+          width: "70%",
+          marginLeft: "350px",
+          marginY: "150px",
+          zIndex: 1,
+          textAlign: "center",
+        }}
       />
     </Box>
   );
