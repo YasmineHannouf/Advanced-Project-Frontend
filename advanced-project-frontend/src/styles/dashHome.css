@@ -4,6 +4,9 @@
 	--lighter-blue: #4db4d7;
 	--sky-blue: #95d8eb;
 }
+.mb_5 {
+	margin-bottom: 5px;
+}
 .section-height {
 	height: 100vh;
 }
@@ -15,7 +18,7 @@
 	width: 100%;
 	margin: 1rem auto;
 }
-.dashHome > div {
+.MuiButtonGroup-root {
 	gap: 1rem;
 	display: flex;
 	justify-content: center;
@@ -32,7 +35,7 @@
 
 /* barChartContainer */
 .barChartContainer {
-	padding:  5rem 0;
+	padding: 5rem 0;
 }
 /* pie chart section  */
 .pieChartContainer {
@@ -89,9 +92,10 @@
 	border-radius: 10px;
 }
 .dashHome > div button {
-	padding: 1rem;
+	padding: 10px 1rem;
 	border-radius: 10px;
 	border: 2px solid var(--dark-blue);
+	font-size: 1.3rem;
 }
 .colorCode {
 	margin-top: 0;
@@ -101,7 +105,6 @@
 	position: relative;
 	background-color: #cfcfcf;
 	height: 40px;
-	/* width: 50%; */
 	margin: 0 auto 2rem auto;
 }
 

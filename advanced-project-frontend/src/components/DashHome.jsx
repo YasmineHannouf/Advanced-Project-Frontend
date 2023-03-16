@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { Bar } from 'react-chartjs-2';
 import ProfitGoal from './ProfitGoal';
+import targetImage from '../assets/pngegg.png';
+import TargetGoal from './TargetGoal';
 
 const userdata = [
 	{
@@ -70,7 +72,7 @@ const DashHome = () => {
 		axios
 			.get('http://localhost:8000/api/')
 			.then((data) => {
-				// console.log(data.data);
+				console.log(data.data);
 				setData(data);
 			})
 			.catch((err) => {
@@ -210,22 +212,36 @@ const DashHome = () => {
 								: 'keep going'}
 						</span>
 					</h2>
-					{profitGoal &&
-						profitGoal
-							.sort((a, b) => {
-								return a.goal - b.goal;
-							})
-							.map((goal) => {
-								return (
-									<ProfitGoal
-										title={goal.title}
-										key={goal.id}
-										goal={goal.goal}
-										Total={Total}
-									/>
-								);
-							})}
+
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'space-around',
+						}}
+					>
+						<div style={{ minWidth: '40%' }}>
+							{profitGoal &&
+								profitGoal
+									.sort((a, b) => {
+										return a.goal - b.goal;
+									})
+									.map((goal) => {
+										return (
+											<ProfitGoal
+												title={goal.title}
+												key={goal.id}
+												goal={goal.goal}
+												Total={Total}
+											/>
+										);
+									})}
+						</div>
+						<div className="targetImageContainer">
+							<img src={targetImage} alt="" />
+						</div>
+					</div>
 				</section>
+				<TargetGoal />
 			</div>
 		);
 	}
