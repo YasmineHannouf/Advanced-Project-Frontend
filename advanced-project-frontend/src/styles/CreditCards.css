@@ -1,4 +1,4 @@
-.flip-card {
+/* .flip-card {
     background-color: transparent;
     width: 70%;
     height: 154px;
@@ -6,7 +6,7 @@
             perspective: 1000px;
     display: flex;
     flex-direction: row;
-    gap: 342px;
+    gap: 60%;
   }
   
   .heading {
@@ -14,13 +14,13 @@
     letter-spacing: .2em;
     font-size: 0.5em;
     top: 2em;
-    left: 32.6em;
+    left: 19.6em;
   }
   
   .logo {
     position: absolute;
     top: 6.8em;
-    left: 18.7em;
+    left: 12.7em;
   }
   
   .chip {
@@ -70,7 +70,7 @@
   .strip {
     position: absolute;
     background-color: black;
-    width: 22em;
+    width: 14em;
     height: 1.5em;
     top: 2.4em;
     background: repeating-linear-gradient(
@@ -111,7 +111,7 @@
   
   .flip-card-inner {
     position: relative;
-    width: 100%;
+    width: 20%;
     height: 100%;
     text-align: center;
     -webkit-transition: -webkit-transform 0.8s;
@@ -151,13 +151,13 @@
   .flip-card-front {
     -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
             box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
-    background-color: #b3aaaa;
+    background-color: #7e2c2c;
   }
   
   .flip-card-back {
     -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
             box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
-    background-color: #b3aaaa;
+    background-color: #7e2c2c;
     -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg);
-  }
+  } */

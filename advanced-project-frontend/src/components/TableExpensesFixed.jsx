@@ -36,7 +36,7 @@ export default function BasicTable() {
     item.title,
     item.description,
     item.amount,
-    item.date_time,
+    // item.date_time,
     item.category_id,
     item.key_id,
     item.is_paid,
@@ -63,11 +63,13 @@ export default function BasicTable() {
       // setIsLoading(false);
     });
   };
-  
+
+
+
   const getData = () => axios
   .get("http://127.0.0.1:8000/api/fixed")
   .then((response) => {
-    setFixed(response.data.data.data);
+    setFixed(response.data.fixed.data);
     console.log(response);
   })
   .catch((error) => {

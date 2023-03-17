@@ -1,5 +1,5 @@
 
-  form {
+  .ContainerReccurinPop {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -11,16 +11,24 @@
     position: relative;
     animation: pulse 10s infinite;
     background-color: rgb(255, 255, 255);
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   
-  label {
+  .labelReccuringPop{
     font-weight: bold;
     font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
   }
   
-  input[type="text"],
-  input[type="number"],
-  input[type="date"] {
+  /* input[name="title"],
+  input[name="description"],
+  input[name="amount"],
+  input[name="type"],
+  input[name="start_date"],
+  input[name="end_date"] */
+   .inputAddReccu{
     padding: 15px;
     border: none;
     border-radius: 15px;
@@ -31,14 +39,21 @@
     max-width: 100%;
     outline: none;
   }
-  
-  input[type="text"]:focus,
-  input[type="number"]:focus,
-  input[type="date"]:focus {
+  /* input[name="title"]:focus,
+  input[name="description"]:focus,
+  input[name="amount"]:focus,
+  input[name="type"]:focus,
+  input[name="start_date"]:focus,
+  input[name="end_date"]:focus */
+  .inputAddReccu
+  {
     box-shadow: 2px 2px 4px #d9d9d9, -2px -2px 4px #fffafa;
   }
   
-  button[type="submit"] {
+  /* button[type="submit"]  */
+  /* button[name="buttonReccuringPop"] */
+  .buttonReccuringPop
+  {
     background-color: brown;
     color: white;
     border: none;
@@ -50,7 +65,8 @@
     transition: background-color 0.2s ease-in-out;
   }
   
-  button[type="submit"]:hover {
+  /* button[name="buttonReccuringPop"] */
+  .buttonReccuringPop:hover {
     background-color: rgb(38, 255, 31);
   }
   
@@ -66,7 +82,7 @@
     }
   }
   
-  form:before {
+  .ContainerReccurinPop:before {
     content: '';
     position: absolute;
     top: -5px;
@@ -111,4 +127,34 @@
     from { width: 0; }
     to { width: 100%; }
   }
+  
+select[name="category_id"] {
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    background-color: #f5f5f5;
+    box-shadow: 3px 3px 6px #d9d9d9, -3px -3px 6px #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    max-width: 100%;
+    outline: none;
+  }
+  
+ 
+  select[name="category_id"]:focus {
+    box-shadow: 2px 2px 4px #d9d9d9, -2px -2px 4px #fffafa;
+  } 
+  @media screen and (max-width: 768px) {
+    .ContainerReccurinPop {
+    max-width: 100%;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ContainerReccurinPop {
+    padding: 5px;
+  }
+}
+ 
   

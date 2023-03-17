@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import '../../styles/RecurringPop.css';
-import CloseButton from '../PopUp/CloseButton';
+import '../../styles/FixedPopEX.css';
+// import CloseButton from '../PopUp/CloseButton';
 
 
 const Add = ({ onClick }) => {
@@ -39,93 +39,138 @@ const Add = ({ onClick }) => {
         console.log(error);
       });
   };
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/categories")
+      .then((response) => {
+        setCategories(response.data.data);
+  console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+
+  const [Fixedkeys, setFixedkeys] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/Fixedkeys/show")
+      .then((response) => {
+        setFixedkeys(response.data.data.data);
+  console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div>
-      <p className="animated-text">Add New Fixed</p>
-      <form onSubmit={addFixed}>
-        <label>
+      <h1 className="animated-text">Add New Fixed</h1>
+      <form onSubmit={addFixed} className='ContainerFixedPop'>
+        <label className="labelFixedPop">
           Title:
           <input
             type="text"
             name="title"
             value={data.title}
             onChange={handleChange}
+            className="inputAddFixed"
           />
         </label>
-        <label>
+        <label className="labelFixedPop">
           Description:
           <input
             type="text"
             name="description"
             value={data.description}
             onChange={handleChange}
+            className="inputAddFixed"
           />
         </label>
-        <label>
+        <label className="labelFixedPop">
           Amount:
-          {data.type === "exp" ? (
+          
             <input
               type="number"
               name="amount"
               value={data.amount}
               onChange={handleChange}
+              className="inputAddFixed"
             />
-          ) : (
-            <input
-              type="number"
-              name="amount"
-              value={-1 * data.amount}
-              onChange={handleChange}
-            />
-          )}
+         
         </label>
-        <label>
-          Category ID:
-          <input
-            type="number"
-            name="category_id"
-            value={data.category_id}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
+        <label className="labelFixedPop">
+            Categories:
+           <select  className="selectReccuring" name="category_id" value={data.category_id} onChange={handleChange}>
+             <option value="">Select a category</option>
+             {categories.map((category) => (
+               <option key={category.id} value={category.id}>
+                 {category.name}
+               </option>
+             ))}
+     </select>
+     </label>
+
+
+
+     <label className="labelFixedPop">
+     Key ID:
+           <select  className="inputAddFixed" name="Fixedkeys_id" value={data.Fixedkeys_id} onChange={handleChange}>
+             <option value="">Select a key</option>
+             {Fixedkeys.map((Fixedkeys) => (
+               <option key={Fixedkeys.id} value={Fixedkeys.id}>
+                 {Fixedkeys.name}
+               </option>
+             ))}
+     </select>
+     </label>
+        {/* <label className="labelFixedPop">
           Key ID:
           <input
             type="text"
             name="key_id"
             value={data.key_id}
             onChange={handleChange}
+            className="inputAddFixed"
           />
-        </label>
-        <label>
-          Is Paid:
+        </label> */}
+        <label className="labelFixedPop">
+          Is Paid?:
           <input
             type="checkbox"
             name="is_paid"
+            // className="inputAddFixed"
             checked={data.is_paid}
             onChange={() => setData({ ...data, is_paid: !data.is_paid })}
+            
           />
         </label>
-        <label>
-          Type (inc/exp):
+        <label className="labelFixedPop">
+          Type (exp):
           <input
             type="text"
             name="type"
             value={data.type}
             onChange={handleChange}
+            className="inputAddFixed"
           />
         </label>
-        <label>
-          Scheduled Date (YYYY-MM-DD hh:mm:ss):
+        <label className="labelFixedPop">
+          Scheduled Date:
           <input
             type="text"
             name="scheduled_date"
             value={data.scheduled_date}
             onChange={handleChange}
+            className="inputAddFixed"
           />
         </label>
-        <button type="submit">Add</button>
+        <button type="submit" className="buttonFixedPop">Add</button>
         <button class="close-btn" type="button" onClick={onClick}>X</button>
       </form>
     </div>
