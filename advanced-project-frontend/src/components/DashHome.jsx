@@ -221,7 +221,7 @@ const DashHome = () => {
 						}}
 					>
 						<div style={{ minWidth: '40%' }}>
-							{profitGoal &&
+							{profitGoal.length > 0 ? (
 								profitGoal
 									.sort((a, b) => {
 										return a.goal - b.goal;
@@ -235,7 +235,10 @@ const DashHome = () => {
 												Total={Total}
 											/>
 										);
-									})}
+									})
+							) : (
+								<div>hello</div>
+							)}
 						</div>
 						<div className="targetImageContainer">
 							<img src={targetImage} alt="" />

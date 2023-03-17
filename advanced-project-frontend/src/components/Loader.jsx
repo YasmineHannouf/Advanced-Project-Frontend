@@ -4,7 +4,7 @@ import '../styles/Loader.css';
 const Loader = () => {
 	return (
 		<div className="loader">
-			<div class="lds-circle">
+			<div className="lds-circle">
 				<div>$$</div>
 			</div>
 		</div>

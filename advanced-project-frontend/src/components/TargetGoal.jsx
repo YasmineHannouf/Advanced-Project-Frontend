@@ -13,8 +13,10 @@ const TargetGoal = () => {
 	const handleInputChange = (event) => {
 		setGoalData({ [event.target.name]: event.target.value });
 	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(goalData);
 		axios
 			.post('http://localhost:8000/profit_goals', goalData)
 			.then((res) => {
@@ -25,20 +27,27 @@ const TargetGoal = () => {
 			});
 	};
 
+	
+
+	const Taghrid = () => {
+		const kemekh = 1;
+		
+	};
 	return (
-        
 		<div className="form-box">
 			<form className="form" onSubmit={handleSubmit}>
 				<span className="title">Define New Profit Goal!</span>
 				<span className="subtitle">set your goal..go For it!</span>
 				<div className="form-container">
 					<input
+						onChange={handleInputChange}
 						type="text"
 						className="input"
 						placeholder="Title"
 						name="title"
 					/>
 					<input
+						onChange={handleInputChange}
 						type="text"
 						className="input"
 						placeholder="Goal"
@@ -52,6 +61,7 @@ const TargetGoal = () => {
 						placeholder="Start Date"
 					/>
 					<input
+						onChange={handleInputChange}
 						name="endDate"
 						type="text"
 						className="input"

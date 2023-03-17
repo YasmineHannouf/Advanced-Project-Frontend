@@ -205,3 +205,17 @@
 .goal-progress > div p {
 	padding-left: 10px;
 }
+
+.dropdownContainer {
+	transition: 0.2s;
+	height: 50px;
+	overflow: hidden;
+}
+
+.dropdownContainer_expanded {
+	height: unset;
+}
+
+.dropdownContainer_expanded > div:nth-child(1) svg {
+	min-width: 50px;
+}

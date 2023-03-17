@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
+// import Dashboard from './pages/Dashboard';
 import Incomes from './components/Incomes';
 import RecurringIncome from './components/RecurringIncome';
 import FixedIncomes from './components/FixedIncomes';
@@ -10,6 +10,7 @@ import SideBar from './components/SideBar';
 import Additionals from './components/Additionals';
 import FixedKey from './components/Fixed_Key';
 import DashHome from './components/DashHome';
+// import Categories from './components/Categories';
 
 const App = () => {
 	return (
