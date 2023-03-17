@@ -1,0 +1,40 @@
+.AdminContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8%;
+  max-width: 100%;
+  left: 25%;
+  position: relative;
+  top: 120px;
+}
+
+.CardAdmin {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.AdminParent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+}
+.AdminContainer > .headerContenet>h1 {
+  color: var(--green-color);
+  border-bottom: 2px dashed;
+}
+.AdminContainer > .headerContenet {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.AdminContainer > .headerContenet>a {
+  color: var(--green-color);
+  border-bottom: 2px dashed;
+  align-self: flex-end
+
+}

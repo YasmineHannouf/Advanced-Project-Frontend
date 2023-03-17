@@ -1,17 +1,17 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import Dashboard from './pages/Dashboard';
-import Incomes from './components/Incomes';
-import RecurringIncome from './components/RecurringIncome';
-import FixedIncomes from './components/FixedIncomes';
-import SignIn from './pages/SignIn';
-import Expenses from './components/Expenses';
-import SideBar from './components/SideBar';
-
-import Additionals from './components/Additionals';
 import FixedKey from './components/Fixed_Key';
 import DashHome from './components/DashHome';
-// import Categories from './components/Categories';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Incomes from "./components/Incomes";
+import RecurringIncome from "./components/RecurringIncome";
+import FixedIncomes from "./components/FixedIncomes";
+import SignIn from "./pages/SignIn";
+import Expenses from "./components/Expenses";
+import SideBar from "./components/SideBar";
+import Admin from './components/Admin/ManageAdmin'
+import Categories from "./components/Categories";
+import Additionals from "./components/Additionals";
+import Setting from '../src/components/Admin/Setting'
 const App = () => {
 	return (
 		<BrowserRouter>
@@ -19,7 +19,8 @@ const App = () => {
 				<SideBar />
 				<Routes>
 					<Route path="/login" element={<SignIn />} />
-					<Route path="/" element={<DashHome />} />
+					<Route path="/" element={<Dashboard />} />
+					<Route path="/home" element={<DashHome />} />
 					<Route path="/incomes" element={<Incomes />} />
 					<Route
 						path="/incomes/recurring"
@@ -27,7 +28,7 @@ const App = () => {
 					/>
 					<Route path="/incomes/fixing" element={<FixedIncomes />} />
 
-					<Route path="/" element={<DashHome />} />
+					{/* <Route path="/" element={<DashHome />} /> */}
 					<Route path="/expenses" element={<Expenses />} />
 					<Route
 						path="/expenses/recurring"
@@ -35,13 +36,16 @@ const App = () => {
 					/>
 					<Route path="/expenses/fixing" element={<FixedIncomes />} />
 
-					<Route path="/add" element={<Additionals />} />
-					{/* <Route path="/add/categories" element={<Categories />} /> */}
-					<Route path="/add/fixedkey" element={<FixedKey />} />
-				</Routes>
-			</div>
-		</BrowserRouter>
-	);
+        <Route path="/add" element={<Additionals />} />
+        <Route path="/add/categories" element={<Categories />} />
+        <Route path="/add/fixedkey" element={<FixedKey />} />
+        <Route path="/setting" element={<Admin />} />
+
+      </Routes>
+      {/* <Admin></Admin> */}
+    </div>
+  </BrowserRouter>
+  );
 };
 
 export default App;
