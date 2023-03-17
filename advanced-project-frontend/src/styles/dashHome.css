@@ -2,7 +2,7 @@
 	--green-color: #48bf91;
 	--dark-blue: #0076be;
 	--lighter-blue: #4db4d7;
-	--pouder-blue :#5e77a8;
+	--pouder-blue: #5e77a8;
 	--sky-blue: #95d8eb;
 	--light-pink: #f5c7a2;
 }
@@ -35,7 +35,44 @@
 	gap: 0.4rem;
 	font-size: 0.9rem;
 }
+/* overallContainer */
+.overallContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+}
+.overallContainer > div {
+	font-weight: 900;
+	font-size: 1.2rem;
+	color: #eee;
+	width: 250px;
+	height: 230px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 0.7rem;
 
+	border-radius: .5rem;
+}
+.overallContainer > div:nth-child(1){
+	background-color: var(--dark-blue);
+}
+.overallContainer > div:nth-child(2){
+	background-color: var(--light-pink);
+}
+.overallContainer > div:nth-child(3){
+	background-color: var(--lighter-blue);
+}
+.overallContainer > div:nth-child(4){
+	background-color: var(--green-color);
+}
+
+.overallContainer > div span {
+	font-weight: 200;
+	font-size: .9rem;
+}
 /* barChartContainer */
 .barChartContainer {
 	padding: 5rem 0;
