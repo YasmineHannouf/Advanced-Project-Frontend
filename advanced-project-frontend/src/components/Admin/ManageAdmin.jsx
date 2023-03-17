@@ -10,7 +10,7 @@ function Admin() {
   const [adminForm, setAdminForm] = useState(false);
   useEffect(() => {
     getData();
-  }, []);
+   console.log(Admin)}, []);
   const getData = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/admins");
