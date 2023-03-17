@@ -110,27 +110,84 @@ const DashHome = () => {
 		return (
 			<div className="dashHome">
 				<h1 className="title">Balances</h1>
-				<ButtonGroup
+				{/* <ButtonGroup
 					variant="contained"
 					aria-label="outlined primary button group"
 				>
 					<Button>
+						
+					</Button>
+					<Button>
+						
+					</Button>
+					<Button>
+						
+					</Button>
+				</ButtonGroup> */}
+				<section className="overallContainer">
+					<div>
 						<p>Income</p>
 						<FontAwesomeIcon icon="fa-solid fa-download" />
-						<p>{Income}</p>
-					</Button>
-					<Button>
+						<span>{Income}</span>
+					</div>
+					<div>
 						<p>Expense</p>
 						<FontAwesomeIcon icon="fa-solid fa-money-bill-transfer" />
-						<p>{Expense}</p>
-					</Button>
-					<Button>
+						<span>{Expense}</span>
+					</div>
+					<div>
 						<p>Total</p>
 						<FontAwesomeIcon icon="fa-solid fa-wallet" />
-						<p>{Total}</p>
-					</Button>
-				</ButtonGroup>
+						<span>{Total}</span>
+					</div>
+					<div>
+						<p>Targets</p>
+						<FontAwesomeIcon icon="fa-solid fa-bullseye" />
+						<span>{profitGoal.length} Goals </span>
+					</div>
+				</section>
+				<section>
+					<h2 className="title">
+						progress Tracker
+						<br />
+						<span style={{ fontSize: `16px`, color: 'gray' }}>
+							{profitGoal > '90'
+								? 'almost there !'
+								: 'keep going'}
+						</span>
+					</h2>
 
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'space-around',
+						}}
+					>
+						<div style={{ minWidth: '40%' }}>
+							{profitGoal.length > 0 ? (
+								profitGoal
+									.sort((a, b) => {
+										return a.goal - b.goal;
+									})
+									.map((goal) => {
+										return (
+											<ProfitGoal
+												title={goal.title}
+												key={goal.id}
+												goal={goal.goal}
+												Total={Total}
+											/>
+										);
+									})
+							) : (
+								<div>hello</div>
+							)}
+						</div>
+						<div className="targetImageContainer">
+							<img src={targetImage} alt="" />
+						</div>
+					</div>
+				</section>
 				<section
 					className="barChartContainer"
 					style={{
@@ -203,48 +260,7 @@ const DashHome = () => {
 					</div>
 				</section>
 				<hr />
-				<section>
-					<h2 className="title">
-						progress Tracker
-						<br />
-						<span style={{ fontSize: `16px`, color: 'gray' }}>
-							{profitGoal > '90'
-								? 'almost there !'
-								: 'keep going'}
-						</span>
-					</h2>
 
-					<div
-						style={{
-							display: 'flex',
-							justifyContent: 'space-around',
-						}}
-					>
-						<div style={{ minWidth: '40%' }}>
-							{profitGoal.length > 0 ? (
-								profitGoal
-									.sort((a, b) => {
-										return a.goal - b.goal;
-									})
-									.map((goal) => {
-										return (
-											<ProfitGoal
-												title={goal.title}
-												key={goal.id}
-												goal={goal.goal}
-												Total={Total}
-											/>
-										);
-									})
-							) : (
-								<div>hello</div>
-							)}
-						</div>
-						<div className="targetImageContainer">
-							<img src={targetImage} alt="" />
-						</div>
-					</div>
-				</section>
 				<TargetGoal />
 			</div>
 		);
