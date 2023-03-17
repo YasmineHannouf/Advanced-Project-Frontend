@@ -2,12 +2,18 @@
 	--green-color: #48bf91;
 	--dark-blue: #0076be;
 	--lighter-blue: #4db4d7;
+	--pouder-blue :#5e77a8;
 	--sky-blue: #95d8eb;
+	--light-pink: #f5c7a2;
+}
+.mb_5 {
+	margin-bottom: 5px;
 }
 .section-height {
 	height: 100vh;
 }
 .dashHome {
+	width: 100%;
 	padding: 1rem 1rem 1rem 1rem;
 }
 .MuiButtonGroup-root {
@@ -15,7 +21,7 @@
 	width: 100%;
 	margin: 1rem auto;
 }
-.dashHome > div {
+.MuiButtonGroup-root {
 	gap: 1rem;
 	display: flex;
 	justify-content: center;
@@ -32,7 +38,7 @@
 
 /* barChartContainer */
 .barChartContainer {
-	padding:  5rem 0;
+	padding: 5rem 0;
 }
 /* pie chart section  */
 .pieChartContainer {
@@ -89,9 +95,10 @@
 	border-radius: 10px;
 }
 .dashHome > div button {
-	padding: 1rem;
+	padding: 10px 1rem;
 	border-radius: 10px;
 	border: 2px solid var(--dark-blue);
+	font-size: 1.3rem;
 }
 .colorCode {
 	margin-top: 0;
@@ -101,7 +108,6 @@
 	position: relative;
 	background-color: #cfcfcf;
 	height: 40px;
-	/* width: 50%; */
 	margin: 0 auto 2rem auto;
 }
 
@@ -110,7 +116,11 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-	/* width: 70%; */
-	background-color: var(--green-color);
-	/* width: 30%; */
+	/* background: linear-gradient(
+		90deg,
+		var(--light-pink) 35%,
+		var(--green-color),
+		var(--dark-blue)
+	); */
+	background-color: var(--pouder-blue);
 }

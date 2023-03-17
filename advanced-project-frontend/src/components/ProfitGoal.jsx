@@ -3,15 +3,13 @@ import React from 'react';
 const ProfitGoal = ({ goal, Total, title }) => {
 	var percentage = Math.round((Total * 100) / Number(goal));
 
-	console.log(percentage, goal, Total);
-
 	// percentage = 50;
 	return (
-		<div style={{ width: '50%', margin: '0 auto' }}>
+		<div style={{ width: '100%' }}>
 			<div className="goalData">
-				<p>{goal}</p>
+				<p className="mb_5">{goal}</p>
 
-				<p>{title}</p>
+				<p className="mb_5">{title}</p>
 			</div>
 
 			<div className="goal-progress">

@@ -8,6 +8,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import Search from './Search';
 import SideLink from './SideLink';
+import SelectLabels from './SelectLabels';
+import DropdownLink from './DropdownLink';
 
 library.add(fas);
 
@@ -27,6 +29,7 @@ const sideBarLinks = [
 		path: '/incomes',
 		icon: <FontAwesomeIcon icon="fa-solid fa-download" />,
 	},
+
 	{
 		name: 'Additionals',
 		path: '/additionals',
@@ -47,10 +50,16 @@ const sideBarLinks = [
 		path: '/add',
 		icon: <FontAwesomeIcon icon="fa-solid fa-plus" />,
 	},
+
 	{
 		name: 'Setting',
 		path: '/setting',
 		icon: <FontAwesomeIcon icon="fa-solid fa-gear" />,
+	},
+	{
+		name: 'Additionals',
+		path: '/categories',
+		icon: <FontAwesomeIcon icon="fa-solid fa-grip" />,
 	},
 	{
 		name: 'Goals Tracker',
@@ -90,6 +99,15 @@ const SideBar = () => {
 			</div>
 			<div className="sideLinksContainer z-index">
 				{sideBarLinks.map((eachLink) => {
+					if (eachLink.name == 'Additionals') {
+						return (
+							<div>
+								<DropdownLink
+									display={sideBarExpanded ? true : false}
+								/>
+							</div>
+						);
+					}
 					return (
 						<SideLink
 							key={sideBarLinks.indexOf(eachLink)}
