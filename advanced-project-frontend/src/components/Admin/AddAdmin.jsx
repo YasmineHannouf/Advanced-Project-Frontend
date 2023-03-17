@@ -7,8 +7,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -24,6 +24,7 @@ export default function AddAdminDialog(props) {
   });
 
   const handleChange = (e) => {
+    e.preventDefault();
     setData({ ...data, [e.target.name]: e.target.value });
   };
   function handleCheckboxChange(event) {
@@ -52,6 +53,8 @@ export default function AddAdminDialog(props) {
       .post("http://127.0.0.1:8000/api/admins", formData)
       .then((response) => {
         console.log(response);
+        onClose();
+        props.handleReload();
         if (response.status === 200) {
           toast.success("Admin added successfully!");
         }
@@ -60,7 +63,6 @@ export default function AddAdminDialog(props) {
         console.log(error);
       });
   };
-
 
   const { open, onClose, onChildClose } = props;
 
@@ -71,88 +73,85 @@ export default function AddAdminDialog(props) {
 
   return (
     <>
-     <Dialog
-       open={open}
-       onClose={onClose}
-     TransitionComponent={Transition}
-       maxWidth="md"
-     >
-     <DialogTitle>Add New Category</DialogTitle>
-      <DialogContent>
-        <form>
-          <TextField
-            label="Name"
-            name="name"
-             value={data.name}
-            onChange={handleChange}
-            fullWidth
-             required
-           />
-           <TextField
-             label="Email"
-             name="email"
-             value={data.email}
-             onChange={handleChange}
-            type="email"
-            fullWidth
-             required
-           />
-    <TextField
-            label="Phone Number"
-             name="tel"
-             value={data.tel}
-             onChange={handleChange}
-             fullWidth
-            required
-           />
-           <TextField
-             label="Password"
-             name="password"
-           value={data.password}
-             onChange={handleChange}
-             type="password"
-            fullWidth
-             required
-           />
-            <label>
-            Is Super:
-            <input
-              type="checkbox"
-             name="is_super"
-         onChange={handleCheckboxChange}
-              className="subscribe-input"
+      <Dialog
+        open={open}
+        onClose={onClose}
+        TransitionComponent={Transition}
+        maxWidth="md"
+      >
+        <DialogTitle>Add New Category</DialogTitle>
+        <DialogContent>
+          <form>
+            <TextField
+              label="Name"
+              name="name"
+              value={data.name}
+              onChange={handleChange}
+              fullWidth
+              required
             />
-           </label>
-           <TextField
-            type="file"
-            name="image"
-            onChange={handleImageChange}
-            fullWidth
-            
-           />
-          <br />
-         </form>
-       </DialogContent>
-     <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-      <Button onClick={addAdmin}>Save</Button>
-      </DialogActions>
-    
-    </Dialog>
-  {showSuccess && (
-        
+            <TextField
+              label="Email"
+              name="email"
+              value={data.email}
+              onChange={handleChange}
+              type="email"
+              fullWidth
+              required
+            />
+            <TextField
+              label="Phone Number"
+              name="tel"
+              value={data.tel}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+            <TextField
+              label="Password"
+              name="password"
+              value={data.password}
+              onChange={handleChange}
+              type="password"
+              fullWidth
+              required
+            />
+            <label>
+              Is Super:
+              <input
+                type="checkbox"
+                name="is_super"
+                onChange={handleCheckboxChange}
+                className="subscribe-input"
+              />
+            </label>
+            <TextField
+              type="file"
+              name="image"
+              onChange={handleImageChange}
+              fullWidth
+            />
+            <br />
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={addAdmin}>Save</Button>
+        </DialogActions>
+      </Dialog>
+
       <ToastContainer
-position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop
-closeOnClick
-rtl
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>     
-    )}</>
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </>
   );
 }

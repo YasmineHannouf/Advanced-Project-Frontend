@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import emailIcon from "../../assets/Email.svg";
 import phoneIcon from "../../assets/Phone.svg";
-import DeleteIcon from "../PopUp/Delete";
+import ConfirmationDialog from "../PopUp/confirm";
 import "../../styles/AdminCard.css";
 import { ButtonGroup, Button, TextField } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
@@ -20,15 +20,19 @@ function AdminCard(props) {
 
   const handleUpdateStatus = async () => {
     try {
-      const response = await axios.patch(
-        `http://localhost:8000/api/admins/${props.Admin.id}`,
-        { is_super: !props.Admin.is_super, _method: "PATCH" }
-      );
-      console.log(response.data);
-      // Handle success
+
+    
+        const response = await axios.patch(
+          `http://localhost:8000/api/admins/${props.Admin.id}`,
+          { is_super: !props.Admin.is_super, _method: "PATCH" }
+        );
+        props.handleReload();
+
+        toast.success("Admin Updated successfully!");
+      
     } catch (error) {
       console.log(error.response.data.message);
-      // Handle error
+      toast.error(error.response.data.message);
     }
   };
 
@@ -38,36 +42,45 @@ function AdminCard(props) {
         <div className="card-top-part">
           <div className="left-part">
             <div className="user-name">
-            <ButtonGroup>
-                <Button
+              <ButtonGroup>
+                <ConfirmationDialog
+                  title="Delete Item"
+                  buttonText="Delete"
+                  confirmText="Yes, delete it"
+                  cancelText="Cancel"
+                  onConfirm={handelDelete}
                   color="error"
-                  variant="contained"
-                  size="meduim"
-                  className="Deletebtn"
-                  onClick={handelDelete}
+                  onError={(message) => toast.error(message)}
                 >
-                  Delete
-                </Button>
+                  Are you sure you want to delete this Admin?
+                </ConfirmationDialog>
+
                 {props.Admin.is_super ? (
-                  <Button
+                  <ConfirmationDialog
                     color="secondary"
-                    variant="contained"
-                    size="medium"
                     className="update-status-button"
-                    onClick={handleUpdateStatus}
+                    title={`Update Role Of ${props.Admin.name}`}
+                    buttonText="Make Admin"
+                    confirmText="Yes, Update it"
+                    cancelText="Cancel"
+                    onConfirm={handleUpdateStatus}
+                    onError={(message) => toast.error(message)}
                   >
-                    Make Admin
-                  </Button>
+                    Are you sure you want Update this Admin?{" "}
+                  </ConfirmationDialog>
                 ) : (
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    size="medium"
-                    className="update-status-button"
-                    onClick={handleUpdateStatus}
-                  >
-                    Make Super 
-                  </Button>
+                  <ConfirmationDialog
+                  color="secondary"
+                  className="update-status-button"
+                  title={`Update Role Of ${props.Admin.name}`}
+                  buttonText="Make Super "
+                  confirmText="Yes, Update it"
+                  cancelText="Cancel"
+                  onConfirm={handleUpdateStatus}
+                  onError={(message) => toast.error(message)}
+                >
+                  Are you sure you want Update this Admin?{" "}
+                </ConfirmationDialog>
                 )}
               </ButtonGroup>
               <p className="name">{props.Admin.name}</p>
