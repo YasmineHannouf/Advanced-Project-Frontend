@@ -11,7 +11,10 @@ const TargetGoal = () => {
 		endDate: '',
 	});
 	const handleInputChange = (event) => {
-		setGoalData({ [event.target.name]: event.target.value });
+		const dataInput = event.target.value;
+		const cloneGoalData = goalData;
+		cloneGoalData[event.target.name] = dataInput;
+		setGoalData(cloneGoalData);
 	};
 
 	const handleSubmit = (e) => {
@@ -27,11 +30,8 @@ const TargetGoal = () => {
 			});
 	};
 
-	
-
 	const Taghrid = () => {
 		const kemekh = 1;
-		
 	};
 	return (
 		<div className="form-box">
@@ -45,6 +45,7 @@ const TargetGoal = () => {
 						className="input"
 						placeholder="Title"
 						name="title"
+						required
 					/>
 					<input
 						onChange={handleInputChange}
@@ -52,6 +53,7 @@ const TargetGoal = () => {
 						className="input"
 						placeholder="Goal"
 						name="goal"
+						required
 					/>
 					<input
 						onChange={handleInputChange}
@@ -59,8 +61,10 @@ const TargetGoal = () => {
 						className="input"
 						name="startDate"
 						placeholder="Start Date"
+						required
 					/>
 					<input
+						required
 						onChange={handleInputChange}
 						name="endDate"
 						type="text"
