@@ -1,10 +1,11 @@
 :root {
-	--green-color: #48bf91;
+	--white: #eee;
+	--green-one: #80a897;
+	--sky-blue: #95d8eb;
+	--pink: #f5c7a2;
+	--light-green: #48bf91;
 	--dark-blue: #0076be;
 	--lighter-blue: #4db4d7;
-	--pouder-blue: #5e77a8;
-	--sky-blue: #95d8eb;
-	--light-pink: #f5c7a2;
 }
 .mb_5 {
 	margin-bottom: 5px;
@@ -45,7 +46,7 @@
 .overallContainer > div {
 	font-weight: 900;
 	font-size: 1.2rem;
-	color: #eee;
+	color: var(--white);
 	width: 250px;
 	height: 230px;
 	display: flex;
@@ -54,24 +55,24 @@
 	flex-direction: column;
 	gap: 0.7rem;
 
-	border-radius: .5rem;
+	border-radius: 0.5rem;
 }
-.overallContainer > div:nth-child(1){
+.overallContainer > div:nth-child(1) {
 	background-color: var(--dark-blue);
 }
-.overallContainer > div:nth-child(2){
-	background-color: var(--light-pink);
+.overallContainer > div:nth-child(2) {
+	background-color: var(--light-green);
 }
-.overallContainer > div:nth-child(3){
+.overallContainer > div:nth-child(3) {
+	background-color: var(--pink);
+}
+.overallContainer > div:nth-child(4) {
 	background-color: var(--lighter-blue);
-}
-.overallContainer > div:nth-child(4){
-	background-color: var(--green-color);
 }
 
 .overallContainer > div span {
 	font-weight: 200;
-	font-size: .9rem;
+	font-size: 0.9rem;
 }
 /* barChartContainer */
 .barChartContainer {
@@ -117,10 +118,10 @@
 }
 
 .incomes {
-	background-color: #e38627;
+	background-color: var(--pink);
 }
 .expenses {
-	background-color: brown;
+	background-color: var(--light-green);
 }
 
 .dashHome > div > div {
@@ -143,9 +144,9 @@
 
 .goal-progress {
 	position: relative;
-	background-color: #cfcfcf;
+	background-color: var(--white);
 	height: 40px;
-	margin: 0 auto 2rem auto;
+	margin: 0 auto 1.3rem auto;
 }
 
 .goal-progress > div {
@@ -153,11 +154,6 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-	/* background: linear-gradient(
-		90deg,
-		var(--light-pink) 35%,
-		var(--green-color),
-		var(--dark-blue)
-	); */
-	background-color: var(--pouder-blue);
+	
+	background-color: var(--lighter-blue);
 }

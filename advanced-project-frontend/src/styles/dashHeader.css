@@ -1,8 +1,11 @@
 :root {
-	--green-color: #48bf91;
+	--white: #eee;
+	--green-one: #80a897;
+	--sky-blue: #95d8eb;
+	--pink: #f5c7a2;
+	--light-green: #48bf91;
 	--dark-blue: #0076be;
 	--lighter-blue: #4db4d7;
-	--sky-blue: #95d8eb;
 }
 
 /* header */
@@ -15,8 +18,7 @@
 
 	padding: 0 1.2rem;
 
-	/* background-color: var(--dark-blue); */
-	color: #eee;
+	color: var(--white);
 }
 
 .dashHeader h1 {
@@ -25,7 +27,7 @@
 
 .header-btn-container button:nth-child(1) {
 	background: transparent;
-	/* color: #eee; */
+
 	border: 0;
 }
 

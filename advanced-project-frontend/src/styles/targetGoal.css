@@ -1,7 +1,16 @@
+:root {
+	--white: #eee;
+	--green-one: #80a897;
+	--sky-blue: #95d8eb;
+	--pink: #f5c7a2;
+	--light-green: #48bf91;
+	--dark-blue: #0076be;
+	--lighter-blue: #4db4d7;
+}
 .form-box {
 	min-width: 300px;
 	max-width: 750px;
-	background: #f1f7fe;
+	background: var(--white);
 	overflow: hidden;
 	border-radius: 16px;
 	color: #010101;
@@ -32,7 +41,7 @@
 .form-container {
 	overflow: hidden;
 	border-radius: 8px;
-	background-color: #fff;
+	background-color: var(--white);
 	margin: 1rem 0 0.5rem;
 	width: 100%;
 }
@@ -43,7 +52,7 @@
 	outline: 0;
 	height: 40px;
 	width: 100%;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid var(--white);
 	font-size: 0.9rem;
 	padding: 8px 15px;
 }
@@ -51,25 +60,25 @@
 .form-section {
 	padding: 16px;
 	font-size: 0.85rem;
-	background-color: #e0ecfb;
+	background-color: var(--white);
 	box-shadow: rgb(0 0 0 / 8%) 0 -1px;
 }
 
 .form-section a {
 	font-weight: bold;
-	color: #0066ff;
+	color: var(--dark-blue);
 	transition: color 0.3s ease;
 }
 
 .form-section a:hover {
-	color: #005ce6;
+	color: var(--dark-blue);
 	text-decoration: underline;
 }
 
 /*Button*/
 .form button {
-	background-color: #0066ff;
-	color: #fff;
+	background-color: var(--dark-blue);
+	color: var(--white);
 	border: 0;
 	border-radius: 24px;
 	padding: 10px 16px;
@@ -80,5 +89,5 @@
 }
 
 .form button:hover {
-	background-color: #005ce6;
+	background-color: var(--dark-blue);
 }

@@ -53,7 +53,6 @@ const DashHome = () => {
 
 	const [userData, setUserData] = useState({
 		labels: userdata.map((data) => data.year),
-
 		datasets: [
 			{
 				label: 'fixed',
@@ -110,20 +109,6 @@ const DashHome = () => {
 		return (
 			<div className="dashHome">
 				<h1 className="title">Balances</h1>
-				{/* <ButtonGroup
-					variant="contained"
-					aria-label="outlined primary button group"
-				>
-					<Button>
-						
-					</Button>
-					<Button>
-						
-					</Button>
-					<Button>
-						
-					</Button>
-				</ButtonGroup> */}
 				<section className="overallContainer">
 					<div>
 						<p>Income</p>
@@ -205,6 +190,7 @@ const DashHome = () => {
 
 					<div className="pieChartContainer">
 						<LineChart width={600} height={300} data={chartData}>
+							{/* --pink: #f5c7a2; --light-green: #48bf91; */}
 							<Line
 								type="monotone"
 								dataKey="uv"
@@ -233,15 +219,16 @@ const DashHome = () => {
 							<div>
 								<PieChart
 									data={[
+										// --pink: #f5c7a2; --light-green: #48bf91;
 										{
 											title: 'Incomes',
 											value: Income,
-											color: '#E38627',
+											color: '#80a897',
 										},
 										{
 											title: 'Expenses',
 											value: Expense,
-											color: '#C13C37',
+											color: '#48bf91',
 										},
 									]}
 									rounded={false}
@@ -259,7 +246,6 @@ const DashHome = () => {
 						</div>
 					</div>
 				</section>
-				<hr />
 
 				<TargetGoal />
 			</div>
