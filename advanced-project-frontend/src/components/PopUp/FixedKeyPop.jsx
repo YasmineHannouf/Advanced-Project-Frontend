@@ -1,11 +1,22 @@
-import React, { useState } from "react";
 import "../../styles/FixedKeyADD.css";
 import axios from "axios";
+import Slide from "@mui/material/Slide";
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 
-const Add = (onClick) => {
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
+
+const AddFk = (props) => {
   const [data, setData] = useState({
     name: "",
-    is_active: 0,
+    is_active: 0
   });
   const HandleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -13,8 +24,10 @@ const Add = (onClick) => {
     setData((prevState) => ({ ...prevState, [name]: newValue }));
   };
 
-  console.log(data);
+  // console.log(data);
   const addFixedKey = () => {
+  console.log(data);
+
     axios
       .post("http://127.0.0.1:8000/api/Fixedkeys/store", data)
       .then((response) => {
@@ -26,45 +39,60 @@ const Add = (onClick) => {
       });
   };
 
-  const HandleOnClick = () => {
-    if (onClick) onClick();
+ 
+  const { open, handleClose, onChildClose } = props;
+
+  const handleSaveClick = () => {
+    handleClose();
+    onChildClose();
   };
+
+
   return (
-    <div className="AddForm">
-      <p>Add New </p>
-      <form onSubmit={addFixedKey}>
-        <label>
-          <input
-            type="text"
-            name="name"
-            onChange={HandleChange}
-            className="subscribe-input"
-            placeholder="Name Of the new Fixed-Key"
-          />
-        </label>
-        <br />
-        <label class="switch">
-          <input
+    <Dialog open={open} onClose={handleClose} TransitionComponent={Transition}>
+      <DialogTitle>Add New Key to a Category</DialogTitle>
+      <DialogContent>
+        <form onMouseEnter={addFixedKey}>
+          <label>
+            The Key Of The Category
+            <input
+              type="text"
+              name="name"
+              onChange={HandleChange}
+              className="subscribe-input"
+              placeholder="Typing Here..."
+            />
+          </label>
+          <label class="switch">
+            Active Status
+           <input
             class="chk"
             type="checkbox"
+            
             name="is_active"
             onChange={HandleChange}
           />
           <span class="slider"></span>
         </label>
-        <div
-          className="submit-btn"
+          <br />
+          <div></div>
+        </form>{" "}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button
           onClick={() => {
             addFixedKey();
-            HandleOnClick();
+            handleClose();
           }}
         >
-          Add
-        </div>
-      </form>
-    </div>
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
-};
+}
 
-export default Add;
+
+export default AddFk;
 

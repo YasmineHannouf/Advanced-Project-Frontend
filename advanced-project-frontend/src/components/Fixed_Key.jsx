@@ -257,7 +257,9 @@ export default function BasicTable() {
           <Add
             sx={{ zIndex: 0 }}
             className="popUpAdd"
-            onClick={handlePopupClose}
+            open={showPopup}
+            handleClose={handlePopupClose}
+            // onClick={getData}
           />
       
         </>

@@ -43,7 +43,7 @@ export default function AddCategoryDialog(props) {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} TransitionComponent={Transition}>
+    <Dialog open={open} onClose={handleClose} TransitionComponent={Transition}  >
       <DialogTitle>Add New Category</DialogTitle>
       <DialogContent>
         <form onMouseEnter={addCategories}>
