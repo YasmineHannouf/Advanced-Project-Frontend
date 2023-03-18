@@ -13,7 +13,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const AddFk = (props) => {
+const AddFk = (props,onClick) => {
   const [data, setData] = useState({
     name: "",
     is_active: 0
@@ -24,6 +24,9 @@ const AddFk = (props) => {
     setData((prevState) => ({ ...prevState, [name]: newValue }));
   };
 
+  const HandleOnClick = () => {
+    if (onClick) onClick();
+  };
   // console.log(data);
   const addFixedKey = () => {
   console.log(data);
