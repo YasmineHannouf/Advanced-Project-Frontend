@@ -31,39 +31,30 @@ const sideBarLinks = [
 	},
 
 	{
-		name: 'Additionals',
+		name: 'additionals',
 		path: '/additionals',
 		icon: <FontAwesomeIcon icon="fa-solid fa-grip" />,
 		subLinks: [
 			{
-			  name: 'Categories',
-			  path: '/add/categories',
+			  name: 'Category',
+			  path: 'additionals/category',
 			},
 			{
 			  name: 'Fixed Key',
-			  path: '/add/fixedkey',
+			  path: '/additionals/fixedkey',
 			},
 		  ],
 	},
+
 	{
-		name: 'Quick Add',
-		path: '/add',
-		icon: <FontAwesomeIcon icon="fa-solid fa-plus" />,
+		name: 'ManageAdmin',
+		path: '/manageadmin',
+		icon: <FontAwesomeIcon icon="fa-solid fa-gear" />,
 	},
 
 	{
-		name: 'Setting',
-		path: '/setting',
-		icon: <FontAwesomeIcon icon="fa-solid fa-gear" />,
-	},
-	{
-		name: 'Additionals',
-		path: '/categories',
-		icon: <FontAwesomeIcon icon="fa-solid fa-grip" />,
-	},
-	{
 		name: 'Goals Tracker',
-		path: 'goals',
+		path: '/goals',
 		icon: <FontAwesomeIcon icon="fa-solid fa-bullseye" />,
 	},
 ];
@@ -99,7 +90,7 @@ const SideBar = () => {
 			</div>
 			<div className="sideLinksContainer z-index">
 				{sideBarLinks.map((eachLink) => {
-					if (eachLink.name == 'Additionals') {
+					if (eachLink.name == 'additionals') {
 						return (
 							<div>
 								<DropdownLink

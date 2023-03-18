@@ -12,7 +12,7 @@ function createData(id, name, created_at, updated_at) {
   return { id, name, created_at, updated_at };
 }
 
-export default function BasicTable() {
+export default function Categories() {
   const [isLoading, setIsLoading] = useState(true);
   const [Category, setCategory] = useState([]);
   const [editingRow, setEditingRow] = useState(null);
