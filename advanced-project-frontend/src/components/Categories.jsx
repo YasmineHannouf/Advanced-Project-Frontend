@@ -7,30 +7,32 @@ import "../styles/Fixed_Key.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/system";
 import Add from "./PopUp/CategoriesPop"; //CloseButton
-import DeleteIcon from '../components/PopUp/Delete' //"../../assets/Phone.svg"
+import ConfirmationDialog from "../components/PopUp/confirm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";import DeleteIcon from '../components/PopUp/Delete' //"../../assets/Phone.svg"
+
+
 function createData(id, name, created_at, updated_at) {
   return { id, name, created_at, updated_at };
 }
 
-export default function Categories() {
+export default function BasicTable() {
   const [isLoading, setIsLoading] = useState(true);
-  const [Category, setCategory] = useState([]);
+  const [FixedKey, setCategory] = useState([]);
   const [editingRow, setEditingRow] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const togglePopup = () => {
     setShowPopup(!showPopup);
     console.log(showPopup);
   };
-  const handlePopupClose = () => {
-    setShowPopup(false);
-    getData();
-  };
-  useEffect(() => {
-    getData();
-  }, []);
 
-  const rows = Category.map((item) =>
-    createData(item.id, item.name, item.created_at, item.updated_at)
+  const rows = FixedKey.map((item) =>
+    createData(
+      item.id,
+      item.name,
+      item.created_at,
+      item.updated_at
+    )
   );
 
   const handleSearch = debounce((searchValue) => {
@@ -38,47 +40,57 @@ export default function Categories() {
   }, 500);
 
   const handleDelete = (rowsDeleted) => {
-    console.log(rowsDeleted);
     axios
       .delete(`http://127.0.0.1:8000/api/categories/${rowsDeleted}`)
       .then((response) => {
         console.log(response);
         getData();
+        toast.success("Data deleted successfully");
       })
       .catch((error) => {
         console.log(error);
-        // setIsLoading(false);
+        toast.error(error);
       });
   };
 
-  const getData = () =>
-    axios
-      .get("http://127.0.0.1:8000/api/categories")
-      .then((response) => {
-        setCategory(response.data.data);
-        setIsLoading(false);
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/categories"
+      );
+      setCategory(response.data.data);
 
+      setIsLoading(false);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+    getData();
+  };
+  useEffect(() => {
+    console.log("handlePopupClose");
+    getData();
+  }, []);
   const handleUpdate = (rowData) => {
     setEditingRow(true);
     console.log(rowData[2]);
     axios
       .patch(`http://127.0.0.1:8000/api/categories/${rowData[0]}`, {
         name: rowData[1],
-        is_active: rowData[2],
       })
       .then((response) => {
         getData();
+        toast.success(" Updated successfully!");
         console.log(rowData);
       })
       .catch((error) => {
         console.log(error);
-        // setIsLoading(false);
+        toast.error(error);
       });
   };
 
@@ -118,7 +130,7 @@ export default function Categories() {
         editable: true,
       },
     },
-
+    
     {
       name: "created_at",
       label: "Created At",
@@ -143,12 +155,22 @@ export default function Categories() {
                   color="#234567"
                 />
               </button>
-              &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-              <button
+              <ConfirmationDialog
+                title="Delete Item"
+                buttonText={            <DeleteIcon/>
+              }
+                confirmText="Yes, delete it"
+                cancelText="Cancel"
+                onConfirm={() => handleDelete(id)}
+                color="error"
+                variant=''
+                onError={(message) => toast.error(message)}
+              >
+                Are you sure you want to delete this Admin?
+              </ConfirmationDialog>      <button
                 className="Deletebtn"
                 onClick={() => handleDelete(rowData[0])}
               >
-            <DeleteIcon/>
               </button>
             </>
           );
@@ -163,13 +185,12 @@ export default function Categories() {
     rowsPerPageOptions: [5, 10, 20],
     selectableRows: "none",
     search: true,
-    searchPlaceholder: "Search for a Category",
+    searchPlaceholder: "Search to a Category",
     onSearchChange: (searchValue) => handleSearch(searchValue),
     download: true,
     print: true,
     pagination: true,
     rowsPerPage: 5,
-    loaded: true,
     rowsPerPageOptions: [5, 10, 20],
     onCellClick: (cellData, cellMeta) => {
       const rowIndex = cellMeta.rowIndex;
@@ -177,9 +198,7 @@ export default function Categories() {
         setEditingRow(rowIndex);
       }
     },
-    // onCellEditCommit: handleCellEditCommit,
     onRowsDelete: handleDelete,
-    fullScreen: true,
     customToolbar: () => {
       return (
         <button className="cta" onClick={togglePopup}>
@@ -193,7 +212,7 @@ export default function Categories() {
     },
   };
   return (
-    <Box sx={{ width: "70%", marginLeft: "15%", marginY: "150px" }}>
+    <Box sx={{ width: "80%", marginLeft: "5%", marginY: "10%" }}>
       {showPopup ? (
         <>
           {" "}
@@ -202,25 +221,25 @@ export default function Categories() {
             className="popUpAdd"
             open={showPopup}
             handleClose={handlePopupClose}
-            // onClick={getData}
+            onClick={getData}
           />
-          `
         </>
       ) : null}
       <MUIDataTable
-        title={"Categories"}
+        title={"Table Of Categories"}
         data={rows}
         columns={columns}
         options={options}
         className={showPopup ? "blur" : ""}
         sx={{
           width: "70%",
-          marginLeft: "390px",
-          marginY: "190px",
+          marginLeft: "350px",
+          marginY: "150px",
           zIndex: 1,
           textAlign: "center",
         }}
       />
+      <ToastContainer />
     </Box>
   );
 }

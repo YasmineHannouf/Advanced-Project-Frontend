@@ -7,70 +7,77 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function AddCategoryDialog(props) {
+const AddCategoryDialog = (props, onClick) => {
   const [data, setData] = useState({
     name: "",
   });
-  const HandleChange = (e) => {
-    setData((e.target.name = e.target.value));
-  };
-  // const handleOnClick = () => {
-  //   if (onClick) onClick();
-  // };
-  console.log(data);
-  const addCategories = () => {
-    console.log(data);
 
+  const handleChange = (e) => {
+    setData({ ...data, name: e.target.value });
+  };
+
+  const addCategories = () => {
     axios
-      .post("http://127.0.0.1:8000/api/categories", { name: data })
+      .post("http://127.0.0.1:8000/api/categories", { name: data.name })
       .then((response) => {
-        console.log(response);
+        if (response.status === 200) {
+          toast.success("New Category added successfully!");
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data.Error);
       });
   };
+
   const { open, handleClose, onChildClose } = props;
 
   const handleSaveClick = () => {
+    addCategories();
     handleClose();
     onChildClose();
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} TransitionComponent={Transition}  >
-      <DialogTitle>Add New Category</DialogTitle>
-      <DialogContent>
-        <form onMouseEnter={addCategories}>
-          <label>
-            <input
-              type="text"
-              name="name"
-              onChange={HandleChange}
-              className="subscribe-input"
-              placeholder="Add a new category Name"
-            />
-          </label>
-          <br />
-          <div></div>
-        </form>{" "}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button
-          onClick={() => {
-            addCategories();
-            handleClose();
-          }}
-        >
-          Save
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        <DialogTitle>Add New Key to a Category</DialogTitle>
+        <DialogContent>
+          <form onKeyDown={addCategories}>
+            <label>
+              The New Of The Category
+              <input
+                type="text"
+                name="name"
+                value={data.name}
+                onChange={handleChange}
+                className="subscribe-input"
+                placeholder="Typing Here..."
+              />
+            </label>
+            <br />
+            <div></div>
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSaveClick}>Save</Button>
+        </DialogActions>
+      </Dialog>
+      <ToastContainer />
+    </>
   );
-}
+};
+
+export default AddCategoryDialog;

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import emailIcon from "../../assets/Email.svg";
 import phoneIcon from "../../assets/Phone.svg";
-import ConfirmationDialog from "../PopUp/confirm";
-import "../../styles/AdminCard.css";
 import { ButtonGroup, Button, TextField } from "@mui/material";
+import ConfirmationDialog from "../PopUp/confirm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../../styles/AdminCard.css";
+
 import axios from "axios";
 
 function AdminCard(props) {
