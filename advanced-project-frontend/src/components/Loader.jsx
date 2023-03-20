@@ -3,10 +3,8 @@ import '../styles/Loader.css';
 
 const Loader = () => {
 	return (
-		<div className="loader">
-			<div className="lds-circle">
-				<div>$$</div>
-			</div>
+		<div className="loader_container">
+			<span class="loader"></span>
 		</div>
 	);
 };
