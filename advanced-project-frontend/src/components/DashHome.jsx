@@ -4,14 +4,13 @@ import '../styles/dashHome.css';
 import axios from 'axios';
 import { PieChart } from 'react-minimal-pie-chart';
 import { useState, useEffect } from 'react';
-import { Chart as ChartJS, BarElement, BarController } from 'chart.js/auto';
+import { Chart as ChartJS } from 'chart.js/auto';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 
-import { Bar } from 'react-chartjs-2';
 import ProfitGoal from './ProfitGoal';
 import targetImage from '../assets/pngegg.png';
-import TargetGoal from './TargetGoal';
+
 import Loader from './Loader';
 
 const DashHome = () => {

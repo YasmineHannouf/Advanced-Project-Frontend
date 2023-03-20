@@ -112,6 +112,10 @@
 	.pieChart {
 		padding-top: 3rem;
 	}
+	.goalData {
+		font-size: 18px;
+		color: gray;
+	}
 }
 
 .overallContainer > div span {
