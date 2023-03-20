@@ -25,7 +25,8 @@ const DropdownLink = ({ display }) => {
 		>
 			<div
 				style={{
-					margin: '1rem 0',
+					
+					
 					textAlign: 'center',
 					fontSize: '1.5rem',
 					margin: '0 auto',

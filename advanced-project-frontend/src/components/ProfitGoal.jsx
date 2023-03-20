@@ -8,7 +8,6 @@ const ProfitGoal = ({ goal, Total, title }) => {
 		<div style={{ width: '100%' }}>
 			<div className="goalData">
 				<p className="mb_5">{goal}</p>
-
 				<p className="mb_5">{title}</p>
 			</div>
 

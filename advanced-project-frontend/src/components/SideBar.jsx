@@ -10,6 +10,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import SideLink from './SideLink';
 import DropdownLink from './DropdownLink';
 
+import brand from '../assets/logo.png';
+
 library.add(fas);
 
 const sideBarLinks = [
@@ -53,7 +55,7 @@ const SideBar = () => {
 		<aside className={sideBarExpanded ? 'sideBar' : 'sideBar_expanded'}>
 			<div className="brandContainer">
 				<h1 className="z-index">
-					<FontAwesomeIcon icon="fa-solid fa-bars-staggered" />
+					<img src={brand} alt="brand" />
 					<span>Brand</span>
 				</h1>
 
@@ -77,7 +79,7 @@ const SideBar = () => {
 			</div>
 			<div className="sideLinksContainer z-index">
 				{sideBarLinks.map((eachLink) => {
-					if (eachLink.name == 'Additionals') {
+					if (eachLink.name === 'Additionals') {
 						return (
 							<div key={sideBarLinks.indexOf(eachLink)}>
 								<DropdownLink

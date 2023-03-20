@@ -11,7 +11,18 @@
 .z-index {
 	z-index: 1550;
 }
-
+.brandContainer {
+	padding-top: 2rem;
+	height: 70px;
+	width: 70px;
+	position: relative;
+	z-index: 99999999999;
+}
+.brandContainer img {
+	max-width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
 .sideBar {
 	position: sticky;
 	top: 0;
@@ -227,4 +238,11 @@
 
 .dropdownContainer_expanded > div:nth-child(1) svg {
 	min-width: 50px;
+}
+
+@media screen and (max-width: 468px) {
+	.sideBar,
+	.sideBar_expanded {
+		display: none;
+	}
 }
