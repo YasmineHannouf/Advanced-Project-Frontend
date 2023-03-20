@@ -1,52 +1,57 @@
-
-import "../styles/LoginPage.css";
-import PropTypes from "prop-types";
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
+import Cookie from "universal-cookie";
+import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
+export default function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = event => {
+    event.preventDefault();
+    axios
+      .post(`http://localhost:8000/api/login`, {
+        email,
+        password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response) {
+          // console.log(response.data)
+          // const token = response.data.token;
+          const isAuthenticated = Cookies.get('Authorisation');
 
+          const cookie = new Cookie();
+          cookie.set("Authorisation", isAuthenticated, { path: "/", maxAge: 60 * 60 * 24 });
 
-export default function Login({ setToken }) {
-  const [email, setUserName] = useState();
-  const [password, setPassword] = useState();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8000/api/login', { email, password });
-      alert('Login successful');
-      console.log(response);
-      // do something with the response, such as storing the token
-    } catch (error) {
-      console.error(error);
-      // handle error, such as displaying an error message to the user
-    }
+          setSuccess(response);
+          alert("you are logged in " + isAuthenticated);
+          navigate("/dash");        }
+      })
+      .catch(error => {
+        if (error) {
+          console.log(error);
+          setError(error);
+        }
+        alert(error.response.data);
+      });
   };
   
 
   return (
-    <div className="login-wrapper">
-      <h1>Please Log In</h1>
-
+    <div>
       <form onSubmit={handleSubmit}>
-        <label>
-          <p>Email</p>
-          <input type="email" onChange={(e) => setUserName(e.target.value)} />
-        </label>
-        <label>
-          <p>Password</p>
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <div>
-          <button  onClick={handleSubmit}>
-            Submit
-          </button>
-        </div>
+        <input type="text" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+        <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <button type="submit">Submit</button>
       </form>
+      {error && <p>{error}</p>}
     </div>
   );
 }
-

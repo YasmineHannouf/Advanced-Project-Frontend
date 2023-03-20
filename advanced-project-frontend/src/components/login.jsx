@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/LoginPage.css";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
