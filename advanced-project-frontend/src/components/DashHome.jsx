@@ -17,7 +17,6 @@ import DashHeader from './DashHeader';
 const DashHome = () => {
 	const [data, setData] = useState(null);
 	const [profitGoal, setProfitGoal] = useState(89);
-	
 
 	// data
 	useEffect(() => {
@@ -60,10 +59,7 @@ const DashHome = () => {
 		}
 		return (
 			<div className="dashHome">
-				<DashHeader
-					// sideExpanded={sideExpanded}
-					// setSideExpanded={setSideExpanded}
-				/>
+				<DashHeader />
 				<h1 className="title">Balances</h1>
 				<section className="overallContainer">
 					<div>

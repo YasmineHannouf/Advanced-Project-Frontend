@@ -17,7 +17,14 @@ const DashHeader = () => {
 					setsideBarExpanded(!sideBarExpanded);
 				}}
 			>
-				<FontAwesomeIcon icon="fa-solid fa-bars" />
+				{sideBarExpanded ? (
+					<FontAwesomeIcon
+						icon="fa-solid fa-xmark"
+						style={{ color: '#ffffff' }}
+					/>
+				) : (
+					<FontAwesomeIcon icon="fa-solid fa-bars" />
+				)}
 			</button>
 		</header>
 	);
