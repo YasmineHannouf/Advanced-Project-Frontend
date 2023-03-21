@@ -1,4 +1,29 @@
 .expensePage{
     width: 100%;
     height: 100%;
+    
+
+    @media (max-width: 600px) {
+    
+      width: 90%;
+      height: auto;
+    }
+    
+    
+    @media (min-width: 600px) and (max-width: 1200px) {
+     
+      width: 70%;
+      height: auto;
+    }
+    
+ 
+    @media (min-width: 1200px) {
+     
+      width: 50%;
+      height: auto;
+    }
+}
+.expensesphoto{
+  width: 70%;
+  height: 30%;
 }

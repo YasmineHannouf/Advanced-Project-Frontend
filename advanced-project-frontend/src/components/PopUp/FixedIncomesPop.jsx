@@ -12,13 +12,12 @@ const Add = ({ onClick }) => {
     category_id: 0,
     key_id: "",
     is_paid: false,
-    type: "exp",
+    type: "inc",
     scheduled_date: ""
   });
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
-    console.log(e.target.name+','+e.target.value);
   };
 
   const addFixed = (e) => {
@@ -30,7 +29,6 @@ const Add = ({ onClick }) => {
     const time = datetime.toLocaleTimeString();
     const date_time = year + "-" + month + "-" + day + " " + time;
     const newData = { ...data, date_time };
-    console.log('data'+data)
     axios
       .post("http://127.0.0.1:8000/api/fixed", newData)
       .then((response) => {
@@ -41,14 +39,14 @@ const Add = ({ onClick }) => {
         console.log(error);
       });
   };
-  const [scheduled_date, setScheduled_date] = useState([]);
+  const [scheduled_date, setscheduled_date] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/fixed")
       .then((response) => {
-        setScheduled_date(response.data.fixed.data);
-        // console.log(response.data);
+        setscheduled_date(response.data.fixed.data.scheduled_date[{data}]);
+  console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -146,23 +144,30 @@ const Add = ({ onClick }) => {
              ))}
      </select>
      </label>
-
-
-
+        {/* <label className="labelFixedPop">
+          Key ID:
+          <input
+            type="text"
+            name="key_id"
+            value={data.key_id}
+            onChange={handleChange}
+            className="inputAddFixed"
+          />
+        </label> */}
         <label className="labelFixedPop">
           Is Paid?:
           <input
             type="checkbox"
             name="is_paid"
+            // className="inputAddFixed"
             checked={data.is_paid}
             onChange={() => setData({ ...data, is_paid: !data.is_paid })}
             
           />
         </label>
         <label className="labelFixedPop">
-          Type (exp):
+          Type:
           <input
-          
             type="text"
             name="type"
             value={data.type}
@@ -170,7 +175,8 @@ const Add = ({ onClick }) => {
             className="inputAddFixed"
           />
         </label>
-        <label className="labelFixedPop">
+       
+     <label className="labelFixedPop">
         scheduled_date:
         <select className="inputAddFixed" name="scheduled_date" onChange={handleChange}>
                     <option value="year">Yearly</option>
@@ -180,8 +186,7 @@ const Add = ({ onClick }) => {
                     <option value="hour">Hourly</option>
                   </select>
      </label>
-
-
+       
         <button type="submit" className="buttonFixedPop">Add</button>
         <button class="close-btn" type="button" onClick={onClick}>X</button>
       </form>

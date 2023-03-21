@@ -1,9 +1,12 @@
 
 import React from 'react';
 import Tabs from '../components/Tabs';
-import '../styles/expensePage.css'
-import ExpensesFixed from "./components/TableExpensesFixed";
-import CreditCard from '../components/CreditCards';
+import '../styles/expensePage.css';
+import expensesImg from '../assets/expenses.jpg';
+
+// import CardsExpenses from '../components/CardsExpenses';
+// import CreditCard from '../components/CreditCards';
+import ProfileExpense from '../components/ProfileExpense';
 const Expenses = () => {
   // const pageStyle = {
 	// background:'#472183',
@@ -15,7 +18,18 @@ const Expenses = () => {
   return (
     // <div style={pageStyle}>
 	<div className='expensePage'>
+<<<<<<< HEAD
       <ExpensesFixed></ExpensesFixed>
+=======
+      <h1>Welcome to your Expense Page</h1>
+      <img className="expensesphoto" src={expensesImg} alt="expenses photo" />
+
+      {/* <CardsExpenses /> */}
+      {/* <CreditCard /> */}
+      {/* <ProfileExpense /> */}
+      <Tabs />
+      
+>>>>>>> khaled_EXpensespagedevelopment
     </div>
   );
 };

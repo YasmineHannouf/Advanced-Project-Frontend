@@ -14,7 +14,7 @@ const Add = ({ onClick }) => {
     description: "",
     amount: 0,
     category_id: 0,
-    type: "exp",
+    type: "inc",
     start_date: "",
     end_date: ""
   });

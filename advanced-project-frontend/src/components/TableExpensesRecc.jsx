@@ -7,9 +7,12 @@ import "../styles/Fixed_Key.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/system";
 import Add from "./PopUp/ReccuringPop"; //CloseButton
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function createData(id, title, description, amount,category_id,type,date_time,start_date,end_date) {
-  return { id, title, description, amount,category_id,type,date_time,start_date,end_date };
+
+function createData(id, title, description, amount,category_id,type,start_date,end_date) {
+  return { id, title, description, amount,category_id,type,start_date,end_date };
 }
 
 export default function BasicTable() {
@@ -39,6 +42,7 @@ export default function BasicTable() {
       item.start_date,
       item.end_date
     )
+    
   );
 
   const handleSearch = debounce((searchValue) => {
@@ -50,6 +54,7 @@ export default function BasicTable() {
     axios.delete(`http://127.0.0.1:8000/api/reccurings/${rowsDeleted}`)
     .then((response) => {
       console.log(response);
+      toast.success("Recurring Item Deleted successfully!");
     })
     .catch((error) => {
       console.log(error);
@@ -62,10 +67,12 @@ export default function BasicTable() {
   .then((response) => {
     setCategory(response.data.data.data);
     // setIsLoading(false);
-    console.log(response.data.data.data[0].category.name);
+    console.log(response.data.data.data);
+    
   })
   .catch((error) => {
     console.log(error);
+    toast.error("Error Deleting Recurring Item.");
     // setIsLoading(false);
   });
 
@@ -76,10 +83,12 @@ export default function BasicTable() {
     .then((response) => {
       getData();
       console.log(rowData);
-      console.log(rowData);
+      // console.log(rowData);
+      toast.success("New recurring item Update successfully!");
     })
     .catch((error) => {
       console.log(error);
+      toast.error("Error updating recurring item.");
       // setIsLoading(false);
     });
   };
@@ -170,7 +179,7 @@ export default function BasicTable() {
     },
     {
       name: "category_id",
-      label: "Category_id",
+      label: "Category",
       
     },
     {
@@ -188,6 +197,18 @@ export default function BasicTable() {
 
           return (
             <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+              <ToastContainer 
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+          />
               {isEditing ? (
                 <input
                   className="EditInput"
@@ -243,9 +264,11 @@ export default function BasicTable() {
                   className="Editbtn"
                   color="#234567"
                 />
+                
               </button>
               &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-              <button className="Deletebtn" onClick={() => handleDelete(rowData[0])}>
+              <button className="Deletebtn" onClick={() => handleDelete(rowData[0],)}>
+              
                 <svg
                   viewBox="0 0 15 17.5"
                   height="15"
@@ -259,7 +282,9 @@ export default function BasicTable() {
                     d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
                     id="Fill"
                   ></path>
+                  
                 </svg>
+                
               </button>
             </>
           );
@@ -269,6 +294,7 @@ export default function BasicTable() {
   ];
 
   const options = {
+    
     filterType: "checkbox",
     responsive: "standard",
     rowsPerPageOptions: [5, 10, 20],
@@ -284,6 +310,7 @@ export default function BasicTable() {
     rowsPerPageOptions: [5, 10, 20],
     onCellClick: (cellData, cellMeta) => {
       const rowIndex = cellMeta.rowIndex;
+      
       if (cellMeta.colIndex === 3) {
         setEditingRow(rowIndex);
       }
@@ -308,6 +335,7 @@ export default function BasicTable() {
         <>
           {" "}
           <Add sx={{ zIndex: 0 }} className="popUpAdd" onClick={togglePopup} />
+         
           {/* <ButtonClose onClick={() => {
   handlePopupClose();
   getData();

@@ -7,9 +7,10 @@ import "../styles/Fixed_Key.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/system";
 // import Add from "./PopUp/ReccuringPop"; //CloseButton
-import Add from '../components/PopUp/FixedPop';
+import ButtonClose from "./PopUp/CloseBtton";
+import Add from '../components/PopUp/FixedIncomesPop';
 
-function createData(id, title, description, amount,category_id, key_id, is_paid, type = 'exp', scheduled_date) {
+function createData(id, title, description, amount,category_id, key_id, is_paid, type = 'inc', scheduled_date) {
     return { id, title, description, amount, category_id, key_id, is_paid, type, scheduled_date};
   }
 
@@ -43,6 +44,7 @@ export default function BasicTable() {
    
   )
 );
+
   const handleSearch = debounce((searchValue) => {
     console.log(searchValue);
   }, 500);
@@ -66,7 +68,7 @@ export default function BasicTable() {
   .get("http://127.0.0.1:8000/api/fixed")
   .then((response) => {
     setFixed(response.data.fixed.data);
-    console.log('res'+response);
+    console.log(response);
   })
   .catch((error) => {
     console.log(error);
@@ -231,7 +233,31 @@ export default function BasicTable() {
         editable: true,
       },
     },
+    // {
+    //   name: "type",
+    //   label: "Type",
+    //   options: {
+    //     customBodyRender: (value, tableMeta, updateValue) => {
+    //       const rowIndex = tableMeta.rowIndex;
+    //       const isEditing = rowIndex === editingRow;
 
+    //       return (
+    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+    //           {isEditing ? (
+    //             <input
+    //               className="EditInput"
+    //               value={value}
+    //               onChange={(e) => updateValue(e.target.value)} 
+    //             />
+    //           ) : (
+    //             value
+    //           )}
+    //         </div>
+    //       );
+    //     },
+    //     editable: true,
+    //   },
+    // },
     {
         name: "scheduled_date",
         label: "Scheduled_date",
@@ -259,7 +285,56 @@ export default function BasicTable() {
           editable: true,
         },
       },
+    // {
+    //   name: "start_date",
+    //   label: "Start_date",
+    //   options: {
+    //     customBodyRender: (value, tableMeta, updateValue) => {
+    //       const rowIndex = tableMeta.rowIndex;
+    //       const isEditing = rowIndex === editingRow;
 
+    //       return (
+    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+    //           {isEditing ? (
+    //             <input
+    //               className="EditInput"
+    //               value={value}
+    //               onChange={(e) => updateValue(e.target.value)}
+    //             />
+    //           ) : (
+    //             value
+    //           )}
+    //         </div>
+    //       );
+    //     },
+    //     editable: true,
+    //   },
+    // },
+    // {
+    //   name: "end_date",
+    //   label: "End_date",
+    //   options: {
+    //     customBodyRender: (value, tableMeta, updateValue) => {
+    //       const rowIndex = tableMeta.rowIndex;
+    //       const isEditing = rowIndex === editingRow;
+
+    //       return (
+    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+    //           {isEditing ? (
+    //             <input
+    //               className="EditInput"
+    //               value={value}
+    //               onChange={(e) => updateValue(e.target.value)}
+    //             />
+    //           ) : (
+    //             value
+    //           )}
+    //         </div>
+    //       );
+    //     },
+    //     editable: true,
+    //   },
+    // },
     {
       name: "actions",
       label: "Actions",
@@ -335,13 +410,12 @@ export default function BasicTable() {
       );
     },
   };
-
   return (
     <Box sx={{ width: "70%", marginLeft: "350px", marginY: "150px" }}>
       {showPopup ? (
         <>
           {" "}
-          <Add sx={{ zIndex: 0 }} className="popUpAdd"   onClick={  handlePopupClose} />
+          <Add sx={{ zIndex: 0 }} className="popUpAdd" onClick={  handlePopupClose} />
           {/* <ButtonClose onClick={() => {
   handlePopupClose();
   getData();
