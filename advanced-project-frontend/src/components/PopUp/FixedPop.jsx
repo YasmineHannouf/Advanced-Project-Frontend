@@ -235,6 +235,7 @@ const Add = ({ onClick }) => {
         <label className="labelFixedPop">
           Type (exp):
           <input
+          
             type="text"
             name="type"
             value={data.type}
@@ -248,7 +249,7 @@ const Add = ({ onClick }) => {
              <option value="">Select a Schedule date</option>
              {scheduled_date.map((scheduled_date) => (
                <option key={scheduled_date.id} 
-               value={scheduled_date.scheduled_date}
+               value='{scheduled_date.scheduled_date}'
                >
                  {scheduled_date.scheduled_date}
                </option>

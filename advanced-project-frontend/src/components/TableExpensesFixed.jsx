@@ -44,7 +44,7 @@ export default function BasicTable() {
    
   )
 );
-
+console.log(+Fixed);
   const handleSearch = debounce((searchValue) => {
     console.log(searchValue);
   }, 500);
@@ -233,31 +233,7 @@ export default function BasicTable() {
         editable: true,
       },
     },
-    // {
-    //   name: "type",
-    //   label: "Type",
-    //   options: {
-    //     customBodyRender: (value, tableMeta, updateValue) => {
-    //       const rowIndex = tableMeta.rowIndex;
-    //       const isEditing = rowIndex === editingRow;
 
-    //       return (
-    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
-    //           {isEditing ? (
-    //             <input
-    //               className="EditInput"
-    //               value={value}
-    //               onChange={(e) => updateValue(e.target.value)} 
-    //             />
-    //           ) : (
-    //             value
-    //           )}
-    //         </div>
-    //       );
-    //     },
-    //     editable: true,
-    //   },
-    // },
     {
         name: "scheduled_date",
         label: "Scheduled_date",
@@ -415,7 +391,7 @@ export default function BasicTable() {
       {showPopup ? (
         <>
           {" "}
-          <Add sx={{ zIndex: 0 }} className="popUpAdd" onClick={  handlePopupClose} />
+          <Add sx={{ zIndex: 0 }} className="popUpAdd"  scheduled = {'d'} onClick={  handlePopupClose} />
           {/* <ButtonClose onClick={() => {
   handlePopupClose();
   getData();
