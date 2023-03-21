@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import "../styles/LoginPage.css";
 import image from '../assets/milky-way-2695569_960_720.jpg'
+
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -54,28 +56,48 @@ export default function SignIn() {
 
   return (
     <div className="logInContainer">
-      <section  className="imageSection">
-        <img src={image} alt="jijiji" className="image"/>
-      </section>
-      <section className="formSection">
-        {" "}
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit">Submit</button>
-        </form>
-      </section>
-      {error && <p>{error}</p>}
-    </div>
+     
+     <div className="form-box">
+			<form className="form" onSubmit={handleSubmit}>
+				<span className="title">Login</span>
+				<span className="subtitle">Let's start</span>
+				<div className="form-container">
+					<input
+						onChange={(event) => setEmail(event.target.value)}
+						type="email"
+						className="input"
+						placeholder="Email"
+						required
+					/>
+					<input
+						onChange={(event) => setPassword(event.target.value)}
+						type="password"
+						className="input"
+						placeholder="Password"
+						required
+					/>
+				</div>
+				<button style={{ textAlign: 'center' }}>Log In</button>
+			</form>
+			<div className="form-section">
+				
+			</div>
+		</div>
+	</div>
   );
 }
+
+// function TargetGoal() {
+//   const [goalData, setGoalData] = useState({
+//     title: '',
+//     goal: '',
+//     startDate: '',
+//     endDate: '',
+//   });
+
+//   const handleInputChange = (event) => {
+//     const dataInput = event.target.name;
+//     const cloneGoalData = { ...goalData };
+//     cloneGoalData[dataInput] = event
+//   }
+// }
