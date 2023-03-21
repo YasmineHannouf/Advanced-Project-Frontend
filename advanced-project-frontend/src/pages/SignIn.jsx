@@ -30,7 +30,7 @@ export default function SignIn() {
       )
       .then((response) => {
         if (response) {
-
+         
           const isAuthenticated = Cookies.get("Authorisation");
 
           const cookie = new Cookie();
@@ -85,4 +85,3 @@ export default function SignIn() {
 	</div>
   );
 }
-

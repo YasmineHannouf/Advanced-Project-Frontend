@@ -6,12 +6,13 @@ import Incomes from "./components/Incomes";
 import ExpensesReccuring from "./components/TableExpensesRecc";
 import ExpensesFixed from "./components/TableExpensesFixed";
 import FixedIncomes from "./components/FixedIncomes";
-import SignIn from "./pages/SignIn";
+import Login from "./pages/SignIn";
 import Expenses from "./components/Expenses";
 import SideBar from "./components/SideBar";
 import Admin from "./components/Admin/ManageAdmin";
 import Categories from "./components/Categories";
 import Additionals from "./components/Additionals";
+
 
 import Setting from "../src/components/Admin/Setting";
 import { useState } from "react";
@@ -59,7 +60,8 @@ const App = () => {
       
     </div>
   </BrowserRouter>
+
   );
-};
+}
 
 export default App;
