@@ -1,5 +1,5 @@
 import adminImage from '../assets/default_61f3429ad1ced-removebg-preview.png';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import React from 'react';
 import '../styles/sideBar.css';
 
@@ -11,6 +11,7 @@ import SideLink from './SideLink';
 import DropdownLink from './DropdownLink';
 
 import brand from '../assets/logo.png';
+import { context, Context } from '../App.js';
 
 library.add(fas);
 
@@ -49,14 +50,13 @@ const sideBarLinks = [
 ];
 
 const SideBar = () => {
-	const [sideBarExpanded, setsideBarExpanded] = useState(false);
-
+	const [sideBarExpanded, setsideBarExpanded] = useContext(context);
+	// const [sideExpanded, setSideExpanded] = useState(context);
 	return (
 		<aside className={sideBarExpanded ? 'sideBar' : 'sideBar_expanded'}>
 			<div className="brandContainer">
 				<h1 className="z-index">
 					<img src={brand} alt="brand" />
-					<span>Brand</span>
 				</h1>
 
 				{sideBarExpanded ? (

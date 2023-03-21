@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import Dashboard from './pages/Dashboard';
 import Incomes from './components/Incomes';
@@ -10,35 +11,46 @@ import SideBar from './components/SideBar';
 import Additionals from './components/Additionals';
 import FixedKey from './components/Fixed_Key';
 import DashHome from './components/DashHome';
-// import Categories from './components/Categories';
+
+export const context = React.createContext();
 
 const App = () => {
+	const [sideExpanded, setSideExpanded] = useState(false);
 	return (
 		<BrowserRouter>
 			<div style={{ display: 'flex', gridColumn: '1/-1' }}>
-				<SideBar />
-				<Routes>
-					<Route path="/login" element={<SignIn />} />
-					<Route path="/" element={<DashHome />} />
-					<Route path="/incomes" element={<Incomes />} />
-					<Route
-						path="/incomes/recurring"
-						element={<RecurringIncome />}
-					/>
-					<Route path="/incomes/fixing" element={<FixedIncomes />} />
+				<context.Provider value={[sideExpanded, setSideExpanded]}>
+					<SideBar />
 
-					<Route path="/" element={<DashHome />} />
-					<Route path="/expenses" element={<Expenses />} />
-					<Route
-						path="/expenses/recurring"
-						element={<RecurringIncome />}
-					/>
-					<Route path="/expenses/fixing" element={<FixedIncomes />} />
+					<Routes>
+						<Route path="/login" element={<SignIn />} />
+						<Route path="/" element={<DashHome />} />
+						<Route path="/incomes" element={<Incomes />} />
+						<Route
+							path="/incomes/recurring"
+							element={<RecurringIncome />}
+						/>
+						<Route
+							path="/incomes/fixing"
+							element={<FixedIncomes />}
+						/>
 
-					<Route path="/add" element={<Additionals />} />
-					{/* <Route path="/add/categories" element={<Categories />} /> */}
-					<Route path="/add/fixedkey" element={<FixedKey />} />
-				</Routes>
+						<Route path="/" element={<DashHome />} />
+						<Route path="/expenses" element={<Expenses />} />
+						<Route
+							path="/expenses/recurring"
+							element={<RecurringIncome />}
+						/>
+						<Route
+							path="/expenses/fixing"
+							element={<FixedIncomes />}
+						/>
+
+						<Route path="/add" element={<Additionals />} />
+						{/* <Route path="/add/categories" element={<Categories />} /> */}
+						<Route path="/add/fixedkey" element={<FixedKey />} />
+					</Routes>
+				</context.Provider>
 			</div>
 		</BrowserRouter>
 	);

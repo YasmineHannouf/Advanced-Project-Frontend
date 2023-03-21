@@ -12,20 +12,20 @@ import ProfitGoal from './ProfitGoal';
 import targetImage from '../assets/pngegg.png';
 
 import Loader from './Loader';
+import DashHeader from './DashHeader';
 
 const DashHome = () => {
 	const [data, setData] = useState(null);
 	const [profitGoal, setProfitGoal] = useState(89);
+	
 
 	// data
 	useEffect(() => {
 		axios
 			.get('http://localhost:8000/api/')
 			.then((data) => {
-				setTimeout(() => {
-					console.log(data.data);
-					setData(data);
-				}, 5000);
+				console.log(data.data);
+				setData(data);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -54,19 +54,16 @@ const DashHome = () => {
 		{ name: 'Page B', uv: 5222, pv: 8000, amt: 6000 },
 	];
 
-	// const incomesDate = data && data.map(eachIncome => {
-	// 	return [{}]
-	// }
-	// 	)
-
 	{
 		if (!data || !profitGoal) {
 			return <Loader />;
 		}
 		return (
 			<div className="dashHome">
-				{/* <BarElement /> */}
-				{/* <BarController /> */}
+				<DashHeader
+					// sideExpanded={sideExpanded}
+					// setSideExpanded={setSideExpanded}
+				/>
 				<h1 className="title">Balances</h1>
 				<section className="overallContainer">
 					<div>
@@ -139,8 +136,7 @@ const DashHome = () => {
 					<h2 className="title">incomes / expenses overview</h2>
 
 					<div className="pieChartContainer">
-						<LineChart width={400} height={300} data={chartData}>
-							{/* --pink: #f5c7a2; --light-green: #48bf91; */}
+						<LineChart width={350} height={350} data={chartData}>
 							<Line
 								type="monotone"
 								dataKey="uv"
@@ -171,7 +167,6 @@ const DashHome = () => {
 							<div>
 								<PieChart
 									data={[
-										// --pink: #f5c7a2; --light-green: #48bf91;
 										{
 											title: 'Incomes',
 											value: Income,
@@ -198,8 +193,6 @@ const DashHome = () => {
 						</div>
 					</div>
 				</section>
-
-				{/* <TargetGoal /> */}
 			</div>
 		);
 	}
