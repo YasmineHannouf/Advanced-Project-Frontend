@@ -12,7 +12,7 @@ const Add = ({ onClick }) => {
     category_id: 0,
     key_id: "",
     is_paid: false,
-    type: "exp",
+    type: "inc",
     scheduled_date: ""
   });
 
@@ -39,14 +39,14 @@ const Add = ({ onClick }) => {
         console.log(error);
       });
   };
-  const [scheduled_date, setScheduled_date] = useState([]);
+  const [scheduled_date, setscheduled_date] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/fixed")
       .then((response) => {
-        setScheduled_date(response.data.fixed.data);
-        // console.log(response.data);
+        setscheduled_date(response.data.fixed.data.scheduled_date[{data}]);
+  console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -73,63 +73,15 @@ const Add = ({ onClick }) => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/Fixedkeys/show")
+      .get("http://127.0.0.1:8000/api/fixedkeys/show")
       .then((response) => {
-        setfixedkeys(response.data.Fixed_keysByDesc);
+        setfixedkeys(response.data.data.data);
   console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
-
-
-
-//   const [scheduled_dates, setScheduledDates] = useState(null);
-// const [fixedKeys, setFixedKeys] = useState([]);
-
-// useEffect(() => {
-//   axios
-//     .get("http://127.0.0.1:8000/api/fixed")
-//     .then((response) => {
-//       setScheduledDates(response.data.fixed.data.scheduled_date);
-//       console.log(response);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// }, []);
-
-// useEffect(() => {
-//   axios
-//     .get("http://127.0.0.1:8000/api/Fixedkeys/show")
-//     .then((response) => {
-//       setFixedKeys(response.data.data);
-//       console.log(response);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// }, []);
-
-
-
-// const addFixed = (event) => {
-//   event.preventDefault();
-//   axios
-//     .post("http://127.0.0.1:8000/api/fixed/create", data)
-//     .then((response) => {
-//       console.log(response);
-//       setData({
-//         fixedkeys_id: "",
-//         scheduled_date: "",
-//       });
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };
 
   return (
     <div>
@@ -183,7 +135,7 @@ const Add = ({ onClick }) => {
 
      <label className="labelFixedPop">
      Key ID:
-           <select  className="inputAddFixed" name="Fixedkeys_id" value={data.fixedkeys_id} onChange={handleChange}>
+           <select  className="inputAddFixed" name="Fixedkeys_id" value={data.key_id} onChange={handleChange}>
              <option value="">Select a key</option>
              {fixedkeys.map((fixedkeys) => (
                <option key={fixedkeys.id} value={fixedkeys.id}>
@@ -192,25 +144,6 @@ const Add = ({ onClick }) => {
              ))}
      </select>
      </label>
-
-
-{/* <label className="labelFixedPop">
-        Key ID:
-        <select
-          className="inputAddFixed"
-          name="fixedkeys_id"
-          value={data.fixedkeys_id}
-          onChange={handleChange}
-        >
-          <option value="">Select a key</option>
-          {fixedKeys.map((fixedKey) => (
-            <option key={fixedKey.id} value={fixedKey.id}>
-              {fixedKey.name}
-            </option>
-          ))}
-        </select>
-      </label> */}
-
         {/* <label className="labelFixedPop">
           Key ID:
           <input
@@ -233,7 +166,7 @@ const Add = ({ onClick }) => {
           />
         </label>
         <label className="labelFixedPop">
-          Type (exp):
+          Type:
           <input
             type="text"
             name="type"
@@ -248,31 +181,13 @@ const Add = ({ onClick }) => {
              <option value="">Select a Schedule date</option>
              {scheduled_date.map((scheduled_date) => (
                <option key={scheduled_date.id} 
-               value={scheduled_date.scheduled_date}
+              //  value={scheduled_date.id}
                >
-                 {scheduled_date.scheduled_date}
+                 {scheduled_date.name}
                </option>
              ))}
      </select>
      </label>
-
-{/* <label className="labelFixedPop">
-        scheduled_date:
-        <select
-          className="inputAddFixed"
-          name="scheduled_date"
-          value={data.scheduled_date}
-          onChange={handleChange}
-        >
-          <option value="">Select a Schedule date</option>
-          {scheduled_dates &&
-            scheduled_dates.map((scheduled_date) => (
-              <option key={scheduled_date} value={scheduled_date}>
-                {scheduled_date}
-              </option>
-            ))}
-        </select>
-      </label> */}
         {/* <label className="labelFixedPop">
           Scheduled Date:
           <input

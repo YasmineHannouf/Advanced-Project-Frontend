@@ -10,8 +10,8 @@ import { Box } from "@mui/system";
 import ButtonClose from "./PopUp/CloseBtton";
 import Add from '../components/PopUp/FixedPop';
 
-function createData(id, title, description, amount, date_time, category_id, key_id, is_paid, type = 'exp', scheduled_date, start_date, end_date) {
-    return { id, title, description, amount, date_time, category_id, key_id, is_paid, type, scheduled_date, start_date, end_date };
+function createData(id, title, description, amount,category_id, key_id, is_paid, type = 'exp', scheduled_date) {
+    return { id, title, description, amount, category_id, key_id, is_paid, type, scheduled_date};
   }
 
 export default function BasicTable() {
@@ -36,14 +36,12 @@ export default function BasicTable() {
     item.title,
     item.description,
     item.amount,
-    // item.date_time,
     item.category_id,
     item.key_id,
     item.is_paid,
     item.type,
-    item.scheduled_date,
-    item.start_date,
-    item.end_date
+    item.scheduled_date
+   
   )
 );
 
@@ -183,6 +181,11 @@ export default function BasicTable() {
     {
       name: "type",
       label: "Type",
+      
+    },
+    {
+      name: "key_id",
+      label: "key",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const rowIndex = tableMeta.rowIndex;
@@ -205,6 +208,56 @@ export default function BasicTable() {
         editable: true,
       },
     },
+    {
+      name: "is_paid",
+      label: "Paid?",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          const rowIndex = tableMeta.rowIndex;
+          const isEditing = rowIndex === editingRow;
+
+          return (
+            <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+              {isEditing ? (
+                <input
+                  className="EditInput"
+                  value={value}
+                  onChange={(e) => updateValue(e.target.value)}
+                />
+              ) : (
+                value
+              )}
+            </div>
+          );
+        },
+        editable: true,
+      },
+    },
+    // {
+    //   name: "type",
+    //   label: "Type",
+    //   options: {
+    //     customBodyRender: (value, tableMeta, updateValue) => {
+    //       const rowIndex = tableMeta.rowIndex;
+    //       const isEditing = rowIndex === editingRow;
+
+    //       return (
+    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+    //           {isEditing ? (
+    //             <input
+    //               className="EditInput"
+    //               value={value}
+    //               onChange={(e) => updateValue(e.target.value)} 
+    //             />
+    //           ) : (
+    //             value
+    //           )}
+    //         </div>
+    //       );
+    //     },
+    //     editable: true,
+    //   },
+    // },
     {
         name: "scheduled_date",
         label: "Scheduled_date",
@@ -232,56 +285,56 @@ export default function BasicTable() {
           editable: true,
         },
       },
-    {
-      name: "start_date",
-      label: "Start_date",
-      options: {
-        customBodyRender: (value, tableMeta, updateValue) => {
-          const rowIndex = tableMeta.rowIndex;
-          const isEditing = rowIndex === editingRow;
+    // {
+    //   name: "start_date",
+    //   label: "Start_date",
+    //   options: {
+    //     customBodyRender: (value, tableMeta, updateValue) => {
+    //       const rowIndex = tableMeta.rowIndex;
+    //       const isEditing = rowIndex === editingRow;
 
-          return (
-            <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
-              {isEditing ? (
-                <input
-                  className="EditInput"
-                  value={value}
-                  onChange={(e) => updateValue(e.target.value)}
-                />
-              ) : (
-                value
-              )}
-            </div>
-          );
-        },
-        editable: true,
-      },
-    },
-    {
-      name: "end_date",
-      label: "End_date",
-      options: {
-        customBodyRender: (value, tableMeta, updateValue) => {
-          const rowIndex = tableMeta.rowIndex;
-          const isEditing = rowIndex === editingRow;
+    //       return (
+    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+    //           {isEditing ? (
+    //             <input
+    //               className="EditInput"
+    //               value={value}
+    //               onChange={(e) => updateValue(e.target.value)}
+    //             />
+    //           ) : (
+    //             value
+    //           )}
+    //         </div>
+    //       );
+    //     },
+    //     editable: true,
+    //   },
+    // },
+    // {
+    //   name: "end_date",
+    //   label: "End_date",
+    //   options: {
+    //     customBodyRender: (value, tableMeta, updateValue) => {
+    //       const rowIndex = tableMeta.rowIndex;
+    //       const isEditing = rowIndex === editingRow;
 
-          return (
-            <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
-              {isEditing ? (
-                <input
-                  className="EditInput"
-                  value={value}
-                  onChange={(e) => updateValue(e.target.value)}
-                />
-              ) : (
-                value
-              )}
-            </div>
-          );
-        },
-        editable: true,
-      },
-    },
+    //       return (
+    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+    //           {isEditing ? (
+    //             <input
+    //               className="EditInput"
+    //               value={value}
+    //               onChange={(e) => updateValue(e.target.value)}
+    //             />
+    //           ) : (
+    //             value
+    //           )}
+    //         </div>
+    //       );
+    //     },
+    //     editable: true,
+    //   },
+    // },
     {
       name: "actions",
       label: "Actions",

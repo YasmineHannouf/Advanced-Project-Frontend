@@ -6,7 +6,7 @@ import debounce from "lodash/debounce";
 import "../styles/Fixed_Key.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/system";
-import Add from "./PopUp/ReccuringPop"; //CloseButton
+import Add from "./PopUp/ReccuringIncomesPop"; //CloseButton
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -67,8 +67,8 @@ export default function BasicTable() {
   .then((response) => {
     setCategory(response.data.data.data);
     // setIsLoading(false);
-    console.log(response.data.data.data);
-    
+    // console.log(response.data.data.data[0].category.name);
+    console.log("endadnadklasndlk"+response);
   })
   .catch((error) => {
     console.log(error);

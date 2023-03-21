@@ -18,7 +18,7 @@ const Expenses = () => {
   return (
     // <div style={pageStyle}>
 	<div className='expensePage'>
-      <h1>kifak</h1>
+      <h1>Welcome to your Expense Page</h1>
       <img className="expensesphoto" src={expensesImg} alt="expenses photo" />
 
       {/* <CardsExpenses /> */}

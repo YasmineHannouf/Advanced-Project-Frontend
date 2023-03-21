@@ -6,23 +6,22 @@ import debounce from "lodash/debounce";
 import "../styles/Fixed_Key.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/system";
-import Add from "./PopUp/ReccuringPop"; //CloseButton
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import Add from "./PopUp/ReccuringPop"; //CloseButton
+import ButtonClose from "./PopUp/CloseBtton";
+import Add from '../components/PopUp/FixedIncomesPop';
 
-
-function createData(id, title, description, amount,category_id,type,start_date,end_date) {
-  return { id, title, description, amount,category_id,type,start_date,end_date };
-}
+function createData(id, title, description, amount,category_id, key_id, is_paid, type = 'inc', scheduled_date) {
+    return { id, title, description, amount, category_id, key_id, is_paid, type, scheduled_date};
+  }
 
 export default function BasicTable() {
   const [isLoading, setIsLoading] = useState(true);
-  const [Category, setCategory] = useState([]);
+  const [Fixed, setFixed] = useState([]);
   const [editingRow, setEditingRow] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const togglePopup = () => {
     setShowPopup(!showPopup);
-    console.log("show"+showPopup);
+    console.log(showPopup);
   };
   const handlePopupClose = () => {
     setShowPopup(false);
@@ -31,19 +30,20 @@ export default function BasicTable() {
     getData();
   }, []);
 
-  const rows = Category.map((item,index) =>
-    createData(
-      item.id,
-      item.title,
-      item.description,
-      item.amount,
-      item.category.name,
-      item.type,
-      item.start_date,
-      item.end_date
-    )
-    
-  );
+  const rows = Fixed.map((item) =>
+  createData(
+    item.id,
+    item.title,
+    item.description,
+    item.amount,
+    item.category_id,
+    item.key_id,
+    item.is_paid,
+    item.type,
+    item.scheduled_date
+   
+  )
+);
 
   const handleSearch = debounce((searchValue) => {
     console.log(searchValue);
@@ -51,44 +51,40 @@ export default function BasicTable() {
 
   const handleDelete = (rowsDeleted) => {
     console.log(rowsDeleted);
-    axios.delete(`http://127.0.0.1:8000/api/reccurings/${rowsDeleted}`)
+    axios.delete(`http://127.0.0.1:8000/api/fixed/delete/${rowsDeleted}`)
     .then((response) => {
       console.log(response);
-      toast.success("Recurring Item Deleted successfully!");
+      getData();
     })
     .catch((error) => {
       console.log(error);
       // setIsLoading(false);
     });
   };
-  
+
+
+
   const getData = () => axios
-  .get("http://127.0.0.1:8000/api/reccurings")
+  .get("http://127.0.0.1:8000/api/fixed")
   .then((response) => {
-    setCategory(response.data.data.data);
-    // setIsLoading(false);
-    console.log(response.data.data.data);
-    
+    setFixed(response.data.fixed.data);
+    console.log(response);
   })
   .catch((error) => {
     console.log(error);
-    toast.error("Error Deleting Recurring Item.");
-    // setIsLoading(false);
+    setIsLoading(false);
   });
 
   const handleUpdate = (rowData) => {
     setEditingRow(true);
     console.log(rowData[2]);
-   axios.patch(`http://127.0.0.1:8000/api/reccurings/${rowData[0]}`, {title:rowData[1],description:rowData[2],amount:rowData[3]})
+   axios.patch(`http://127.0.0.1:8000/api/fixed/update/${rowData[0]}`, {name:rowData[1],is_active:rowData[2]})
     .then((response) => {
       getData();
       console.log(rowData);
-      // console.log(rowData);
-      toast.success("New recurring item Update successfully!");
     })
     .catch((error) => {
       console.log(error);
-      toast.error("Error updating recurring item.");
       // setIsLoading(false);
     });
   };
@@ -179,54 +175,17 @@ export default function BasicTable() {
     },
     {
       name: "category_id",
-      label: "Category",
+      label: "Category_id",
       
     },
     {
       name: "type",
       label: "Type",
-     
+      
     },
     {
-      name: "start_date",
-      label: "Start_date",
-      options: {
-        customBodyRender: (value, tableMeta, updateValue) => {
-          const rowIndex = tableMeta.rowIndex;
-          const isEditing = rowIndex === editingRow;
-
-          return (
-            <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
-              <ToastContainer 
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-          />
-              {isEditing ? (
-                <input
-                  className="EditInput"
-                  value={value}
-                  onChange={(e) => updateValue(e.target.value)}
-                />
-              ) : (
-                value
-              )}
-            </div>
-          );
-        },
-        editable: true,
-      },
-    },
-    {
-      name: "end_date",
-      label: "End_date",
+      name: "key_id",
+      label: "key",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const rowIndex = tableMeta.rowIndex;
@@ -249,6 +208,133 @@ export default function BasicTable() {
         editable: true,
       },
     },
+    {
+      name: "is_paid",
+      label: "Paid?",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          const rowIndex = tableMeta.rowIndex;
+          const isEditing = rowIndex === editingRow;
+
+          return (
+            <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+              {isEditing ? (
+                <input
+                  className="EditInput"
+                  value={value}
+                  onChange={(e) => updateValue(e.target.value)}
+                />
+              ) : (
+                value
+              )}
+            </div>
+          );
+        },
+        editable: true,
+      },
+    },
+    // {
+    //   name: "type",
+    //   label: "Type",
+    //   options: {
+    //     customBodyRender: (value, tableMeta, updateValue) => {
+    //       const rowIndex = tableMeta.rowIndex;
+    //       const isEditing = rowIndex === editingRow;
+
+    //       return (
+    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+    //           {isEditing ? (
+    //             <input
+    //               className="EditInput"
+    //               value={value}
+    //               onChange={(e) => updateValue(e.target.value)} 
+    //             />
+    //           ) : (
+    //             value
+    //           )}
+    //         </div>
+    //       );
+    //     },
+    //     editable: true,
+    //   },
+    // },
+    {
+        name: "scheduled_date",
+        label: "Scheduled_date",
+        options: {
+          customBodyRender: (value, tableMeta, updateValue) => {
+            const rowIndex = tableMeta.rowIndex;
+            const isEditing = rowIndex === editingRow;
+  
+            return (
+                <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+                {isEditing ? (
+                  <select className="EditInput" value={value} onChange={(e) => updateValue(e.target.value)}>
+                    <option value="yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                    <option value="hourly">Hourly</option>
+                  </select>
+                ) : (
+                  value
+                )}
+              </div>
+            );
+          },
+          editable: true,
+        },
+      },
+    // {
+    //   name: "start_date",
+    //   label: "Start_date",
+    //   options: {
+    //     customBodyRender: (value, tableMeta, updateValue) => {
+    //       const rowIndex = tableMeta.rowIndex;
+    //       const isEditing = rowIndex === editingRow;
+
+    //       return (
+    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+    //           {isEditing ? (
+    //             <input
+    //               className="EditInput"
+    //               value={value}
+    //               onChange={(e) => updateValue(e.target.value)}
+    //             />
+    //           ) : (
+    //             value
+    //           )}
+    //         </div>
+    //       );
+    //     },
+    //     editable: true,
+    //   },
+    // },
+    // {
+    //   name: "end_date",
+    //   label: "End_date",
+    //   options: {
+    //     customBodyRender: (value, tableMeta, updateValue) => {
+    //       const rowIndex = tableMeta.rowIndex;
+    //       const isEditing = rowIndex === editingRow;
+
+    //       return (
+    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
+    //           {isEditing ? (
+    //             <input
+    //               className="EditInput"
+    //               value={value}
+    //               onChange={(e) => updateValue(e.target.value)}
+    //             />
+    //           ) : (
+    //             value
+    //           )}
+    //         </div>
+    //       );
+    //     },
+    //     editable: true,
+    //   },
+    // },
     {
       name: "actions",
       label: "Actions",
@@ -264,17 +350,15 @@ export default function BasicTable() {
                   className="Editbtn"
                   color="#234567"
                 />
-                
               </button>
               &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-              <button className="Deletebtn" onClick={() => handleDelete(rowData[0],)}>
-              
+              <button className="Deletebtn" onClick={() => handleDelete(rowData[0])}>
                 <svg
                   viewBox="0 0 15 17.5"
                   height="15"
                   width="15"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="icon"
+                  class="icon"
                   fill="red"
                 >
                   <path
@@ -282,9 +366,7 @@ export default function BasicTable() {
                     d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
                     id="Fill"
                   ></path>
-                  
                 </svg>
-                
               </button>
             </>
           );
@@ -294,7 +376,6 @@ export default function BasicTable() {
   ];
 
   const options = {
-    
     filterType: "checkbox",
     responsive: "standard",
     rowsPerPageOptions: [5, 10, 20],
@@ -310,13 +391,13 @@ export default function BasicTable() {
     rowsPerPageOptions: [5, 10, 20],
     onCellClick: (cellData, cellMeta) => {
       const rowIndex = cellMeta.rowIndex;
-      
       if (cellMeta.colIndex === 3) {
         setEditingRow(rowIndex);
       }
     },
-    // onCellEditCommit: handleCellEditCommit,
+
     onRowsDelete: handleDelete,
+    fullScreen: true,
     customToolbar: () => {
       return (
         <button className="cta" onClick={togglePopup}>
@@ -334,8 +415,7 @@ export default function BasicTable() {
       {showPopup ? (
         <>
           {" "}
-          <Add sx={{ zIndex: 0 }} className="popUpAdd" onClick={togglePopup} />
-         
+          <Add sx={{ zIndex: 0 }} className="popUpAdd" onClick={  handlePopupClose} />
           {/* <ButtonClose onClick={() => {
   handlePopupClose();
   getData();
@@ -343,14 +423,14 @@ export default function BasicTable() {
         </>
       ) : null}
       <MUIDataTable
-        title={"Reccuring"}
+        title={"Fixed"}
         data={rows}
         columns={columns}
         options={options}
         className={showPopup ? "blur" : ""}
         sx={{ width: "70%", marginLeft: "350px", marginY: "150px", zIndex: 1 ,textAlign: "center" }}
-
       />
     </Box>
   );
 }
+
