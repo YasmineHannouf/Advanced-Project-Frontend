@@ -41,7 +41,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 2rem;
+	gap: 0.5rem;
+	flex-wrap: wrap;
 }
 .overallContainer > div {
 	font-weight: 900;
@@ -53,21 +54,68 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	gap: 0.7rem;
+	gap: 0.2rem;
 
 	border-radius: 0.5rem;
 }
+@media screen and (max-width: 468px) {
+	.overallContainer > div {
+		height: 150px;
+	}
+}
 .overallContainer > div:nth-child(1) {
 	background-color: var(--dark-blue);
+	/* flex-basis: 100%; */
 }
 .overallContainer > div:nth-child(2) {
 	background-color: var(--light-green);
+	/* flex-basis: 100%; */
 }
 .overallContainer > div:nth-child(3) {
 	background-color: var(--pink);
+	/* flex-basis: 100%; */
 }
 .overallContainer > div:nth-child(4) {
 	background-color: var(--lighter-blue);
+	/* flex-basis: 100%; */
+}
+
+@media screen and (max-width: 468px) {
+	.overallContainer > div:nth-child(4),
+	.overallContainer > div:nth-child(3),
+	.overallContainer > div:nth-child(2),
+	.overallContainer > div:nth-child(1) {
+		flex-basis: 100%;
+	}
+	.dashHome {
+		padding: 1rem 0;
+	}
+	.barChartContainer {
+		flex-direction: column;
+	}
+	.pieChartContainer {
+		flex-direction: column !important;
+		padding: 1rem 0;
+	}
+	.targetImageContainer {
+		width: 100%;
+	}
+	.targetImageContainer img {
+		max-width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+	.barChartContainer {
+		margin: 0;
+		padding: 0 !important;
+	}
+	.pieChart {
+		padding-top: 3rem;
+	}
+	.goalData {
+		font-size: 18px;
+		color: gray;
+	}
 }
 
 .overallContainer > div span {
@@ -87,6 +135,9 @@
 	padding: 2rem 0;
 }
 
+.pieChartContainer img {
+	width: 100%;
+}
 .recharts-surface {
 	margin-right: auto;
 }
@@ -105,6 +156,7 @@
 }
 .colorNameContainer p {
 	margin-left: 5px;
+	color: gray;
 }
 .colorCode {
 	width: 25px;
@@ -154,6 +206,6 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-	
+
 	background-color: var(--lighter-blue);
 }

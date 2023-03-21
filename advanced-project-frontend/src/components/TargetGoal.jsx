@@ -30,9 +30,6 @@ const TargetGoal = () => {
 			});
 	};
 
-	const Taghrid = () => {
-		const kemekh = 1;
-	};
 	return (
 		<div className="form-box">
 			<form className="form" onSubmit={handleSubmit}>
@@ -76,7 +73,7 @@ const TargetGoal = () => {
 			</form>
 			<div className="form-section">
 				<p>
-					Have an account? <a href="">Log in</a>{' '}
+					Have an account? <a href="fb.com">Log in</a>{' '}
 				</p>
 			</div>
 		</div>

@@ -5,75 +5,27 @@ import axios from 'axios';
 import { PieChart } from 'react-minimal-pie-chart';
 import { useState, useEffect } from 'react';
 import { Chart as ChartJS } from 'chart.js/auto';
-import { ButtonGroup, Button } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
-import { Bar } from 'react-chartjs-2';
+
 import ProfitGoal from './ProfitGoal';
 import targetImage from '../assets/pngegg.png';
-import TargetGoal from './TargetGoal';
-import Loader from './Loader';
 
-const userdata = [
-	{
-		id: 1,
-		year: 2020,
-		usergain: 200,
-		userlose: 39,
-	},
-	{
-		id: 2,
-		year: 2020,
-		usergain: 212,
-		userlose: 80,
-	},
-	{
-		id: 3,
-		year: 2020,
-		usergain: 88,
-		userlose: 7,
-	},
-	{
-		id: 4,
-		year: 2020,
-		usergain: 22,
-		userlose: 300,
-	},
-	{
-		id: 5,
-		year: 2020,
-		usergain: 90,
-		userlose: 90,
-	},
-];
+import Loader from './Loader';
 
 const DashHome = () => {
 	const [data, setData] = useState(null);
 	const [profitGoal, setProfitGoal] = useState(89);
-
-	const [userData, setUserData] = useState({
-		labels: userdata.map((data) => data.year),
-		datasets: [
-			{
-				label: 'fixed',
-				data: userdata.map((data) => data.usergain),
-				backgroundColor: '#1d0023',
-			},
-			{
-				label: 'recurring',
-				data: userdata.map((data) => data.userlose),
-				backgroundColor: '#F023',
-			},
-		],
-	});
 
 	// data
 	useEffect(() => {
 		axios
 			.get('http://localhost:8000/api/')
 			.then((data) => {
-				console.log(data.data);
-				setData(data);
+				setTimeout(() => {
+					console.log(data.data);
+					setData(data);
+				}, 5000);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -97,10 +49,15 @@ const DashHome = () => {
 	const Total = data && data.data.Total.Profit;
 
 	const chartData = [
-		{ name: 'Page A', uv: 8000, pv: 2400, amt: 2400 },
+		{ name: 'Page A', uv: 1000, pv: 2400, amt: 2400 },
 		{ name: 'Page B', uv: 4500, pv: 2400, amt: 2400 },
-		{ name: 'Page B', uv: 5222, pv: 8000, amt: 5000 },
+		{ name: 'Page B', uv: 5222, pv: 8000, amt: 6000 },
 	];
+
+	// const incomesDate = data && data.map(eachIncome => {
+	// 	return [{}]
+	// }
+	// 	)
 
 	{
 		if (!data || !profitGoal) {
@@ -108,6 +65,8 @@ const DashHome = () => {
 		}
 		return (
 			<div className="dashHome">
+				{/* <BarElement /> */}
+				{/* <BarController /> */}
 				<h1 className="title">Balances</h1>
 				<section className="overallContainer">
 					<div>
@@ -131,6 +90,7 @@ const DashHome = () => {
 						<span>{profitGoal.length} Goals </span>
 					</div>
 				</section>
+				<hr />
 				<section>
 					<h2 className="title">
 						progress Tracker
@@ -147,6 +107,7 @@ const DashHome = () => {
 							display: 'flex',
 							justifyContent: 'space-around',
 						}}
+						className="barChartContainer"
 					>
 						<div style={{ minWidth: '40%' }}>
 							{profitGoal.length > 0 ? (
@@ -173,23 +134,12 @@ const DashHome = () => {
 						</div>
 					</div>
 				</section>
-				<section
-					className="barChartContainer"
-					style={{
-						width: '50%',
-						margin: '0 auto',
-					}}
-				>
-					<Bar data={userData} height={400} width={900} />
-				</section>
 				<hr />
 				<section>
-					{/* const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, ...]; */}
-
 					<h2 className="title">incomes / expenses overview</h2>
 
 					<div className="pieChartContainer">
-						<LineChart width={600} height={300} data={chartData}>
+						<LineChart width={400} height={300} data={chartData}>
 							{/* --pink: #f5c7a2; --light-green: #48bf91; */}
 							<Line
 								type="monotone"
@@ -206,16 +156,18 @@ const DashHome = () => {
 							style={{ marginLeft: 'auto' }}
 						>
 							<div className="keysContainer">
-								<div className="colorNameContainer">
+								<div className="colorNameContainer ">
 									<div className="colorCode incomes"></div>
 									<p>Incomes</p>
 								</div>
 								<div className="colorNameContainer">
-									<div className="colorCode expenses"></div>
+									<div
+										className="colorCode expenses"
+										style={{ backgroundColor: '#36a2eb' }}
+									></div>
 									<p>Expenses</p>
 								</div>
 							</div>
-
 							<div>
 								<PieChart
 									data={[
@@ -223,12 +175,12 @@ const DashHome = () => {
 										{
 											title: 'Incomes',
 											value: Income,
-											color: '#80a897',
+											color: '#ff6384',
 										},
 										{
 											title: 'Expenses',
 											value: Expense,
-											color: '#48bf91',
+											color: '#36a2eb',
 										},
 									]}
 									rounded={false}
@@ -247,7 +199,7 @@ const DashHome = () => {
 					</div>
 				</section>
 
-				<TargetGoal />
+				{/* <TargetGoal /> */}
 			</div>
 		);
 	}

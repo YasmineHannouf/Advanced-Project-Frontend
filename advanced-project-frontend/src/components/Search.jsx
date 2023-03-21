@@ -6,7 +6,12 @@ const Search = ({ placeholder }) => {
 	return (
 		<form className="searchBar">
 			<FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-			<input type="search" name="search" id="search" />
+			<input
+				type="search"
+				name="search"
+				id="search"
+				placeholder={placeholder}
+			/>
 		</form>
 	);
 };

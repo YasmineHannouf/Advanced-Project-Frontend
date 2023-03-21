@@ -7,9 +7,31 @@ const ProfitGoal = ({ goal, Total, title }) => {
 	return (
 		<div style={{ width: '100%' }}>
 			<div className="goalData">
-				<p className="mb_5">{goal}</p>
-
-				<p className="mb_5">{title}</p>
+				<p
+					className="mb_5"
+					style={{ display: 'flex', alignItems: 'flex-end' }}
+				>
+					{goal}
+				</p>
+				<div>
+					<p
+						className="mb_5"
+						style={{
+							textAlign: 'end',
+							color: percentage <= '100' ? `gray` : `#198754`,
+							fontWeight: percentage <= '100' ? `unset` : `900`,
+						}}
+					>
+						{percentage >= 100
+							? 'done ✔'
+							: percentage >= 50
+							? 'Almost There'
+							: 'Keep Going!'}
+					</p>
+					<p className="mb_5">
+						<span>{title}</span>
+					</p>
+				</div>
 			</div>
 
 			<div className="goal-progress">

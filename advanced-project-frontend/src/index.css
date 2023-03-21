@@ -9,3 +9,13 @@
 	margin: 1.3rem auto;
 	text-align: center;
 }
+
+@media screen and (max-width: 468px) {
+	body {
+		padding: 0 12px;
+	}
+}
+
+hr {
+	margin: 2rem 0;
+}
