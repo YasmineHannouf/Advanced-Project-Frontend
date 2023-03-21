@@ -14,31 +14,51 @@ import Categories from "./components/Categories";
 import Additionals from "./components/Additionals";
 
 import Setting from "../src/components/Admin/Setting";
+import { useState } from "react";
 const App = () => {
+  const [isSuper,SetSuper]=useState(false);
   return (
     <BrowserRouter>
-      <div style={{ display: "flex", gridColumn: "1/-1" }}>
-        <SideBar />
-        <Routes>
-          <Route path="/login" element={<SignIn />} />
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/home" element={<DashHome />} />
-          <Route path="/incomes" element={<Incomes />} />
-          {/* <Route path="/incomes/recurring" element={<RecurringIncome />} />
-          <Route path="/incomes/fixing" element={<FixedIncomes />} /> */}
-
-          <Route path="/expenses" element={<Expenses />} />
-          <Route path="/expenses/recurring" element={<ExpensesReccuring />} />
-          <Route path="/expenses/fixing" element={<ExpensesFixed />} />
-
-          <Route path="/additionals" />
-          <Route path="/additionals/category" element={<Categories />} />
-          <Route path="/additionals/fixedkey" element={<FixedKey />} />
-          <Route path="/manageAdmin" element={<Admin />} />
-        </Routes>
-        {/* <Admin></Admin> */}
-      </div>
-    </BrowserRouter>
+    <div style={{ display: "flex", gridColumn: "1/-1" }}>
+      <SideBar />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={<PrivateRoute element={<Dashboard />} />}
+        />
+        <Route
+          path="/home"
+          element={<PrivateRoute element={<DashHome />} />}
+        />
+        <Route
+        path="/incomes"
+        element={<PrivateRoute element={<Incomes />} />}
+      />
+      <Route
+      path="/expenses"
+      element={<PrivateRoute element={<Expenses/>} />}
+    />
+     <Route
+      path="/goals"
+      element={<PrivateRoute element={<Profit/>} />}
+    />
+       <Route
+      path="/additionals"
+      element={<PrivateRoute element={<Categories/>} />}
+    />  
+      <Route
+    path="/additionals/category"
+    element={<PrivateRoute element={<Categories/>} />}
+  />
+      <Route
+    path="/additionals/fixedkey"
+    element={<PrivateRoute element={<FixedKey/>} />}
+  />
+      </Routes>
+      
+    </div>
+  </BrowserRouter>
   );
 };
 
