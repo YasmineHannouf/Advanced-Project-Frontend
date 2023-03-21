@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import "../styles/LoginPage.css";
 import image from '../assets/milky-way-2695569_960_720.jpg'
 
-export default function SignIn() {
+export default function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,6 +15,8 @@ export default function SignIn() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + Cookies.get('Authorization');
+
     axios
       .post(
         `http://localhost:8000/api/login`,
@@ -30,18 +32,12 @@ export default function SignIn() {
       )
       .then((response) => {
         if (response) {
-         
-          const isAuthenticated = Cookies.get("Authorisation");
-
-          const cookie = new Cookie();
-          cookie.set("Authorisation", isAuthenticated, {
-            path: "/",
-            maxAge: 60 * 60 * 24,
-          });
-
+          const token = response.data.token;
+          Cookies.set("Authorization", `Bearer ${token}`, { expires: 1 });
           setSuccess(response);
-          alert("you are logged in " + isAuthenticated);
-          navigate("/dash");
+          props.handleLogin(response);
+          alert("you are logged in");
+          navigate("/home");
         }
       })
       .catch((error) => {

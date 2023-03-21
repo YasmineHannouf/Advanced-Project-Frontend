@@ -7,10 +7,7 @@ const Dashboard = () => {
 	alert('Dashboard');
 	return (
 		<div className="DashboardContainer">
-			{/* <Outlet />
-			 */}
-			 <h1>Hello</h1>
-
+		
 		</div>
 	);
 };

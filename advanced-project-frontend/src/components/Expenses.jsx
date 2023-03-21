@@ -18,9 +18,6 @@ const Expenses = () => {
   return (
     // <div style={pageStyle}>
 	<div className='expensePage'>
-<<<<<<< HEAD
-      <ExpensesFixed></ExpensesFixed>
-=======
       <h1>Welcome to your Expense Page</h1>
       <img className="expensesphoto" src={expensesImg} alt="expenses photo" />
 
@@ -29,7 +26,6 @@ const Expenses = () => {
       {/* <ProfileExpense /> */}
       <Tabs />
       
->>>>>>> khaled_EXpensespagedevelopment
     </div>
   );
 };

@@ -1,10 +1,13 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { createContext, useState } from 'react';
 
-export default function isAuthenticated() {
-  const authToken = Cookies.get('Authorisation');
-  console.log(authToken);
+export const AuthContext = createContext();
 
-  return !!authToken;
+export function AuthProvider(props) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+      {props.children}
+    </AuthContext.Provider>
+  );
 }
