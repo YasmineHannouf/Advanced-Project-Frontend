@@ -135,7 +135,7 @@ const Add = ({ onClick }) => {
 
      <label className="labelFixedPop">
      Key ID:
-           <select  className="inputAddFixed" name="Fixedkeys_id" value={data.fixedkeys_id} onChange={handleChange}>
+           <select  className="inputAddFixed" name="key_id" value={data.fixedkeys_id} onChange={handleChange}>
              <option value="">Select a key</option>
              {fixedkeys.map((fixedkeys) => (
                <option key={fixedkeys.id} value={fixedkeys.id}>
@@ -175,29 +175,17 @@ const Add = ({ onClick }) => {
             className="inputAddFixed"
           />
         </label>
-        <label className="labelFixedPop">
+       
+     <label className="labelFixedPop">
         scheduled_date:
-           <select  className="inputAddFixed" name="scheduled_date" value={data.scheduled_date} onChange={handleChange}>
-             <option value="">Select a Schedule date</option>
-             {scheduled_date.map((scheduled_date) => (
-               <option key={scheduled_date.id} 
-              //  value={scheduled_date.id}
-               >
-                 {scheduled_date.name}
-               </option>
-             ))}
-     </select>
+        <select className="inputAddFixed" name="scheduled_date" onChange={handleChange}>
+                    <option value="year">Yearly</option>
+                    <option value="month">Monthly</option>
+                    <option value="week">Weekly</option>
+                    <option value="dail">Daily</option>
+                    <option value="hour">Hourly</option>
+                  </select>
      </label>
-        {/* <label className="labelFixedPop">
-          Scheduled Date:
-          <input
-            type="text"
-            name="scheduled_date"
-            value={data.scheduled_date}
-            onChange={handleChange}
-            className="inputAddFixed"
-          />
-        </label> */}
        
         <button type="submit" className="buttonFixedPop">Add</button>
         <button class="close-btn" type="button" onClick={onClick}>X</button>
