@@ -7,6 +7,10 @@ import "../styles/Fixed_Key.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/system";
 import Add from "./PopUp/FixedKeyPop"; //CloseButton
+import ConfirmationDialog from "../components/PopUp/confirm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";import DeleteIcon from '../components/PopUp/Delete' //"../../assets/Phone.svg"
+
 
 function createData(id, name, is_active, created_at, updated_at) {
   return { id, name, is_active, created_at, updated_at };
@@ -21,13 +25,6 @@ export default function BasicTable() {
     setShowPopup(!showPopup);
     console.log(showPopup);
   };
-  const handlePopupClose = () => {
-    setShowPopup(false);
-    getData();
-  };
-  useEffect(() => {
-    getData();
-  }, []);
 
   const rows = FixedKey.map((item) =>
     createData(
@@ -49,17 +46,21 @@ export default function BasicTable() {
       .then((response) => {
         console.log(response);
         getData();
+        toast.success("Data deleted successfully");
       })
       .catch((error) => {
         console.log(error);
-        // setIsLoading(false);
+        toast.error(error);
       });
   };
 
   const getData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/Fixedkeys/show");
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/Fixedkeys/show"
+      );
       setFixedKey(response.data.Fixed_keysByDesc);
+
       setIsLoading(false);
       console.log(response);
     } catch (error) {
@@ -67,8 +68,15 @@ export default function BasicTable() {
       setIsLoading(false);
     }
   };
-  
 
+  const handlePopupClose = () => {
+    setShowPopup(false);
+    getData();
+  };
+  useEffect(() => {
+    console.log("handlePopupClose");
+    getData();
+  }, []);
   const handleUpdate = (rowData) => {
     setEditingRow(true);
     console.log(rowData[2]);
@@ -79,11 +87,12 @@ export default function BasicTable() {
       })
       .then((response) => {
         getData();
+        toast.success(" Updated successfully!");
         console.log(rowData);
       })
       .catch((error) => {
         console.log(error);
-        // setIsLoading(false);
+        toast.error(error);
       });
   };
 
@@ -144,12 +153,6 @@ export default function BasicTable() {
               ) : (
                 <span>
                   {value === 1 ? (
-                    // <input
-                    //   type="checkbox"
-                    //   className="EditInput"
-                    //   checked={value === 1}
-                    //   onChange={(e) => updateValue(Number(e.target.checked))}
-                    // />
                     <strong className="ActiveLabel">
                       <>Active</>
                     </strong>
@@ -190,25 +193,22 @@ export default function BasicTable() {
                   color="#234567"
                 />
               </button>
-              &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-              <button
+              <ConfirmationDialog
+                title="Delete Item"
+                buttonText={            <DeleteIcon/>
+              }
+                confirmText="Yes, delete it"
+                cancelText="Cancel"
+                onConfirm={() => handleDelete(id)}
+                color="error"
+                variant=''
+                onError={(message) => toast.error(message)}
+              >
+                Are you sure you want to delete this Admin?
+              </ConfirmationDialog>      <button
                 className="Deletebtn"
                 onClick={() => handleDelete(rowData[0])}
               >
-                <svg
-                  viewBox="0 0 15 17.5"
-                  height="15"
-                  width="15"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon"
-                  fill="red"
-                >
-                  <path
-                    transform="translate(-2.5 -1.25)"
-                    d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
-                    id="Fill"
-                  ></path>
-                </svg>
               </button>
             </>
           );
@@ -219,7 +219,7 @@ export default function BasicTable() {
 
   const options = {
     filterType: "checkbox",
-    responsive: "standard",
+    responsive: "vertical",
     rowsPerPageOptions: [5, 10, 20],
     selectableRows: "none",
     search: true,
@@ -250,16 +250,17 @@ export default function BasicTable() {
     },
   };
   return (
-    <Box sx={{ width: "80%", marginLeft: "330px", marginY: "10%" }}>
+    <Box sx={{ width: "80%", marginLeft: "5%", marginY: "10%" }}>
       {showPopup ? (
         <>
           {" "}
           <Add
             sx={{ zIndex: 0 }}
             className="popUpAdd"
-            onClick={handlePopupClose}
+            open={showPopup}
+            handleClose={handlePopupClose}
+            onClick={getData}
           />
-      
         </>
       ) : null}
       <MUIDataTable
@@ -276,6 +277,7 @@ export default function BasicTable() {
           textAlign: "center",
         }}
       />
+      <ToastContainer />
     </Box>
   );
 }

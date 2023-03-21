@@ -18,8 +18,8 @@ export default function ConfirmationDialog(props) {
 
   return (
     <>
-      <Button variant="contained"  color={props.color}
-                  size="meduim"
+      <Button variant={props.variant}  color={props.color}
+                  size="small"
                   className={props.className}onClick={handleOpen}>
         {props.buttonText}
       </Button>
