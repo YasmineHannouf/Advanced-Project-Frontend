@@ -15,7 +15,7 @@ library.add(fas);
 const sideBarLinks = [
 	{
 		name: 'home',
-		path: '/',
+		path: '/home',
 		icon: <FontAwesomeIcon icon="fa-solid fa-house" />,
 	},
 	{
@@ -30,18 +30,30 @@ const sideBarLinks = [
 	},
 
 	{
-		name: 'Settings',
-		path: 'settings',
+		name: 'additionals',
+		path: '/additionals',
+		icon: <FontAwesomeIcon icon="fa-solid fa-grip" />,
+		subLinks: [
+			{
+			  name: 'Category',
+			  path: 'additionals/category',
+			},
+			{
+			  name: 'Fixed Key',
+			  path: '/additionals/fixedkey',
+			},
+		  ],
+	},
+
+	{
+		name: 'ManageAdmin',
+		path: '/manageadmin',
 		icon: <FontAwesomeIcon icon="fa-solid fa-gear" />,
 	},
-	{
-		name: 'Additionals',
-		path: '/categories',
-		icon: <FontAwesomeIcon icon="fa-solid fa-grip" />,
-	},
+
 	{
 		name: 'Goals Tracker',
-		path: 'goals',
+		path: '/goals',
 		icon: <FontAwesomeIcon icon="fa-solid fa-bullseye" />,
 	},
 ];
@@ -77,7 +89,7 @@ const SideBar = () => {
 			</div>
 			<div className="sideLinksContainer z-index">
 				{sideBarLinks.map((eachLink) => {
-					if (eachLink.name == 'Additionals') {
+					if (eachLink.name == 'additionals') {
 						return (
 							<div key={sideBarLinks.indexOf(eachLink)}>
 								<DropdownLink
