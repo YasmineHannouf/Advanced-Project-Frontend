@@ -44,7 +44,6 @@ export default function BasicTable() {
    
   )
 );
-console.log(+Fixed);
   const handleSearch = debounce((searchValue) => {
     console.log(searchValue);
   }, 500);
@@ -68,7 +67,7 @@ console.log(+Fixed);
   .get("http://127.0.0.1:8000/api/fixed")
   .then((response) => {
     setFixed(response.data.fixed.data);
-    console.log(response);
+    console.log('res'+response);
   })
   .catch((error) => {
     console.log(error);
@@ -261,56 +260,7 @@ console.log(+Fixed);
           editable: true,
         },
       },
-    // {
-    //   name: "start_date",
-    //   label: "Start_date",
-    //   options: {
-    //     customBodyRender: (value, tableMeta, updateValue) => {
-    //       const rowIndex = tableMeta.rowIndex;
-    //       const isEditing = rowIndex === editingRow;
 
-    //       return (
-    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
-    //           {isEditing ? (
-    //             <input
-    //               className="EditInput"
-    //               value={value}
-    //               onChange={(e) => updateValue(e.target.value)}
-    //             />
-    //           ) : (
-    //             value
-    //           )}
-    //         </div>
-    //       );
-    //     },
-    //     editable: true,
-    //   },
-    // },
-    // {
-    //   name: "end_date",
-    //   label: "End_date",
-    //   options: {
-    //     customBodyRender: (value, tableMeta, updateValue) => {
-    //       const rowIndex = tableMeta.rowIndex;
-    //       const isEditing = rowIndex === editingRow;
-
-    //       return (
-    //         <div style={{ textAlign: "center" }} onClick={() => setEditingRow(rowIndex)}>
-    //           {isEditing ? (
-    //             <input
-    //               className="EditInput"
-    //               value={value}
-    //               onChange={(e) => updateValue(e.target.value)}
-    //             />
-    //           ) : (
-    //             value
-    //           )}
-    //         </div>
-    //       );
-    //     },
-    //     editable: true,
-    //   },
-    // },
     {
       name: "actions",
       label: "Actions",
@@ -386,12 +336,13 @@ console.log(+Fixed);
       );
     },
   };
+
   return (
     <Box sx={{ width: "70%", marginLeft: "350px", marginY: "150px" }}>
       {showPopup ? (
         <>
           {" "}
-          <Add sx={{ zIndex: 0 }} className="popUpAdd"  scheduled = {'d'} onClick={  handlePopupClose} />
+          <Add sx={{ zIndex: 0 }} className="popUpAdd"   onClick={  handlePopupClose} />
           {/* <ButtonClose onClick={() => {
   handlePopupClose();
   getData();
