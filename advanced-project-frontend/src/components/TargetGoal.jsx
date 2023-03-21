@@ -6,27 +6,28 @@ import { useState } from 'react';
 const TargetGoal = () => {
 	const [goalData, setGoalData] = useState({
 		title: '',
-		goal: '',
-		startDate: '',
-		endDate: '',
+		goals: '',
+		start_date: '',
+		end_date: '',
 	});
 	const handleInputChange = (event) => {
 		const dataInput = event.target.value;
 		const cloneGoalData = goalData;
 		cloneGoalData[event.target.name] = dataInput;
 		setGoalData(cloneGoalData);
+		console.log('ddsd'+cloneGoalData);
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(goalData);
 		axios
-			.post('http://localhost:8000/profit_goals', goalData)
+			.post('http://localhost:8000/api/profit_goals', goalData)
 			.then((res) => {
 				console.log(res);
 			})
 			.catch((err) => {
-				console.log(err.message);
+				console.log(err);
 			});
 	};
 
@@ -49,22 +50,22 @@ const TargetGoal = () => {
 						type="text"
 						className="input"
 						placeholder="Goal"
-						name="goal"
+						name="goals"
 						required
 					/>
 					<input
 						onChange={handleInputChange}
-						type="text"
+						type="date"
 						className="input"
-						name="startDate"
+						name="start_date"
 						placeholder="Start Date"
 						required
 					/>
 					<input
 						required
 						onChange={handleInputChange}
-						name="endDate"
-						type="text"
+						name="end_date"
+						type="date"
 						className="input"
 						placeholder="End Date"
 					/>
@@ -72,9 +73,7 @@ const TargetGoal = () => {
 				<button style={{ textAlign: 'center' }}>Define Goal !</button>
 			</form>
 			<div className="form-section">
-				<p>
-					Have an account? <a href="fb.com">Log in</a>{' '}
-				</p>
+				
 			</div>
 		</div>
 	);
