@@ -73,9 +73,9 @@ const Add = ({ onClick }) => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/fixedkeys/show")
+      .get("http://127.0.0.1:8000/api/Fixedkeys/show")
       .then((response) => {
-        setfixedkeys(response.data.data.data);
+        setfixedkeys(response.data.Fixed_keysByDesc);
   console.log(response);
       })
       .catch((error) => {
@@ -135,7 +135,7 @@ const Add = ({ onClick }) => {
 
      <label className="labelFixedPop">
      Key ID:
-           <select  className="inputAddFixed" name="Fixedkeys_id" value={data.key_id} onChange={handleChange}>
+           <select  className="inputAddFixed" name="Fixedkeys_id" value={data.fixedkeys_id} onChange={handleChange}>
              <option value="">Select a key</option>
              {fixedkeys.map((fixedkeys) => (
                <option key={fixedkeys.id} value={fixedkeys.id}>
