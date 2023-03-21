@@ -47,7 +47,7 @@ function Admin() {
         ))}
        <AddAdmin open={adminForm} onClose={() => {
             setAdminForm(!adminForm); 
-          }} handleReload={getData}></AddAdmin>
+          }} onClick={getData}></AddAdmin>
       </div>
       
     </div>

@@ -34,6 +34,8 @@ const AddCategoryDialog = (props, onClick) => {
       })
       .catch((error) => {
         console.log(error.response.data.Error);
+        toast.error(error.response.data.Error);
+
       });
   };
 
@@ -54,7 +56,7 @@ const AddCategoryDialog = (props, onClick) => {
       >
         <DialogTitle>Add New Key to a Category</DialogTitle>
         <DialogContent>
-          <form onKeyDown={addCategories}>
+          <form onSubmit={addCategories}>
             <label>
               The New Of The Category
               <input

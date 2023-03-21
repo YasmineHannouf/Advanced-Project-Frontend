@@ -9,7 +9,7 @@ import "../../styles/AdminCard.css";
 
 import axios from "axios";
 
-function AdminCard(props) {
+function AdminCard(props,onClick) {
   const handelDelete = async () => {
     try {
       await axios.delete(`http://127.0.0.1:8000/api/admins/${props.Admin.id}`);
@@ -30,13 +30,16 @@ function AdminCard(props) {
         props.handleReload();
 
         toast.success("Admin Updated successfully!");
+
       
     } catch (error) {
       console.log(error.response.data.message);
       toast.error(error.response.data.message);
     }
   };
-
+  const HandleOnClick = () => {
+    if (onClick) onClick();
+  };
   return (
     <section className="ContanerCard">
       <div className="card">
@@ -64,8 +67,7 @@ function AdminCard(props) {
                     buttonText="Make Admin"
                     confirmText="Yes, Update it"
                     cancelText="Cancel"
-                    onConfirm={handleUpdateStatus}
-                    onError={(message) => toast.error(message)}
+                    onConfirm={()=>{handleUpdateStatus(); HandleOnClick();}}                    onError={(message) => toast.error(message)}
                   >
                     Are you sure you want Update this Admin?{" "}
                   </ConfirmationDialog>
@@ -77,14 +79,14 @@ function AdminCard(props) {
                   buttonText="Make Super "
                   confirmText="Yes, Update it"
                   cancelText="Cancel"
-                  onConfirm={handleUpdateStatus}
+                  onConfirm={()=>{handleUpdateStatus(); HandleOnClick();}}
                   onError={(message) => toast.error(message)}
                 >
                   Are you sure you want Update this Admin?{" "}
                 </ConfirmationDialog>
                 )}
               </ButtonGroup>
-              <p className="name">{props.Admin.name}</p>
+              <p ><strong>{props.Admin.name}</strong></p>
               <p
                 className={`role ${
                   props.Admin.is_super ? "super-admin" : "admin"

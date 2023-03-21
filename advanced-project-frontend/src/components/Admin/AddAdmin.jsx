@@ -14,7 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function AddAdminDialog(props) {
+export default function AddAdminDialog(props,onClick) {
   const [data, setData] = useState({
     name: "",
     email: "",
