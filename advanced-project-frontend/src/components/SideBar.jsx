@@ -6,9 +6,8 @@ import '../styles/sideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import Search from './Search';
+
 import SideLink from './SideLink';
-import SelectLabels from './SelectLabels';
 import DropdownLink from './DropdownLink';
 
 library.add(fas);
@@ -92,7 +91,7 @@ const SideBar = () => {
 				{sideBarLinks.map((eachLink) => {
 					if (eachLink.name == 'additionals') {
 						return (
-							<div>
+							<div key={sideBarLinks.indexOf(eachLink)}>
 								<DropdownLink
 									display={sideBarExpanded ? true : false}
 								/>

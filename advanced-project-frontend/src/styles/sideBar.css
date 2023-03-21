@@ -1,3 +1,12 @@
+:root {
+	--white: #eee;
+	--green-one: #80a897;
+	--sky-blue: #95d8eb;
+	--pink: #f5c7a2;
+	--light-green: #48bf91;
+	--dark-blue: #0076be;
+	--lighter-blue: #4db4d7;
+}
 /* root classes */
 .z-index {
 	z-index: 1550;
@@ -12,7 +21,7 @@
 	max-width: 250px;
 	padding: 1.5rem 1rem;
 
-	color: #eee;
+	color: var(--white);
 	box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
 	-webkit-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
 	-moz-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
@@ -31,7 +40,7 @@
 	min-width: 70px;
 	padding: 0.5rem;
 
-	color: #eee;
+	color: var(--white);
 	box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
 	-webkit-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
 	-moz-box-shadow: 9px 14px 29px -7px rgba(0, 0, 0, 0.88);
@@ -67,7 +76,7 @@
 	top: 5%;
 	right: -5%;
 	border: 2px solid gray;
-	background-color: #eee;
+	color: var(--white);
 	color: gray;
 	padding: 0.5rem;
 	border-radius: 50%;
@@ -78,7 +87,7 @@
 	top: 5%;
 	right: -25%;
 	border: 2px solid gray;
-	background-color: #eee;
+	color: var(--white);
 	color: gray;
 	padding: 0.5rem;
 	border-radius: 50%;
@@ -108,7 +117,7 @@
 
 .sideLinksContainer a {
 	text-decoration: none;
-	color: #eee;
+	color: var(--white);
 }
 
 /* image css */
@@ -195,7 +204,7 @@
 	color: rgb(78, 78, 78);
 }
 .goal-progress > div {
-	color: #eee;
+	color: var(--white);
 	font-weight: 900;
 	transition: 0.2s;
 	display: flex;
