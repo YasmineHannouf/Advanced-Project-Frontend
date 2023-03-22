@@ -1,59 +1,94 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import Dashboard from './pages/Dashboard';
-import Incomes from './components/Incomes';
-import RecurringIncome from './components/RecurringIncome';
-import FixedIncomes from './components/FixedIncomes';
-import SignIn from './pages/SignIn';
-import Expenses from './components/Expenses';
-import SideBar from './components/SideBar';
 
-import Additionals from './components/Additionals';
-import FixedKey from './components/Fixed_Key';
-import DashHome from './components/DashHome';
+import { useState, useEffect } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
+import Login from "./pages/SignIn";
+import Dashboard from "./pages/Dashboard";
+import DashHome from "./components/DashHome";
+import Incomes from "./components/Incomes";
+import Expenses from "./components/Expenses";
+import Profit from "./components/TargetGoal";
+import Categories from "./components/Categories";
+import FixedKey from "./components/Fixed_Key";
+import SideBar from "./components/SideBar";
+import Admins from '../src/components/Admin/ManageAdmin';
+import Additionals from '../src/components/Additionals';
+import PrivateRoute from './components/auth/ProtectedRoute';
+import { AuthProvider } from './components/auth/useAuth';
 export const context = React.createContext();
 
 const App = () => {
 	const [sideExpanded, setSideExpanded] = useState(false);
-	return (
-		<BrowserRouter>
-			<div style={{ display: 'flex', gridColumn: '1/-1' }}>
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState();
+  const [adminName, setAdminName] = useState();
+  const handleLogin = (response) => {
+    setIsAuthenticated(true);
+    console.log("Login response:", response);
+    setIsAdmin(response.data.admin.is_super)
+    setAdminName(response.data.admin.name)
+    console.log("Admin response:", response.data.admin.is_super);
+  };
+
+
+console.log(isAuthenticated);
+  return (
+    <BrowserRouter>
 				<context.Provider value={[sideExpanded, setSideExpanded]}>
-					<SideBar />
-
-					<Routes>
-						<Route path="/login" element={<SignIn />} />
-						<Route path="/" element={<DashHome />} />
-						<Route path="/incomes" element={<Incomes />} />
-						<Route
-							path="/incomes/recurring"
-							element={<RecurringIncome />}
-						/>
-						<Route
-							path="/incomes/fixing"
-							element={<FixedIncomes />}
-						/>
-
-						<Route path="/" element={<DashHome />} />
-						<Route path="/expenses" element={<Expenses />} />
-						<Route
-							path="/expenses/recurring"
-							element={<RecurringIncome />}
-						/>
-						<Route
-							path="/expenses/fixing"
-							element={<FixedIncomes />}
-						/>
-
-						<Route path="/add" element={<Additionals />} />
-						{/* <Route path="/add/categories" element={<Categories />} /> */}
-						<Route path="/add/fixedkey" element={<FixedKey />} />
-					</Routes>
+      {isAuthenticated ? (
+        <div style={{ display: "flex", gridColumn: "1/-1" }}>
+          <SideBar  name={adminName} status={isAdmin}/>
+          <Routes>
+            <Route
+              path="/dashboard"
+              element={<PrivateRoute element={<Dashboard />} />}
+            />
+            <Route
+              path="/home"
+              element={<PrivateRoute element={<DashHome />} />}
+            />
+            <Route
+              path="/incomes"
+              element={<PrivateRoute element={<Incomes />} />}
+            />
+            <Route
+              path="/expenses"
+              element={<PrivateRoute element={<Expenses />} />}
+            />
+            <Route
+              path="/goals"
+              element={<PrivateRoute element={<Profit />} />}
+            />
+    
+            <Route
+              path="additional/Category"
+              element={<PrivateRoute element={<Categories />} />}
+            />
+            <Route
+              path="additional/fixedkey"
+              element={<PrivateRoute element={<FixedKey />} />}
+            />
+           {!!isAdmin && (<Route
+              path="/manageadmin"
+              element={<PrivateRoute element={<Admins />} />}
+            />)}
+          </Routes>
+        </div>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Login  handleLogin={handleLogin}/>} />
+          
+        </Routes>
+      )}
 				</context.Provider>
-			</div>
-		</BrowserRouter>
-	);
+
+    </BrowserRouter>
+  );
+
 };
 
 export default App;
