@@ -12,20 +12,21 @@ import SideLink from './SideLink';
 import DropdownLink from './DropdownLink';
 
 import brand from '../assets/logo.png';
-import { context, Context } from '../App.js';
+import { context} from '../App.js';
 
 library.add(fas);
 
 const SideBar = (props) => {
 
   const navigate = useNavigate();
-  const [status, setStatus] = useState(props.status);
+  const [status] = useState(props.status);
   const handleLogOut = () => {
     axios
       .get("http://127.0.0.1:8000/api/logout")
       .then((response) => {
         console.log(response);
         navigate("/");
+		props.handleLogOut(false);
       })
       .then((err) => {
         console.log(err);
@@ -124,13 +125,15 @@ const SideBar = (props) => {
 			</div>
 			<div className="userCredentials z-index">
 				<div className="profileContainer">
-					<img src={adminImage} alt="admin" />
-				</div>
+					{props.img == null ? 	< img src={adminImage} alt='admin image'/>	: <img src={`http://127.0.0.1:8000/storage/images/${props.img}`}/>}
+			
+				
+							</div>
 				<div>
 					<h4>{props.name}  </h4>
 					<p>Administrator</p>
 				</div>
-				<FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
+				<FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" onClick={handleLogOut}/>
 			</div>
 		</aside>
 	);
