@@ -22,10 +22,9 @@ const DashHome = () => {
 		axios
 			.get('http://localhost:8000/api/')
 			.then((data) => {
-				setTimeout(() => {
-					console.log(data.data);
+				console.log(data.data);
 					setData(data);
-				}, 5000);
+				
 			})
 			.catch((err) => {
 				console.log(err.message);
