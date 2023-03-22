@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import {
   BrowserRouter,
@@ -18,8 +19,10 @@ import Admins from '../src/components/Admin/ManageAdmin';
 import Additionals from '../src/components/Additionals';
 import PrivateRoute from './components/auth/ProtectedRoute';
 import { AuthProvider } from './components/auth/useAuth';
+export const context = React.createContext();
 
 const App = () => {
+	const [sideExpanded, setSideExpanded] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState();
   const [adminName, setAdminName] = useState();
@@ -35,7 +38,7 @@ const App = () => {
 console.log(isAuthenticated);
   return (
     <BrowserRouter>
-    <AuthProvider>
+				<context.Provider value={[sideExpanded, setSideExpanded]}>
       {isAuthenticated ? (
         <div style={{ display: "flex", gridColumn: "1/-1" }}>
           <SideBar  name={adminName} status={isAdmin}/>
@@ -81,11 +84,11 @@ console.log(isAuthenticated);
           
         </Routes>
       )}
-</AuthProvider>
+				</context.Provider>
 
     </BrowserRouter>
   );
+
 };
 
 export default App;
-//	

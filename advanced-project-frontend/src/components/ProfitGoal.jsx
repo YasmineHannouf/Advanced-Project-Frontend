@@ -9,7 +9,11 @@ const ProfitGoal = ({ goal, Total, title }) => {
 			<div className="goalData">
 				<p
 					className="mb_5"
-					style={{ display: 'flex', alignItems: 'flex-end' }}
+					style={{
+						display: 'flex',
+						alignItems: 'flex-end',
+						color: '#343a40',
+					}}
 				>
 					{goal}
 				</p>
@@ -18,18 +22,20 @@ const ProfitGoal = ({ goal, Total, title }) => {
 						className="mb_5"
 						style={{
 							textAlign: 'end',
-							color: percentage <= '100' ? `gray` : `#198754`,
-							fontWeight: percentage <= '100' ? `unset` : `900`,
+							color: percentage <= '100' ? `#ffc107` : `#198754`,
+							fontWeight: percentage <= '100' ? `900` : `900`,
 						}}
 					>
 						{percentage >= 100
 							? 'done ✔'
 							: percentage >= 50
 							? 'Almost There'
-							: 'Keep Going!'}
+							: 'Keep Going . .'}
 					</p>
 					<p className="mb_5">
-						<span>{title}</span>
+						<span style={{ color: '#343a40', fontWeight: '500' }}>
+							{title}
+						</span>
 					</p>
 				</div>
 			</div>
