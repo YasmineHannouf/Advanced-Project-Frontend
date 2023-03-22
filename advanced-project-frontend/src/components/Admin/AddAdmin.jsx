@@ -54,7 +54,6 @@ export default function AddAdminDialog(props,onClick) {
       .then((response) => {
         console.log(response);
         onClose();
-        props.handleReload();
         if (response.status === 200) {
           toast.success("Admin added successfully!");
         }
@@ -70,7 +69,9 @@ export default function AddAdminDialog(props,onClick) {
     onClose();
     onChildClose();
   };
-
+  const HandleOnClick = () => {
+    if (onClick) onClick();
+  };
   return (
     <>
       <Dialog
@@ -136,10 +137,13 @@ export default function AddAdminDialog(props,onClick) {
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Cancel</Button>
-          <Button onClick={addAdmin}>Save</Button>
+          <Button   onClick={() => {
+             addAdmin();
+              HandleOnClick();
+            }}>Save</Button>
         </DialogActions>
       </Dialog>
-
+    
       <ToastContainer
         position="top-right"
         autoClose={5000}

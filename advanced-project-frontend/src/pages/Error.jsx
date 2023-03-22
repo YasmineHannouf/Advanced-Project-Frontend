@@ -1,32 +1,36 @@
+// import error from '../'
 
-function ErrorFallback() {
-    return <h1>Something went wrong.</h1>;
-  }
+
+// function ErrorFallback() {
+//     return <>
+//     <img src="" alt='Somethings Wrong' width={'500px'} height={'500px'}/>
+//     </>
+
+//   }
   
-  function MyErrorBoundary() {
-    const [hasError, setHasError] = useState(false);
+//   function MyErrorBoundary() {
+//     const [hasError, setHasError] = useState(false);
   
-    useEffect(() => {
-      function errorHandler(error, errorInfo) {
-        console.error(error, errorInfo);
-        setHasError(true);
-      }
+//     useEffect(() => {
+//       function errorHandler(error, errorInfo) {
+//         console.error(error, errorInfo);
+//         setHasError(true);
+//       }
   
-      if (hasError) {
-        // Call your error reporting service here
-      }
+//       if (hasError) {
+//       }
   
-      window.addEventListener("error", errorHandler);
-      return () => window.removeEventListener("error", errorHandler);
-    }, [hasError]);
+//       window.addEventListener("error", errorHandler);
+//       return () => window.removeEventListener("error", errorHandler);
+//     }, [hasError]);
   
-    if (hasError) {
-      return <ErrorFallback />;
-    }
+//     if (hasError) {
+//       return <ErrorFallback />;
+//     }
   
-    return <MyComponent />;
-  }
+//     return <MyComponent />;
+//   }
   
-  export default MyErrorBoundary;
+//   export default MyErrorBoundary;
   
   

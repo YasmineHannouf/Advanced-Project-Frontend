@@ -2,7 +2,7 @@ import adminImage from '../assets/default_61f3429ad1ced-removebg-preview.png';
 import { useState, useContext } from 'react';
 import React from 'react';
 import '../styles/sideBar.css';
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -125,17 +125,20 @@ const SideBar = (props) => {
 				})}
 			</div>
 			<div className="userCredentials z-index">
-				<div className="profileContainer">
-					{props.img == null ? 	< img src={adminImage} alt='admin image'/>	: <img src={`http://127.0.0.1:8000/storage/images/${props.img}`}/>}
-			
-				
-							</div>
-				<div>
-					<h4>{props.name}  </h4>
-					<p>Administrator</p>
-				</div>
-				<FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" onClick={handleLogOut}/>
-			</div>
+ 
+    <div className="profileContainer">
+	{props.img == null ? 	< img src={adminImage} alt='admin image'/>	: <img src={`http://127.0.0.1:8000/storage/images/${props.img}`}/>}
+
+	</div>
+    <div>
+	<NavLink to="/profile">
+      <h4>{props.name} </h4>
+      <p>Administrator</p>
+  </NavLink>
+  
+    </div>
+  <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" onClick={handleLogOut} />
+</div>
 		</aside>
 	);
 };
