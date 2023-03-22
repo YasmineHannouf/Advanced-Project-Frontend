@@ -25,6 +25,7 @@ const SideBar = (props) => {
       .get("http://127.0.0.1:8000/api/logout")
       .then((response) => {
         console.log(response);
+        props.handleLogOut(false);
         navigate("/");
 		props.handleLogOut(false);
       })

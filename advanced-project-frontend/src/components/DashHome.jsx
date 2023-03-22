@@ -24,7 +24,8 @@ const DashHome = () => {
 			.get('http://localhost:8000/api/')
 			.then((data) => {
 				console.log(data.data);
-				setData(data);
+					setData(data);
+				
 			})
 			.catch((err) => {
 				console.log(err.message);

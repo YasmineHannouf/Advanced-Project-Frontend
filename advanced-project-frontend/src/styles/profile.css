@@ -1,0 +1,185 @@
+.profile-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    height: 80%;
+  }
+  
+  .profile-info-container 
+  img {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-info-container 
+  p {
+    margin: 10px 0;
+  }
+  
+  .profile-info-container 
+  button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .profile-info-container 
+  button:hover {
+    background-color: #0062cc;
+    transform: scale(1.1);
+  }
+  
+  .profile-info-container 
+  input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .profile-info-container 
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .profile-info-container 
+  form {
+    width: 100%;
+  }
+  
+  .profile-info-container 
+  .edit-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .profile-info-container 
+  .view-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .profile-info-container 
+  .fade-enter {
+    opacity: 0;
+  }
+  
+  .profile-info-container 
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  
+  .profile-info-container 
+  .fade-exit {
+    opacity: 1;
+  }
+  
+  .profile-info-container 
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-out;
+  }
+  
+  
+  
+  
+  
+  .buttonDownload {
+    display: inline-block;
+    position: relative;
+    padding: 10px 25px;
+    background-color: #4CC713;
+    color: white;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 0.9em;
+    text-align: center;
+    text-indent: 15px;
+    border: none;
+    border-radius: 2em;
+    font-weight: bold;
+  }
+  
+  .buttonDownload:hover {
+    background-color: #1a60a2;
+    color: white;
+  }
+  
+  .buttonDownload:before, .buttonDownload:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 15px;
+    top: 52%;
+  }
+  
+  .buttonDownload:before {
+    width: 10px;
+    height: 2px;
+    border-style: solid;
+    border-width: 0 2px 2px;
+  }
+  
+  .buttonDownload:after {
+    width: 0;
+    height: 0;
+    margin-left: 3px;
+    margin-top: -7px;
+    border-style: solid;
+    border-width: 4px 4px 0 4px;
+    border-color: transparent;
+    border-top-color: inherit;
+    animation: downloadArrow 1s linear infinite;
+    animation-play-state: paused;
+  }
+  
+  .buttonDownload:hover:before {
+    border-color: #bdd3ef;
+  }
+  
+  .buttonDownload:hover:after {
+    border-top-color: #eff1f7;
+    animation-play-state: running;
+  }
+  
+  @keyframes downloadArrow {
+    0% {
+      margin-top: -7px;
+      opacity: 1;
+    }
+  
+    0.001% {
+      margin-top: -15px;
+      opacity: 0.4;
+    }
+  
+    50% {
+      opacity: 1;
+    }
+  
+    100% {
+      margin-top: 0;
+      opacity: 0.4;
+    }
+  }
